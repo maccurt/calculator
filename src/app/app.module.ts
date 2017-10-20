@@ -5,6 +5,7 @@ import { AppRouteModule } from './app-route.module';
 import { FutureValueRoutingModule } from './future-value/future-value-routing.module';
 import { FutureValueModule } from 'app/future-value/future-value.module';
 import { DirectivesModule } from './directives/directives.module';
+import { MathModule } from './math/math.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { DirectivesModule } from './directives/directives.module';
     AppComponent
   ],
   imports: [BrowserModule, AppRouteModule, FutureValueRoutingModule, FutureValueModule,
-    DirectivesModule ],
+    DirectivesModule,
+    MathModule ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FutureValueService } from './future-value.service'
 
 
 @Component({
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FutureValueComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(futureValueService: FutureValueService) { }
 
   ngOnInit() {
+  }
+
+  calculate = () => {
+
   }
 
 }
