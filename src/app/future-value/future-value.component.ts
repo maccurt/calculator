@@ -9,14 +9,18 @@ import { FutureValueService } from './future-value.service'
 })
 export class FutureValueComponent implements OnInit {
 
+  ratePercent:number;
+  years:number;
+  payment:number;
 
-  constructor(futureValueService: FutureValueService) { }
+
+  constructor(public futureValueService: FutureValueService) { }
 
   ngOnInit() {
   }
 
   calculate = () => {
-
+    this.futureValueService.monthlyPayments(this.ratePercent,this.years,this.payment)
   }
 
 }

@@ -19,11 +19,31 @@ describe('FutureValueComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FutureValueComponent);
-    component = fixture.componentInstance;
+    component = fixture.componentInstance; 
+  
     fixture.detectChanges();
   });
 
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('when I click the button it should call calculate', () => {
+
+    var calculateButton =  fixture.nativeElement.querySelector('#calculate-button');
+    spyOn(component,'calculate');
+    calculateButton.click();
+    expect(component.calculate).toHaveBeenCalled();    
+  });
+
+  it('when I call calaculate it should call the', () => {
+    component.ratePercent  = 5;
+    component.years =6
+    component.payment = 50;
+    spyOn(component.futureValueService,'monthlyPayments')  
+    component.calculate()   
+    expect(component.futureValueService.monthlyPayments).toHaveBeenCalledWith(5,6,50);  
+    
+  });
+
 });
