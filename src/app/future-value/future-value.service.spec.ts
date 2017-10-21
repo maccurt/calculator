@@ -23,6 +23,15 @@ describe('FutureValueService', () => {
     })
   })
 
+  describe('monthlyPaymentsWithDetail', () => {
+    it('5% 5 years $50 payment', () => {
+      var result = futureValueSerive.monthlyPaymentsWithDetail(5, 5, 50);
+      expect(result.futureValue).toBe(3400.3)
+      expect(result.principal).toBe(3000)
+      expect(result.interest).toBe(400.3)
+    })
+  })
+
   describe('futureValue', () => {
     
     it('5% 5 years $50 payment isBegin period false should be 3400.3', () => {
@@ -34,5 +43,6 @@ describe('FutureValueService', () => {
       var fv = futureValueSerive.futureValue(5/12,60,50,true)
       expect(fv).toBe(3414.47)
     })
+    
   })
 });
