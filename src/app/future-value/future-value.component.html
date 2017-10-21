@@ -1,23 +1,29 @@
-<div class="col-sm-4">
+<div class="col-sm-5">
 
-    <div class="form-group">
-        <label for="monthlyPayment">Monthly Payment</label>
-        <input id='monthlyPayment' type="text" numeric-input [(ngModel)]="monthlyPayment" class="form-control" />
-    </div>
+    <form  (ngSubmit)='calculate()' #futureValueForm='ngForm' >
 
-    <div class="form-group">
-        <label for="ratePercent">Rate %</label>
-        <input id='ratePercent' type="text" numeric-input [(ngModel)]="ratePercent" class="form-control" />
-    </div>
+        <div class="form-group">
+            <label for="monthlyPayment">Monthly Payment</label>
+            <input id='monthlyPayment' type="text" name='monthlyPayment' maxlength="7" required numeric-input [(ngModel)]="monthlyPayment" class="form-control"
+            />
+        </div>
 
-    <div class="form-group">
-        <label for="years"># Of Years</label>
-        <input id='years' type="text" numeric-input [(ngModel)]="years" class="form-control" />
-    </div>
+        <div class="form-group">
+            <label for="ratePercent">Rate %</label>
+            <input id='ratePercent' type="text" name='ratePercent' maxlength='5' required numeric-input [(ngModel)]="ratePercent" class="form-control" />
+        </div>
 
-    <div>
-        <button id='calculate-button' (click)='calculate()' type="button" class="btn btn-primary">Calculate</button>
-    </div>
+        <div class="form-group">
+            <label for="years"># Of Years</label>
+            <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" class="form-control" />
+        </div>
+
+        <div>
+            <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
+            <span *ngIf='showSubmitError()'>Required Fields</span>
+        </div>        
+
+    </form>
 
     <div *ngIf="showResults" id='calculate-result'>
         <table class='table table-bordered'>
@@ -30,7 +36,7 @@
             <tr>
                 <td> + Interest</td>
                 <td>
-                    <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label> 
+                    <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label>
                 </td>
             </tr>
             <tr>

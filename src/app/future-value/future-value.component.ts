@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FutureValueService } from './future-value.service'
 import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
-
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-future-value',
@@ -10,27 +10,30 @@ import { IFutureValueResult } from './ifuture-value-result';
   styleUrls: ['./future-value.component.less']
 })
 export class FutureValueComponent implements OnInit {
-
+  @ViewChild('futureValueForm') form: NgForm;
   ratePercent: number;
   years: number;
   monthlyPayment: number;
   futureValueResult: IFutureValueResult;
   showResults = false;
 
-
-  constructor(public futureValueService: FutureValueService) { 
-    this.futureValueResult = <any> {  }
+  constructor(public futureValueService: FutureValueService) {
+    this.futureValueResult = <any>{}
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   calculate = () => {
-    this.futureValueResult = this.futureValueService
-      .monthlyPaymentsWithDetail(this.ratePercent, this.years, this.monthlyPayment);
+    if (this.form.valid) {
+      this.futureValueResult = this.futureValueService
+        .monthlyPaymentsWithDetail(this.ratePercent, this.years, this.monthlyPayment);
+    }
 
-      this.showResults = true;
+    this.showResults = this.form.valid;
   }
 
-  
+  showSubmitError = () => {
+    var result = !this.form.valid && this.form.submitted;
+    return result;
+  }
 }
