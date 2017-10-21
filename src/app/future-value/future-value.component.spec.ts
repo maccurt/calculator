@@ -83,4 +83,23 @@ describe('FutureValueComponent', () => {
     component.calculate()
     expect(component.futureValueService.monthlyPaymentsWithDetail).toHaveBeenCalledWith(5, 6, 50);
   });
+
+
+  describe('showSubmitError', () => {
+    it('form is not submitted and the form NOT valid should be false', () => {
+      component.form =  <any> { valid:false,submitted:false}
+      expect( component.showSubmitError()).toBe(false);      
+    });
+
+    it('form is submitted and the form is NOT valid should be true', () => {    
+        component.form =  <any> { valid:false,submitted:true}
+        expect( component.showSubmitError()).toBe(true);        
+    });
+    
+    it('form is submitted and the form is valid true', () => {    
+        component.form =  <any> { valid:true,submitted:true}
+        expect( component.showSubmitError()).toBe(false);        
+    });    
+  });
+
 });

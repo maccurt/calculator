@@ -33,6 +33,7 @@ export class FutureValueComponent implements OnInit {
   }
 
   showSubmitError = () => {
+    
     var result = !this.form.valid && this.form.submitted;
     return result;
   }
