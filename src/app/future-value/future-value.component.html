@@ -1,65 +1,75 @@
 <!-- perhaps this bootstrap code should not be in here the class col-sm-5 -->
-<div class="col-sm-5">
+<div id='future-value-component'>
 
-    <div id='future-value-component'>
-        <form (ngSubmit)='calculate()' #futureValueForm='ngForm'>
+    <div class="row">
 
-            <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
-                <label for="monthly-payment">Monthly Payment</label>
-                <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="7" required numeric-input [(ngModel)]="monthlyPayment"
-                    #monthlyPaymentInput='ngModel' class="form-control" />
-                <div class='error-message'>
-                    <span>Monthly Payment Is required</span>
-                </div>
+        <div class='col-lg-3'>
+            <div class='future-value-input-section'>
+                <form (ngSubmit)='calculate()' #futureValueForm='ngForm'>
+
+                    <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
+                        <label for="monthly-payment">Monthly Payment</label>
+                        <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="7" required numeric-input [(ngModel)]="monthlyPayment"
+                            #monthlyPaymentInput='ngModel' class="form-control" />
+                        <div class='error-message'>
+                            <span>Monthly Payment Is required</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" [ngClass]="{'validation-error':showValidationError(ratePercentInput)}">
+                        <label for="rate-percent">Rate %</label>
+                        <input id='rate-percent' type="text" name='ratePercent' maxlength='5' required numeric-input [(ngModel)]="ratePercent" #ratePercentInput='ngModel'
+                            class="form-control" />
+                        <div class='error-message'>
+                            <span>Rate Percent Is required</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" [ngClass]="{'validation-error':showValidationError(yearsInput)}">
+                        <label for="years"># Of Years</label>
+                        <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" #yearsInput='ngModel'
+                            class="form-control" />
+                        <div class='error-message'>
+                            <span># Of Years Is required</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
+                        <span *ngIf='showSubmitError()'>Required Fields</span>
+                    </div>
+
+                </form>
             </div>
-
-            <div class="form-group" [ngClass]="{'validation-error':showValidationError(ratePercentInput)}">
-                <label for="rate-percent">Rate %</label>
-                <input id='rate-percent' type="text" name='ratePercent' maxlength='5' required numeric-input [(ngModel)]="ratePercent" #ratePercentInput='ngModel'
-                    class="form-control" />
-                <div class='error-message'>
-                    <span>Rate Percent Is required</span>
-                </div>
-            </div>
-
-            <div class="form-group" [ngClass]="{'validation-error':showValidationError(yearsInput)}">
-                <label for="years"># Of Years</label>
-                <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" #yearsInput='ngModel'
-                    class="form-control" />
-                <div class='error-message'>
-                    <span># Of Years Is required</span>
-                </div>
-            </div>
-
-            <div>
-                <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
-                <span *ngIf='showSubmitError()'>Required Fields</span>
-            </div>
-
-        </form>
-
-        <div *ngIf="showResults" id='calculate-result'>
-            <table class='table table-bordered'>
-                <tr>
-                    <td>Total Payments</td>
-                    <td>
-                        <label id='principal'>{{futureValueResult.principal| currency:'USD':true:'1.2-2'}}</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td> + Interest</td>
-                    <td>
-                        <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Future Value</td>
-                    <td>
-                        <label id='future-value'>{{futureValueResult.futureValue| currency:'USD':true:'1.2-2'}}</label>
-                    </td>
-                </tr>
-            </table>
-
         </div>
 
-    </div>
+        <div class="col-lg-5">
+                {{showResult}}
+                    <div *ngIf="showResults" id='calculate-result'>
+                            <table class='table table-bordered'>
+                                <tr>
+                                    <td>Total Payments</td>
+                                    <td>
+                                        <label id='principal'>{{futureValueResult.principal| currency:'USD':true:'1.2-2'}}</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> + Interest</td>
+                                    <td>
+                                        <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Future Value</td>
+                                    <td>
+                                        <label id='future-value'>{{futureValueResult.futureValue| currency:'USD':true:'1.2-2'}}</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+    
+            </div>    
+
+    </div>   
+
+</div>
