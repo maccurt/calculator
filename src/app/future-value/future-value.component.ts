@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FutureValueService } from './future-value.service'
 import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
-import { NgForm } from '@angular/forms';
+import { NgForm, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-future-value',
@@ -33,8 +33,14 @@ export class FutureValueComponent implements OnInit {
   }
 
   showSubmitError = () => {
-    
     var result = !this.form.valid && this.form.submitted;
     return result;
+  }
+
+  showValidationError = (control: AbstractControl) => {
+    console.log('control',control)
+    var showError = control.invalid && control.touched;
+    return showError;
+
   }
 }

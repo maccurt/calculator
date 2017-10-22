@@ -1,27 +1,31 @@
 <div class="col-sm-5">
 
-    <form  (ngSubmit)='calculate()' #futureValueForm='ngForm' >
+    <form (ngSubmit)='calculate()' #futureValueForm='ngForm'>
 
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
             <label for="monthlyPayment">Monthly Payment</label>
-            <input id='monthlyPayment' type="text" name='monthlyPayment' maxlength="7" required numeric-input [(ngModel)]="monthlyPayment" class="form-control"
-            />
+            <input id='monthlyPayment' type="text" name='monthlyPaymentInput' maxlength="7" required numeric-input  [(ngModel)]="monthlyPayment"
+                #monthlyPaymentInput='ngModel' class="form-control" />
+            <div class='error-message'><span>Monthly Payment Is required</span></div>
+
         </div>
 
         <div class="form-group">
             <label for="ratePercent">Rate %</label>
-            <input id='ratePercent' type="text" name='ratePercent' maxlength='5' required numeric-input [(ngModel)]="ratePercent" class="form-control" />
+            <input id='ratePercent' type="text" name='ratePercent' maxlength='5' required numeric-input [(ngModel)]="ratePercent" class="form-control"
+            />
         </div>
 
         <div class="form-group">
             <label for="years"># Of Years</label>
-            <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" class="form-control" />
+            <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" class="form-control"
+            />
         </div>
 
         <div>
             <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
             <span *ngIf='showSubmitError()'>Required Fields</span>
-        </div>        
+        </div>
 
     </form>
 
