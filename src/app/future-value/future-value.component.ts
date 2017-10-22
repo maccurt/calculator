@@ -37,10 +37,8 @@ export class FutureValueComponent implements OnInit {
     return result;
   }
 
-  showValidationError = (control: AbstractControl) => {
-    console.log('control',control)
+  showValidationError = (control: AbstractControl) => {    
     var showError = control.invalid && control.touched;
     return showError;
-
   }
 }
