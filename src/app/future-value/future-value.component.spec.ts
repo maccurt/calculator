@@ -5,6 +5,8 @@ import { FutureValueService } from '../future-value/future-value.service'
 import { MathService } from 'app/math/math.service';
 import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
+import { DirectivesModule } from 'app/directives/directives.module';
+import { NumericInputDirective } from 'app/directives/numeric-input.directive';
 
 describe('FutureValueComponent', () => {
   let component: FutureValueComponent;
@@ -13,8 +15,8 @@ describe('FutureValueComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FutureValueComponent],
-      imports: [FormsModule],
-      providers: [FutureValueService, MathService]
+      imports: [FormsModule,DirectivesModule],
+      providers: [FutureValueService, MathService]      
     })
       .compileComponents();
   }));
@@ -119,6 +121,5 @@ describe('FutureValueComponent', () => {
       var result = component.showValidationError(<any>control)
       expect(result).toBe(false)
     });
-
   });
 });
