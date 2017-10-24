@@ -9,7 +9,7 @@
 
                     <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
                         <label for="monthly-payment">Monthly Payment</label>
-                        <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="7" required numeric-input [(ngModel)]="monthlyPayment"
+                        <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="5" required numeric-input [(ngModel)]="monthlyPayment"
                             #monthlyPaymentInput='ngModel' class="form-control" />
                         <div class='error-message'>
                             <span>Monthly Payment Is required</span>
@@ -18,7 +18,7 @@
 
                     <div class="form-group" [ngClass]="{'validation-error':showValidationError(ratePercentInput)}">
                         <label for="rate-percent">Rate %</label>
-                        <input id='rate-percent' type="text" name='ratePercent' maxlength='5' required numeric-input [(ngModel)]="ratePercent" #ratePercentInput='ngModel'
+                        <input id='rate-percent' type="text" name='ratePercent' maxlength='5' required numeric-input [max]='20' [decimals]='2'  [(ngModel)]="ratePercent" #ratePercentInput='ngModel'
                             class="form-control" />
                         <div class='error-message'>
                             <span>Rate Percent Is required</span>
