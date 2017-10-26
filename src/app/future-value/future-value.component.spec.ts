@@ -69,11 +69,11 @@ describe('FutureValueComponent', () => {
       var futureValue = <HTMLDivElement>fixture.nativeElement.querySelector('#future-value ');
       expect(futureValue.innerHTML).toBe('$500,112.33')
 
-      // var principal = <HTMLDivElement>fixture.nativeElement.querySelector('#principal');
-      // expect(principal.innerHTML).toBe('$500,000.00')
+      var principal = <HTMLDivElement>fixture.nativeElement.querySelector('#principal');
+      expect(principal.innerHTML).toBe('$500,000.00')
 
-      // var interest = <HTMLDivElement>fixture.nativeElement.querySelector('#interest');
-      // expect(interest.innerHTML).toBe('$9,999.33')
+      var interest = <HTMLDivElement>fixture.nativeElement.querySelector('#interest');
+      expect(interest.innerHTML).toBe('$9,999.33')
     });
   });
 
@@ -94,6 +94,7 @@ describe('FutureValueComponent', () => {
 
     it('form is submitted and the form is NOT valid should be true', () => {
       component.form = <any>{ valid: false, submitted: true }
+      component.isSubmitError = true
       expect(component.showSubmitError()).toBe(true);
     });
 
