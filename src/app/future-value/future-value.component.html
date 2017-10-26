@@ -8,7 +8,7 @@
                 <form (ngSubmit)='calculate()' #futureValueForm='ngForm'>
 
                     <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
-                        <label for="monthly-payment">Monthly Payment</label>
+                        <label for="monthly-payment" title="How much you will save each month. (1-99999)">Monthly Payment</label>
                         <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="5" required numeric-input [(ngModel)]="monthlyPayment"
                             #monthlyPaymentInput='ngModel' class="form-control" />
                         <div class='error-message'>
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="form-group" [ngClass]="{'validation-error':showValidationError(ratePercentInput)}">
-                        <label for="rate-percent">Rate %</label>
+                        <label for="rate-percent" title="The rate % you expect to make on your investment (1-20)" >Rate %</label>
                         <input id='rate-percent' type="text" name='ratePercent' maxlength='5' required numeric-input [max]='20' [decimals]='2'  [(ngModel)]="ratePercent" #ratePercentInput='ngModel'
                             class="form-control" />
                         <div class='error-message'>
@@ -26,8 +26,8 @@
                     </div>
 
                     <div class="form-group" [ngClass]="{'validation-error':showValidationError(yearsInput)}">
-                        <label for="years"># Of Years</label>
-                        <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" #yearsInput='ngModel'
+                        <label for="years" title="The number of years you plan to save (1-99)" ># Of Years</label>
+                        <input id='years'  type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" #yearsInput='ngModel'
                             class="form-control" />
                         <div class='error-message'>
                             <span># Of Years Is required</span>
@@ -47,21 +47,28 @@
             
                     <div *ngIf="showResults" id='calculate-result'>
                             <table class='table table-bordered'>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
+                                            Results
+                                        </th>
+                                    </tr>
+                                </thead>
                                 <tr>
                                     <td>Total Payments</td>
-                                    <td>
+                                    <td class='number'>
                                         <label id='principal'>{{futureValueResult.principal| currency:'USD':true:'1.2-2'}}</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td> + Interest</td>
-                                    <td>
+                                    <td class='number'>
                                         <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label>
                                     </td>
                                 </tr>
                                 <tr class='total-line'>
                                     <td>Future Value</td>
-                                    <td  >
+                                    <td class='number'  >
                                         <label id='future-value'>{{futureValueResult.futureValue| currency:'USD':true:'1.2-2'}}</label>
                                     </td>
                                 </tr>
