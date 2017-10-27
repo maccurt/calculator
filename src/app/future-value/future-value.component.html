@@ -6,6 +6,9 @@
         <div class='col-lg-3'>
             <div class='future-value-input-section'>
                 <form (ngSubmit)='calculate()' #futureValueForm='ngForm'>
+                    <div class='form-description'>
+                       Calculates the future value of a monthly investment.
+                    </div>
 
                     <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
                         <label for="monthly-payment" title="How much you will save each month. (1-99999)">Monthly Payment</label>
