@@ -8,6 +8,11 @@ export class FutureValueService {
 
   constructor(private mathService: MathService) { }
 
+  rateOfReturn = (principal: number, endTotal): number => {
+    let r = principal - endTotal;
+    return this.mathService.round(r / principal * 100, 2);
+  }
+
   monthlyPayments(ratePercent: number, numberOfYears: number, payment: number): number {
     var months: number = numberOfYears * 12;
     var rate = ratePercent / 12;
@@ -22,12 +27,12 @@ export class FutureValueService {
     //Only remove this if you find you are repeating this code in the future
     var fv = this.futureValue(rate, months, payment);
     var principal = months * payment;
-    var interest = this.mathService.round( fv - principal,2);    
+    var interest = this.mathService.round(fv - principal, 2);
 
     var result: IFutureValueResult = {
-      principal: principal,      
+      principal: principal,
       interest: interest,
-      futureValue: fv      
+      futureValue: fv
     }
 
     return result;
@@ -43,4 +48,6 @@ export class FutureValueService {
     }
     return this.mathService.round(fv, 2);
   }
+
+
 }
