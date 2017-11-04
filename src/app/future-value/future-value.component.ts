@@ -5,6 +5,7 @@ import { IFutureValueResult } from './ifuture-value-result';
 import { NgForm, AbstractControl } from '@angular/forms';
 import { ChartModule } from 'angular2-highcharts';
 
+
 @Component({
   selector: 'app-future-value',
   templateUrl: './future-value.component.html',
@@ -25,11 +26,10 @@ export class FutureValueComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.monthlyPayment = 50;
-    this.ratePercent = 8.5;
-    this.years = 20;
-    this.calculate();
-
+    // this.monthlyPayment = 50;
+    // this.ratePercent = 8.5;
+    // this.years = 20;
+    // this.calculate();
   }
 
   calculate = () => {
@@ -48,10 +48,11 @@ export class FutureValueComponent implements OnInit {
 
   createChart = (principal: number, interest: number) => {
 
+    //TODO in the furtue move this to a service of some sort
     var dataLabels = { distance: 5 };
 
     this.options = {
-      
+
       title: {
         text: null
       },
@@ -63,12 +64,18 @@ export class FutureValueComponent implements OnInit {
         width: 300,
         height: 180,
         spacing: [5, 1, 1, 1],
-        borderWidth: 1,
+        borderWidth: 0,
         borderColor: '#cccccc'
-
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          slicedOffset: 3
+        }
       },
       series: [{
-        data: [{ name: 'principal', y: principal, color: '#0000FF', dataLabels: dataLabels },
+        name: ' ',
+        data: [{ name: 'Total Payment', y: principal, color: '#0000FF', dataLabels: dataLabels, sliced: true, },
         { name: 'interest', y: interest, color: '#00FF00', dataLabels: dataLabels }],
       }]
     };

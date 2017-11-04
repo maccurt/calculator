@@ -7,6 +7,18 @@ import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
 import { DirectivesModule } from 'app/directives/directives.module';
 import { NumericInputDirective } from 'app/directives/numeric-input.directive';
+import { ChartModule } from 'angular2-highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import * as highcharts from 'highcharts'
+export function highchartsFactory() {
+  highcharts.setOptions({
+    lang: {
+      thousandsSep: ','
+    }
+  })
+  return highcharts;
+}
+
 
 describe('FutureValueComponent', () => {
   let component: FutureValueComponent;
@@ -15,8 +27,8 @@ describe('FutureValueComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FutureValueComponent],
-      imports: [FormsModule, DirectivesModule],
-      providers: [FutureValueService, MathService]
+      imports: [FormsModule, DirectivesModule, ChartModule],
+      providers: [FutureValueService, MathService,{provide:HighchartsStatic,useFactory: highchartsFactory} ],
     })
       .compileComponents();
   }));
@@ -88,10 +100,17 @@ describe('FutureValueComponent', () => {
       component.ratePercent = 5;
       component.years = 6
       component.monthlyPayment = 50;
-      spyOn(component.futureValueService, 'monthlyPaymentsWithDetail')
+      spyOn(component.futureValueService, 'monthlyPaymentsWithDetail').and.returnValue({principal:0})
       component.calculate()
       expect(component.futureValueService.monthlyPaymentsWithDetail).toHaveBeenCalledWith(5, 6, 50);
-    });   
+    });
+
+    it('should call createChart with 777,888', () => { 
+      spyOn(component.futureValueService, 'monthlyPaymentsWithDetail').and.returnValue({principal:777,interest:888})
+      spyOn(component,'createChart')
+      component.calculate()      
+      expect(component.createChart).toHaveBeenCalledWith(777,888)
+    });
 
     it('should set isSubmitError to true', () => {
       component.form = <any>{ valid: false, submitted: true }
