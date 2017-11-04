@@ -9,7 +9,7 @@ export class FutureValueService {
   constructor(private mathService: MathService) { }
 
   rateOfReturn = (principal: number, endTotal): number => {
-    let r = principal - endTotal;
+    let r =  endTotal - principal;
     return this.mathService.round(r / principal * 100, 2);
   }
 

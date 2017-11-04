@@ -8,13 +8,14 @@ import { DirectivesModule } from './directives/directives.module';
 import { MathModule } from './math/math.module';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [BrowserModule, AppRouteModule, FutureValueRoutingModule, FutureValueModule,
-    DirectivesModule,
-    MathModule ],
+    DirectivesModule, MathModule],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -15,8 +15,8 @@ describe('FutureValueComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FutureValueComponent],
-      imports: [FormsModule,DirectivesModule],
-      providers: [FutureValueService, MathService]      
+      imports: [FormsModule, DirectivesModule],
+      providers: [FutureValueService, MathService]
     })
       .compileComponents();
   }));
@@ -28,18 +28,16 @@ describe('FutureValueComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-  it('the result should be false', () => {
-    expect(component.showResults).toBe(false)
-  })
+  describe('component', () => {
 
-  it('when I click the calculate button it should call calculate', () => {
-    var calculateButton = fixture.nativeElement.querySelector('#calculate-button');
-    spyOn(component, 'calculate');
-    calculateButton.click();
-    expect(component.calculate).toHaveBeenCalled();
+    it('should be created', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('the result should be false', () => {
+      expect(component.showResults).toBe(false)
+    })
+
   });
 
   describe('click the calculate button', () => {
@@ -56,6 +54,13 @@ describe('FutureValueComponent', () => {
       calculateButton.click();
       fixture.detectChanges();
     })
+
+    it('when I click the calculate button it should call calculate', () => {
+      var calculateButton = fixture.nativeElement.querySelector('#calculate-button');
+      spyOn(component, 'calculate');
+      calculateButton.click();
+      expect(component.calculate).toHaveBeenCalled();
+    });
 
     it('it should set component.futureValueResult correctly', () => {
       expect(component.futureValueResult).toBe(result)
@@ -77,13 +82,22 @@ describe('FutureValueComponent', () => {
     });
   });
 
-  it('when I call calaculate it should call monthly payments with 5,6 ,50', () => {
-    component.ratePercent = 5;
-    component.years = 6
-    component.monthlyPayment = 50;
-    spyOn(component.futureValueService, 'monthlyPaymentsWithDetail')
-    component.calculate()
-    expect(component.futureValueService.monthlyPaymentsWithDetail).toHaveBeenCalledWith(5, 6, 50);
+  describe('calculate', () => {
+
+    it('when I call calaculate it should call monthly payments with 5,6 ,50', () => {
+      component.ratePercent = 5;
+      component.years = 6
+      component.monthlyPayment = 50;
+      spyOn(component.futureValueService, 'monthlyPaymentsWithDetail')
+      component.calculate()
+      expect(component.futureValueService.monthlyPaymentsWithDetail).toHaveBeenCalledWith(5, 6, 50);
+    });   
+
+    it('should set isSubmitError to true', () => {
+      component.form = <any>{ valid: false, submitted: true }
+      component.calculate()
+      expect(component.isSubmitError).toBe(true);
+    });
   });
 
   describe('showSubmitError', () => {
