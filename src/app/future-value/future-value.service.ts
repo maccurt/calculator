@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MathService } from 'app/math/math.service'
 import { IFutureValueResult } from './ifuture-value-result'
+import { BalanceSummary, IBalanceSummary, BalanceDetailItem } from './IBalanceSummary.type'
 
 
 @Injectable()
@@ -9,7 +10,7 @@ export class FutureValueService {
   constructor(private mathService: MathService) { }
 
   rateOfReturn = (principal: number, endTotal): number => {
-    const r =  endTotal - principal;
+    const r = endTotal - principal;
     return this.mathService.round(r / principal * 100, 2);
   }
 
@@ -49,5 +50,87 @@ export class FutureValueService {
     return this.mathService.round(fv, 2);
   }
 
+  rateFactor(ratePercent: number, periods: number, compoundingFrequencyPerPeriod: number): number {
+    const rateFactor = Math.pow((1 + (ratePercent / 100 / compoundingFrequencyPerPeriod)),
+      compoundingFrequencyPerPeriod * periods);
+    return rateFactor;
+  }
 
+  // TODO consider renaming this, with amortization or something else
+  monthlyPaymentsBalanceSummary(ratePercent: number, numberOfYears: number, periodPayment: number): BalanceSummary {
+    const balanceSummary: IBalanceSummary = new BalanceSummary(0, 0, 0, 0);
+    let endBalance = 0, beginBalance = 0, interestTotal = 0;
+    const rateFactor = this.rateFactor(ratePercent, 1, 12);
+    const yearPaymentTotal = periodPayment * 12;
+    let paymentTotal = 0;
+
+    for (let i = 1; i <= numberOfYears; i++) {
+
+      const round = this.mathService.round;
+      //this is the future value of the previous balance
+      const previousBalanceFv = this.mathService.round(beginBalance * rateFactor, 2);
+      endBalance = round(previousBalanceFv + this.futureValue(ratePercent / 12, 12, periodPayment, true), 2);
+
+      paymentTotal += yearPaymentTotal;
+      const interest = round(endBalance - beginBalance - yearPaymentTotal, 2);
+      interestTotal += interest;
+      interestTotal = round(interestTotal, 2);
+
+      const detailItem = new BalanceDetailItem(
+        i,
+        beginBalance,
+        periodPayment,
+        yearPaymentTotal,
+        ratePercent,
+        paymentTotal,
+        interest,
+        interestTotal,
+        endBalance);
+
+      detailItem.balanceSummary = balanceSummary;
+
+      balanceSummary.detailItems.push(detailItem);
+      beginBalance = endBalance;
+    }
+
+    balanceSummary.balance = balanceSummary.detailItems[numberOfYears - 1].endBalance;
+    balanceSummary.interest = interestTotal;
+    balanceSummary.paymentTotal = periodPayment * 12 * numberOfYears;
+    return balanceSummary;
+  }
+
+  calculateBalanceSummary(balanceSummary: BalanceSummary): void {
+
+    balanceSummary.interest = 0;
+    balanceSummary.paymentTotal = 0;
+    let previousEndBalance = 0;
+    let paymentTotal = 0;
+
+    balanceSummary.detailItems.forEach((item: BalanceDetailItem) => {
+
+      const rateFactor = this.rateFactor(item.ratePercent, 1, 12);
+
+      item.beginBalance = previousEndBalance;
+      const beginBalanceFutureValue = this.mathService.round(item.beginBalance * rateFactor, 2);
+      item.endBalance = this.mathService.round(
+        beginBalanceFutureValue +
+        this.futureValue(item.ratePercent / 12, 12, item.periodPayment, true), 2);
+
+      item.yearPaymentTotal = item.periodPayment * 12;
+
+      //The running payment of all items
+      paymentTotal += item.yearPaymentTotal;
+      item.paymentTotal = paymentTotal;
+
+      // balanceSummary.paymentTotal += item.yearPaymentTotal;
+      item.interest = this.mathService.round(item.endBalance - item.beginBalance - item.yearPaymentTotal, 2);
+
+      balanceSummary.interest += item.interest;
+      previousEndBalance = item.endBalance;
+    });
+
+    balanceSummary.paymentTotal = paymentTotal;
+    balanceSummary.balance = balanceSummary.detailItems[balanceSummary.detailItems.length - 1].endBalance;
+    balanceSummary.interest = this.mathService.round(balanceSummary.interest, 2);
+  }
 }
