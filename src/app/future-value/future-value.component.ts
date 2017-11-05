@@ -76,7 +76,7 @@ export class FutureValueComponent implements OnInit {
       series: [{
         name: ' ',
         data: [{ name: 'Total Payment', y: principal, color: '#0000FF', dataLabels: dataLabels, sliced: true, },
-        { name: 'interest', y: interest, color: '#00FF00', dataLabels: dataLabels }],
+        { name: 'Interest', y: interest, color: '#00FF00', dataLabels: dataLabels }],
       }]
     };
 
