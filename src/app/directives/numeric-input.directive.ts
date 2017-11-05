@@ -36,7 +36,7 @@ export class NumericInputDirective implements OnInit {
 
         if (!isNaN(this.max)) {
             if (!isNaN(this.el.nativeElement.value)) {
-                var num = Number(this.el.nativeElement.value)
+                const num = Number(this.el.nativeElement.value)
 
                 if (num > this.max) {
                     this.el.nativeElement.value = this.keyDownValue;
@@ -53,13 +53,13 @@ export class NumericInputDirective implements OnInit {
 
     checkInput = (event: KeyboardEvent): void => {
 
-        var value: string = this.el.nativeElement.value;
+        const value: string = this.el.nativeElement.value;
 
-        let inputChar = String.fromCharCode(event.charCode);
+        const inputChar = String.fromCharCode(event.charCode);
         // TODO you were allowing negatived you don't need know, so removed
         // const pattern = /[0-9\.\-\ ]/;
 
-        var pattern = /[0-9\.\ ]/;
+        let pattern = /[0-9\.\ ]/;
         if (this.decimals === 0) {
             pattern = /[0-9\ ]/;
         }

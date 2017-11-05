@@ -49,7 +49,7 @@ export class FutureValueComponent implements OnInit {
   createChart = (principal: number, interest: number) => {
 
     //TODO in the furtue move this to a service of some sort
-    var dataLabels = { distance: 5 };
+    const dataLabels = { distance: 5 };
 
     this.options = {
 
@@ -83,14 +83,14 @@ export class FutureValueComponent implements OnInit {
   }
 
   showSubmitError = () => {
-    var result = !this.form.valid && this.form.submitted && this.isSubmitError;
+    const result = !this.form.valid && this.form.submitted && this.isSubmitError;
     return result;
   }
 
   showValidationError = (control: AbstractControl) => {
     //TODO I wish I could get the form passed in because I want to make this 
     //generic in the future so other controls can use it. Don't fret over it now
-    var showError = control.invalid && (control.touched || this.form.submitted)
+    const showError = control.invalid && (control.touched || this.form.submitted)
     return showError;
   }
 }

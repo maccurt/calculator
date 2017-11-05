@@ -9,27 +9,27 @@ export class FutureValueService {
   constructor(private mathService: MathService) { }
 
   rateOfReturn = (principal: number, endTotal): number => {
-    let r =  endTotal - principal;
+    const r =  endTotal - principal;
     return this.mathService.round(r / principal * 100, 2);
   }
 
   monthlyPayments(ratePercent: number, numberOfYears: number, payment: number): number {
-    var months: number = numberOfYears * 12;
-    var rate = ratePercent / 12;
+    const months: number = numberOfYears * 12;
+    const rate = ratePercent / 12;
     return this.futureValue(rate, months, payment);
   }
 
   monthlyPaymentsWithDetail(ratePercent: number, numberOfYears: number, payment: number): IFutureValueResult {
-    var months: number = numberOfYears * 12;
-    var rate = ratePercent / 12;
+    const months: number = numberOfYears * 12;
+    const rate = ratePercent / 12;
 
     //TODO Perhaps this math here should be in another service
     //Only remove this if you find you are repeating this code in the future
-    var fv = this.futureValue(rate, months, payment);
-    var principal = months * payment;
-    var interest = this.mathService.round(fv - principal, 2);
+    const fv = this.futureValue(rate, months, payment);
+    const principal = months * payment;
+    const interest = this.mathService.round(fv - principal, 2);
 
-    var result: IFutureValueResult = {
+    const result: IFutureValueResult = {
       principal: principal,
       interest: interest,
       futureValue: fv
@@ -40,8 +40,8 @@ export class FutureValueService {
 
   futureValue(ratePercent: number, periods: number, payment: number, isBeginOfPeriod?: boolean): number {
 
-    let rate = ratePercent / 100;
-    let multiplier: number = ((Math.pow(1 + rate, periods) - 1) / rate);
+    const rate = ratePercent / 100;
+    const multiplier: number = ((Math.pow(1 + rate, periods) - 1) / rate);
     let fv: number = payment * multiplier;
     if (isBeginOfPeriod) {
       fv = fv * (1 + rate);
