@@ -54,6 +54,24 @@ describe('FutureValueService', () => {
     });
   });
 
+
+  describe('monthlyPaymentsBalanceSummary', () => {
+    
+      it('5% 5 years $50 payment', () => {
+
+        const x = futureValueService.monthlyPaymentsWithDetail(5,5,50);
+        
+
+        const result = futureValueService.monthlyPaymentsBalanceSummary(5, 5, 50);
+       
+        //TODO thiis an issue, it might be because of rounding, but not $14 difference
+      
+        expect(result.balance).toBe(3400.3)
+        expect(result.paymentTotal).toBe(3000)
+        expect(result.interest).toBe(400.3)
+      })
+    
+  });
   describe('calculateBalanceSummary', () => {
 
     let balanceSummary: BalanceSummary;

@@ -64,7 +64,7 @@
                                 <tr>
                                     <td>Total Payments</td>
                                     <td class='number'>
-                                        <label id='principal'>{{futureValueResult.principal| currency:'USD':true:'1.2-2'}}</label>
+                                        <label id='principal'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -76,7 +76,7 @@
                                 <tr class='total-line'>
                                     <td>Future Value</td>
                                     <td class='number'>
-                                        <label id='future-value'>{{futureValueResult.futureValue| currency:'USD':true:'1.2-2'}}</label>
+                                        <label id='future-value'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</label>
                                     </td>
                                 </tr>
                             </table>

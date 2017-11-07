@@ -4,6 +4,7 @@ import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
 import { NgForm, AbstractControl } from '@angular/forms';
 import { ChartModule } from 'angular2-highcharts';
+import { BalanceSummary } from 'app/future-value/IBalanceSummary.type';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class FutureValueComponent implements OnInit {
   ratePercent: number;
   years: number;
   monthlyPayment: number;
-  futureValueResult: IFutureValueResult;
+  futureValueResult: BalanceSummary;
   showResults = false;
   isSubmitError = false;
   options: any;
@@ -34,10 +35,9 @@ export class FutureValueComponent implements OnInit {
 
   calculate = () => {
     if (this.form.valid) {
-      this.futureValueResult = this.futureValueService
-        .monthlyPaymentsWithDetail(this.ratePercent, this.years, this.monthlyPayment);
-      this.isSubmitError = false;
-      this.createChart(this.futureValueResult.principal, this.futureValueResult.interest)
+     
+      this.futureValueResult = this.futureValueService.monthlyPaymentsBalanceSummary(this.ratePercent,this.years,this.monthlyPayment)
+      this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest)
     }
     else {
       this.isSubmitError = true;

@@ -10,6 +10,7 @@ import { NumericInputDirective } from 'app/directives/numeric-input.directive';
 import { ChartModule } from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import * as highcharts from 'highcharts'
+import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 export function highchartsFactory() {
   highcharts.setOptions({
     lang: {
@@ -54,18 +55,30 @@ describe('FutureValueComponent', () => {
 
   describe('click the calculate button', () => {
 
-    const result: IFutureValueResult = {
-      principal: 500000.00,
+
+    // detailItems: Array<IBalanceDetailItem>;
+    // principal: number;
+    // interest: number;
+    // balance: number;
+    // paymentTotal: number;
+    const result: IBalanceSummary = {
+      principal: 99999999, //What do we do with this
       interest: 9999.33,
-      futureValue: 500112.33
+      balance: 500112.33,
+      paymentTotal:500000.00,
+      detailItems:[]
     }
     beforeEach(() => {
 
-      spyOn(component.futureValueService, 'monthlyPaymentsWithDetail').and.returnValue(result)
+      spyOn(component.futureValueService, 'monthlyPaymentsBalanceSummary').and.returnValue(result)
       const calculateButton = fixture.nativeElement.querySelector('#calculate-button');
       calculateButton.click();
       fixture.detectChanges();
     })
+
+    it('should behave...', () => {
+      expect(component.futureValueService.monthlyPaymentsBalanceSummary).toHaveBeenCalled()
+    });
 
     it('when I click the calculate button it should call calculate', () => {
       const calculateButton = fixture.nativeElement.querySelector('#calculate-button');
@@ -82,13 +95,17 @@ describe('FutureValueComponent', () => {
       expect(component.showResults).toBe(true)
     })
 
-    it('it should set the resulting html correctly', () => {
+    it('future value should be correct', () => {
       const futureValue = <HTMLDivElement>fixture.nativeElement.querySelector('#future-value ');
-      expect(futureValue.innerHTML).toBe('$500,112.33')
+      expect(futureValue.innerHTML).toBe('$500,112.33')    
+    });
 
+    it('total payment should be correct', () => {     
       const principal = <HTMLDivElement>fixture.nativeElement.querySelector('#principal');
-      expect(principal.innerHTML).toBe('$500,000.00')
+      expect(principal.innerHTML).toBe('$500,000.00')     
+    });
 
+    it('interst should be correct', () => {
       const interest = <HTMLDivElement>fixture.nativeElement.querySelector('#interest');
       expect(interest.innerHTML).toBe('$9,999.33')
     });
@@ -100,13 +117,13 @@ describe('FutureValueComponent', () => {
       component.ratePercent = 5;
       component.years = 6
       component.monthlyPayment = 50;
-      spyOn(component.futureValueService, 'monthlyPaymentsWithDetail').and.returnValue({ principal: 0 })
+      spyOn(component.futureValueService, 'monthlyPaymentsBalanceSummary').and.returnValue({ principal: 0 })
       component.calculate()
-      expect(component.futureValueService.monthlyPaymentsWithDetail).toHaveBeenCalledWith(5, 6, 50);
+      expect(component.futureValueService.monthlyPaymentsBalanceSummary).toHaveBeenCalledWith(5, 6, 50);
     });
 
     it('should call createChart with 777,888', () => {
-      spyOn(component.futureValueService, 'monthlyPaymentsWithDetail').and.returnValue({ principal: 777, interest: 888 })
+      spyOn(component.futureValueService, 'monthlyPaymentsBalanceSummary').and.returnValue({ paymentTotal: 777, interest: 888 })
       spyOn(component, 'createChart')
       component.calculate()
       expect(component.createChart).toHaveBeenCalledWith(777, 888)
