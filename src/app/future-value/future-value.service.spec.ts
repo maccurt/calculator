@@ -54,24 +54,33 @@ describe('FutureValueService', () => {
     });
   });
 
-
   describe('monthlyPaymentsBalanceSummary', () => {
     
-      it('5% 5 years $50 payment', () => {
-
-        const x = futureValueService.monthlyPaymentsWithDetail(5,5,50);
-        
-
-        const result = futureValueService.monthlyPaymentsBalanceSummary(5, 5, 50);
+        it('5% 1 years $50 payment', () => {    
+     
        
-        //TODO thiis an issue, it might be because of rounding, but not $14 difference
-      
-        expect(result.balance).toBe(3400.3)
-        expect(result.paymentTotal).toBe(3000)
-        expect(result.interest).toBe(400.3)
-      })
+          const result = futureValueService.monthlyPaymentsBalanceSummary(5, 1, 50);          
+          expect(result.detailItems[0].endBalance).toEqual(613.94)    
     
+          // expect(result.balance).toBe(3400.3)
+          // expect(result.paymentTotal).toBe(3000)
+          // expect(result.interest).toBe(400.3)
+        })
+    
+      });
+    
+
+
+
+  describe('monthlyPaymentsBalanceSummary', () => {
+    it('5% 5 years $50 payment', () => {      
+      const result = futureValueService.monthlyPaymentsBalanceSummary(5, 5, 50);           
+      expect(result.balance).toBe(3400.29)
+      expect(result.paymentTotal).toBe(3000)
+      expect(result.interest).toBe(400.29)
+    })
   });
+
   describe('calculateBalanceSummary', () => {
 
     let balanceSummary: BalanceSummary;
@@ -82,7 +91,7 @@ describe('FutureValueService', () => {
     describe('baseline', () => {
 
       it('balance', () => {
-        expect(balanceSummary.balance).toEqual(803.27);
+        expect(balanceSummary.balance).toEqual(798.60);
       });
 
       it('should behave...', () => {
@@ -96,7 +105,7 @@ describe('FutureValueService', () => {
       });
 
       it('balance', () => {
-        expect(balanceSummary.balance).toEqual(803.27);
+        expect(balanceSummary.balance).toEqual(798.60);
       });
 
       // it('balance', () => {
@@ -182,31 +191,31 @@ describe('FutureValueService', () => {
 
       describe('index 0', () => {
         it('endBalance', () => {
-          expect(balanceSummary.detailItems[0].endBalance).toEqual(250.66);
+          expect(balanceSummary.detailItems[0].endBalance).toEqual(249.00);
         });
 
         it('interest', () => {
-          expect(balanceSummary.detailItems[0].interest).toEqual(10.66);
+          expect(balanceSummary.detailItems[0].interest).toEqual(9);
         });
       });
 
       describe('index 1', () => {
         it('beginBalance', () => {
-          expect(balanceSummary.detailItems[1].beginBalance).toEqual(250.66);
+          expect(balanceSummary.detailItems[1].beginBalance).toEqual(249);
         });
 
         it('endBalance', () => {
-          expect(balanceSummary.detailItems[1].endBalance).toEqual(518.08);
+          expect(balanceSummary.detailItems[1].endBalance).toEqual(514.85);
         });
 
         it('interest', () => {
-          expect(balanceSummary.detailItems[1].interest).toEqual(27.42);
+          expect(balanceSummary.detailItems[1].interest).toEqual(25.85);
         });
       });
 
       describe('index 2', () => {
         it('endBalance', () => {
-          expect(balanceSummary.detailItems[2].endBalance).toEqual(804.83);
+          expect(balanceSummary.detailItems[2].endBalance).toEqual(799.92);
         });
       });
     });
@@ -219,11 +228,11 @@ describe('FutureValueService', () => {
 
       describe('index 0', () => {
         it('interest', () => {
-          expect(balanceSummary.detailItems[0].interest).toEqual(46.49);
+          expect(balanceSummary.detailItems[0].interest).toEqual(39.26);
         });
 
         it('endBalance', () => {
-          expect(balanceSummary.detailItems[0].endBalance).toEqual(1246.49);
+          expect(balanceSummary.detailItems[0].endBalance).toEqual(1239.26);
         });
 
         it('yearPaymentTotal', () => {

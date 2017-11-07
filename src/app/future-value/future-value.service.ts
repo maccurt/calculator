@@ -63,13 +63,15 @@ export class FutureValueService {
     const rateFactor = this.rateFactor(ratePercent, 1, 12);
     const yearPaymentTotal = periodPayment * 12;
     let paymentTotal = 0;
+    const round = this.mathService.round;
 
     for (let i = 1; i <= numberOfYears; i++) {
 
-      const round = this.mathService.round;
       //this is the future value of the previous balance
       const previousBalanceFv = this.mathService.round(beginBalance * rateFactor, 2);
-      endBalance = round(previousBalanceFv + this.futureValue(ratePercent / 12, 12, periodPayment, true), 2);
+
+      endBalance = round(previousBalanceFv + this.futureValue(ratePercent / 12, 12, periodPayment, false), 2);
+
 
       paymentTotal += yearPaymentTotal;
       const interest = round(endBalance - beginBalance - yearPaymentTotal, 2);
@@ -114,7 +116,7 @@ export class FutureValueService {
       const beginBalanceFutureValue = this.mathService.round(item.beginBalance * rateFactor, 2);
       item.endBalance = this.mathService.round(
         beginBalanceFutureValue +
-        this.futureValue(item.ratePercent / 12, 12, item.periodPayment, true), 2);
+        this.futureValue(item.ratePercent / 12, 12, item.periodPayment, false), 2);
 
       item.yearPaymentTotal = item.periodPayment * 12;
 
