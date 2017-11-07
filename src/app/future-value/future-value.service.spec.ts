@@ -55,26 +55,21 @@ describe('FutureValueService', () => {
   });
 
   describe('monthlyPaymentsBalanceSummary', () => {
-    
-        it('5% 1 years $50 payment', () => {    
-     
-       
-          const result = futureValueService.monthlyPaymentsBalanceSummary(5, 1, 50);          
-          expect(result.detailItems[0].endBalance).toEqual(613.94)    
-    
-          // expect(result.balance).toBe(3400.3)
-          // expect(result.paymentTotal).toBe(3000)
-          // expect(result.interest).toBe(400.3)
-        })
-    
-      });
-    
 
+    it('5% 1 years $50 payment', () => {
+      const result = futureValueService.monthlyPaymentsBalanceSummary(5, 1, 50);
+      expect(result.detailItems[0].endBalance).toEqual(613.94);
 
+      // expect(result.balance).toBe(3400.3)
+      // expect(result.paymentTotal).toBe(3000)
+      // expect(result.interest).toBe(400.3)
+    })
+
+  });
 
   describe('monthlyPaymentsBalanceSummary', () => {
-    it('5% 5 years $50 payment', () => {      
-      const result = futureValueService.monthlyPaymentsBalanceSummary(5, 5, 50);           
+    it('5% 5 years $50 payment', () => {
+      const result = futureValueService.monthlyPaymentsBalanceSummary(5, 5, 50);
       expect(result.balance).toBe(3400.29)
       expect(result.paymentTotal).toBe(3000)
       expect(result.interest).toBe(400.29)
