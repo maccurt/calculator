@@ -76,6 +76,12 @@ describe('FutureValueService', () => {
     })
   });
 
+  describe('Name of the group', () => {
+    it('should behave...', () => {
+      var x= futureValueService.monthlyPaymentsBalanceSummary(8.5,20,50);
+      expect(x.detailItems[0].endBalance).toBe(623.94)
+    });
+  });
   describe('calculateBalanceSummary', () => {
 
     let balanceSummary: BalanceSummary;
@@ -103,32 +109,35 @@ describe('FutureValueService', () => {
         expect(balanceSummary.balance).toEqual(798.60);
       });
 
-      // it('balance', () => {
-      //     expect(balanceSummary.interest).toEqual(83.27);
-      // });
+      it('balance', () => {
+          expect(balanceSummary.interest).toEqual(78.6);
+      });
 
-      // describe("index 0", function () {
 
-      //     it('begin balance', function () {
-      //         expect(balanceSummary.detailItems[0].beginBalance).toEqual(0);
-      //     });
 
-      //     it('yearPaymentTotal', function () {
-      //         expect(balanceSummary.detailItems[0].yearPaymentTotal).toEqual(240);
-      //     });
 
-      //     it('paymentTotal', function () {
-      //         expect(balanceSummary.detailItems[0].paymentTotal).toEqual(240);
-      //     });
+      describe("index 0", function () {
 
-      //     it('interest', function () {
-      //         expect(balanceSummary.detailItems[0].interest).toEqual(9.30);
-      //     });
+          it('begin balance', function () {
+              expect(balanceSummary.detailItems[0].beginBalance).toEqual(0);
+          });
 
-      //     it('endBalance', function () {
-      //         expect(balanceSummary.detailItems[0].endBalance).toEqual(249.30);
-      //     });
-      // });
+          it('yearPaymentTotal', function () {
+              expect(balanceSummary.detailItems[0].yearPaymentTotal).toEqual(240);
+          });
+
+          it('paymentTotal', function () {
+              expect(balanceSummary.detailItems[0].paymentTotal).toEqual(240);
+          });
+
+          it('interest', function () {
+              expect(balanceSummary.detailItems[0].interest).toEqual(9.30);
+          });
+
+          it('endBalance', function () {
+              expect(balanceSummary.detailItems[0].endBalance).toEqual(249.30);
+          });
+      });
 
       // describe("index 1", function () {
 

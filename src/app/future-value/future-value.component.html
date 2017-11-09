@@ -100,10 +100,14 @@
 
         <div class="col-xs-12 col-sm-6">
 
-            <table>
+            <table class='table table-condensed'>
                 <tr *ngFor="let d of futureValueResult.detailItems">
 
+                    <td>{{d.period}}</td>
+                    <td>{{d.beginBalance}}</td>
+                    <td>{{d.yearPaymentTotal}}</td>
                     <td>{{d.interest}}</td>
+                    <td>{{d.endBalance}}</td>
                 </tr>
             </table>
 
