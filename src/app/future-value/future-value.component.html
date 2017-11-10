@@ -100,18 +100,36 @@
 
         <div class="col-xs-12 col-sm-6">
 
-            <table class='table table-condensed'>
+            <table class='table table-condensed balance-details'>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Begin Balance</th>
+                        <th>Payment Total</th>
+                        <th>Interest</th>
+                        <th>End Balance</th>
+
+                    </tr>
+                </thead>
                 <tr *ngFor="let d of futureValueResult.detailItems">
-
                     <td>{{d.period}}</td>
-                    <td>{{d.beginBalance}}</td>
-                    <td>{{d.yearPaymentTotal}}</td>
-                    <td>{{d.interest}}</td>
-                    <td>{{d.endBalance}}</td>
+                    <td>{{d.beginBalance | number}}</td>
+                    <td>{{d.yearPaymentTotal | number}}</td>
+                    <td>{{d.interest | number}}</td>
+                    <td>{{d.endBalance | number}}</td>
                 </tr>
-            </table>
+                <tfoot>
+                    <tr>
+                        <td  colspan="1"></td>                       
+                        <td  colspan="1"></td>                       
+                        
+                        <td>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</td>
+                        <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>
+                        <td>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</td>
+                    </tr>
+                </tfoot>
 
-            
+            </table>
 
         </div>
     </div>
