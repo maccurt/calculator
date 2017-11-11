@@ -34,6 +34,10 @@ describe('FutureValueService', () => {
   })
 
   describe('futureValue', () => {
+    it('a zero percent interest should return correct', () => {
+      const fv = futureValueService.futureValue(0, 12, 50, false);
+      expect(fv).toBe(600);
+    });
 
     it('5% 5 years $50 payment isBegin period false should be 3400.3', () => {
       const fv = futureValueService.futureValue(5 / 12, 60, 50, false)
@@ -78,7 +82,7 @@ describe('FutureValueService', () => {
 
   describe('Name of the group', () => {
     it('should behave...', () => {
-      var x= futureValueService.monthlyPaymentsBalanceSummary(8.5,20,50);
+      const x = futureValueService.monthlyPaymentsBalanceSummary(8.5, 20, 50);
       expect(x.detailItems[0].endBalance).toBe(623.94)
     });
   });
@@ -110,7 +114,7 @@ describe('FutureValueService', () => {
       });
 
       it('balance', () => {
-          expect(balanceSummary.interest).toEqual(78.6);
+        expect(balanceSummary.interest).toEqual(78.6);
       });
 
       // describe("index 0", function () {

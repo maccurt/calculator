@@ -55,8 +55,10 @@ export class FutureValueComponent implements OnInit {
 
   updateDetail = (detail: IBalanceDetailItem) => {
 
-    if (!isNaN(detail.ratePercent)) {
+    if (detail.ratePercent.toString() !== '' && !isNaN(detail.ratePercent)) {
       detail.ratePercent = parseFloat(detail.ratePercent.toString())
+    } else {
+      detail.ratePercent = 0;
     }
 
     this.futureValueService.calculateBalanceSummary(this.futureValueResult)
