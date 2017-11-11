@@ -2,9 +2,12 @@
 <div id='future-value-component'>
 
     <div class="row">
-
         <div class='col-xs-12 col-sm-6 col-md-4'>
-            <div class='future-value-input-section'>
+            <div class='show-input' [hidden]='showInput'>
+                <a href='#' (click)="toggleShowInput()">Show Input & Calculate Again</a>
+            </div>
+
+            <div [hidden]='!showInput' class='future-value-input-section'>
                 <form (ngSubmit)='calculate()' #futureValueForm='ngForm' autocomplete="false">
                     <div class='form-description'>
                         Calculates the future value of a monthly investment.
@@ -45,60 +48,55 @@
                 </form>
             </div>
         </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-5">
-
-            <div *ngIf="showResults">
-                <div class="row">
-                    <div class="col-xs-12">
-
-                        <div id='calculate-result'>
-                            <table class='table table-bordered'>
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">
-                                            Results
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tr>
-                                    <td>Total Payments</td>
-                                    <td class='number'>
-                                        <label id='principal'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> + Interest</td>
-                                    <td class='number'>
-                                        <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label>
-                                    </td>
-                                </tr>
-                                <tr class='total-line'>
-                                    <td>Future Value</td>
-                                    <td class='number'>
-                                        <label id='future-value'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</label>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 ">
-
-                        <chart class="future-value-chart" [options]="options"></chart>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </div>
 
-    <div class=row>
+    <div class="row">
 
-        <div class="col-xs-12 col-sm-6">
+        <div *ngIf="showResults">
+            <div class="col-xs-6">
+                <div id='calculate-result'>
+                    <table class='table table-bordered'>
+                        <thead>
+                            <tr>
+                                <th colspan="2">
+                                    Results
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>Total Payments</td>
+                            <td class='number'>
+                                <label id='principal'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> + Interest</td>
+                            <td class='number'>
+                                <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label>
+                            </td>
+                        </tr>
+                        <tr class='total-line'>
+                            <td>Future Value</td>
+                            <td class='number'>
+                                <label id='future-value'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+
+                <chart class="future-value-chart" [options]="options"></chart>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-7">
 
             <table class='table table-condensed balance-details'>
                 <thead>
@@ -106,6 +104,7 @@
                         <th>Year</th>
                         <th>Begin Balance</th>
                         <th>Payment Total</th>
+                        <th>Annual Rate %</th>
                         <th>Interest</th>
                         <th>End Balance</th>
 
@@ -113,18 +112,23 @@
                 </thead>
                 <tr *ngFor="let d of futureValueResult.detailItems">
                     <td>{{d.period}}</td>
-                    <td>{{d.beginBalance | number}}</td>
-                    <td>{{d.yearPaymentTotal | number}}</td>
-                    <td>{{d.interest | number}}</td>
-                    <td>{{d.endBalance | number}}</td>
+                    <td>{{d.beginBalance | number : '1.2-2'}}</td>
+                    <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
+                    <td class='input-td'>
+                        <input class='detail-rate-percent' (blur)="updateDetail(d)" type="text" name='detail-ratePercent' maxlength='5'
+                            required numeric-input [max]='20' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel'
+                            autocomplete="false" />
+                    </td>
+                    <td>{{d.interest | number : '1.2-2'}}</td>
+                    <td>{{d.endBalance | number : '1.2-2'}}</td>
                 </tr>
                 <tfoot>
                     <tr>
-                        <td  colspan="1"></td>                       
-                        <td  colspan="1"></td>                       
-                        
+                        <td></td>
+                        <td></td>
                         <td>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</td>
-                        <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>
+                        <td></td>
+                        <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>                        
                         <td>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</td>
                     </tr>
                 </tfoot>

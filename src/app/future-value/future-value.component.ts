@@ -4,7 +4,7 @@ import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
 import { NgForm, AbstractControl } from '@angular/forms';
 import { ChartModule } from 'angular2-highcharts';
-import { BalanceSummary } from 'app/future-value/IBalanceSummary.type';
+import { BalanceSummary, IBalanceDetailItem } from 'app/future-value/IBalanceSummary.type';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class FutureValueComponent implements OnInit {
   showResults = false;
   isSubmitError = false;
   options: any;
+  showInput = true;
 
   constructor(public futureValueService: FutureValueService) {
     this.futureValueResult = <any>{}
@@ -35,9 +36,11 @@ export class FutureValueComponent implements OnInit {
 
   calculate = () => {
     if (this.form.valid) {
-     
-      this.futureValueResult = this.futureValueService.monthlyPaymentsBalanceSummary(this.ratePercent,this.years,this.monthlyPayment)
+
+      this.futureValueResult = this.futureValueService
+        .monthlyPaymentsBalanceSummary(this.ratePercent, this.years, this.monthlyPayment)
       this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest)
+      this.showInput = false;
     }
     else {
       this.isSubmitError = true;
@@ -46,6 +49,22 @@ export class FutureValueComponent implements OnInit {
     this.showResults = this.form.valid;
   }
 
+  toggleShowInput = () => {
+    this.showInput = true;
+  }
+
+  updateDetail = (detail: IBalanceDetailItem) => {
+
+    if (!isNaN(detail.ratePercent)) {
+      detail.ratePercent = parseFloat(detail.ratePercent.toString())
+    }
+
+    this.futureValueService.calculateBalanceSummary(this.futureValueResult)
+    this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest)
+
+  }
+
+  //TODO fix this so you just pass in the object and not the individal numbers
   createChart = (principal: number, interest: number) => {
 
     //TODO in the furtue move this to a service of some sort
