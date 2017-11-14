@@ -101,6 +101,17 @@
             <table class='table table-condensed balance-details'>
                 <thead>
                     <tr>
+                        <th colspan="6">
+                            <div class="result-horizontal">
+                                <span>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
+                                <span>Total Payments +</span>
+                                <span>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
+                                <span>Interest =</span>
+                                <span class='balance' >{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
                         <th>Year</th>
                         <th>Begin Balance</th>
                         <th>Payment Total</th>
@@ -115,9 +126,9 @@
                     <td>{{d.beginBalance | number : '1.2-2'}}</td>
                     <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
                     <td class='input-td'>
-                        <input class='detail-rate-percent' (blur)="updateDetail(d)" type="text" name='detail-ratePercent' maxlength='5'
-                            required numeric-input [max]='20' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel'
-                            autocomplete="false" />
+                        <input class='detail-rate-percent' (blur)="updateDetail(d)" type="text" name='detail-ratePercent' maxlength='5' required
+                            numeric-input [max]='20' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel' autocomplete="false"
+                        />
                     </td>
                     <td>{{d.interest | number : '1.2-2'}}</td>
                     <td>{{d.endBalance | number : '1.2-2'}}</td>
@@ -128,7 +139,7 @@
                         <td></td>
                         <td>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</td>
                         <td></td>
-                        <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>                        
+                        <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>
                         <td>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</td>
                     </tr>
                 </tfoot>
