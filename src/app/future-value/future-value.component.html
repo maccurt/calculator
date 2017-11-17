@@ -49,50 +49,7 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-
-        <div *ngIf="showResults">
-            <div class="col-xs-6 col-md-4">
-                <div id='calculate-result'>
-                    <table class='table table-bordered'>
-                        <thead>
-                            <tr>
-                                <th colspan="2">
-                                    Results
-                                </th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>Total Payments</td>
-                            <td class='number'>
-                                <label id='principal'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> + Interest</td>
-                            <td class='number'>
-                                <label id='interest'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</label>
-                            </td>
-                        </tr>
-                        <tr class='total-line'>
-                            <td>Future Value</td>
-                            <td class='number'>
-                                <label id='future-value'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</label>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="col-xs-6">
-
-                <chart class="future-value-chart" [options]="options"></chart>
-            </div>
-
-        </div>
-
-    </div>
+ 
 
     <div class="row" *ngIf="showResults">
 
@@ -103,11 +60,11 @@
                     <tr>
                         <th colspan="6">
                             <div class="result-horizontal">
-                                <span>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
-                                <span>Total Payments +</span>
-                                <span>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
-                                <span>Interest =</span>
-                                <span class='balance' >{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</span>
+                                <span  id='principal' class='minor'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
+                                <span class='label'>Total Payments +</span>
+                                <span  id='interest' class='minor'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
+                                <span class='label'>Interest =</span>
+                                <span id='future-value' class='major'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</span>
                             </div>
                         </th>
                     </tr>
@@ -146,6 +103,10 @@
 
             </table>
 
+        </div>
+        <div class="col-xs-6 col-md-3" >
+
+            <chart class="future-value-chart" [options]="options"></chart>
         </div>
     </div>
 </div>

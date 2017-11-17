@@ -65,8 +65,8 @@ describe('FutureValueComponent', () => {
       principal: 99999999, //What do we do with this
       interest: 9999.33,
       balance: 500112.33,
-      paymentTotal:500000.00,
-      detailItems:[]
+      paymentTotal: 500000.00,
+      detailItems: []
     }
     beforeEach(() => {
 
@@ -96,13 +96,13 @@ describe('FutureValueComponent', () => {
     })
 
     it('future value should be correct', () => {
-      const futureValue = <HTMLDivElement>fixture.nativeElement.querySelector('#future-value ');
-      expect(futureValue.innerHTML).toBe('$500,112.33')    
+      const futureValue = <HTMLDivElement>fixture.nativeElement.querySelector('#future-value');
+      expect(futureValue.innerHTML).toBe('$500,112.33')
     });
 
-    it('total payment should be correct', () => {     
+    it('total payment should be correct', () => {
       const principal = <HTMLDivElement>fixture.nativeElement.querySelector('#principal');
-      expect(principal.innerHTML).toBe('$500,000.00')     
+      expect(principal.innerHTML).toBe('$500,000.00')
     });
 
     it('interst should be correct', () => {
