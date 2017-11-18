@@ -84,7 +84,7 @@
                     <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
                     <td class='input-td'>
                         <input class='detail-rate-percent' (blur)="updateDetail(d)" type="text" name='detail-ratePercent' maxlength='5' required
-                            numeric-input [max]='20' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel' autocomplete="false"
+                            numeric-input [min]='-20' [max]='40' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel' autocomplete="false"
                         />
                     </td>
                     <td>{{d.interest | number : '1.2-2'}}</td>
@@ -104,7 +104,7 @@
             </table>
 
         </div>
-        <div class="col-xs-6 col-md-3" >
+        <div class="col-xs-6 col-md-5" >
 
             <chart class="future-value-chart" [options]="options"></chart>
         </div>

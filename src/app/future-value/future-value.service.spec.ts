@@ -34,6 +34,11 @@ describe('FutureValueService', () => {
   })
 
   describe('futureValue', () => {
+
+    it('negative -12 percent interest should return 1634.02', () => {
+      const fv = futureValueService.futureValue(-12/12, 12, 250, false);
+      expect(fv).toBe(2840.38);
+    });
     it('a zero percent interest should return correct', () => {
       const fv = futureValueService.futureValue(0, 12, 50, false);
       expect(fv).toBe(600);

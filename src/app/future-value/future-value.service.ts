@@ -42,7 +42,7 @@ export class FutureValueService {
   futureValue(ratePercent: number, periods: number, payment: number, isBeginOfPeriod?: boolean): number {
 
     let fv = 0;
-    if (ratePercent > 0) {
+    if (ratePercent !== 0) {
       const rate = ratePercent / 100;
       const multiplier: number = ((Math.pow(1 + rate, periods) - 1) / rate);
       fv = payment * multiplier;
@@ -78,8 +78,8 @@ export class FutureValueService {
       endBalance = round(previousBalanceFv + this.futureValue(ratePercent / 12, 12, periodPayment, false), 2);
       paymentTotal += yearPaymentTotal;
 
-      const interest = round(endBalance - beginBalance - yearPaymentTotal, 2);
-      console.log(interest)
+      let interest = round(endBalance - beginBalance - yearPaymentTotal, 2);
+ 
       interestTotal += interest;
       interestTotal = round(interestTotal, 2);
 
@@ -131,6 +131,7 @@ export class FutureValueService {
 
       // balanceSummary.paymentTotal += item.yearPaymentTotal;
       item.interest = this.mathService.round(item.endBalance - item.beginBalance - item.yearPaymentTotal, 2);
+
 
       balanceSummary.interest += item.interest;
       previousEndBalance = item.endBalance;
