@@ -56,12 +56,14 @@
                     <tr>
 
                         <th colspan="7">
-                            <a  class='re-calculate' href='#' (click)="toggleShowInput()">Re-Calculate</a>
+
+                            <a class='re-calculate' href='#' (click)="toggleShowInput()">Re-Calculate</a>
+
                             <div class="result-horizontal pull-right">
                                 <span id='principal' class='minor'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
-                                <span class='label'>Total Payments +</span>
+                                <span class='description'>Total Payments +</span>
                                 <span id='interest' class='minor'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
-                                <span class='label'>Interest =</span>
+                                <span class='description'>Interest =</span>
                                 <span id='future-value' class='major'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</span>
                             </div>
                         </th>
