@@ -3,9 +3,6 @@
 
     <div class="row">
         <div class='col-xs-12 col-sm-6 col-md-4'>
-            <div class='show-input' [hidden]='showInput'>
-                <a href='#' (click)="toggleShowInput()">Show Input & Calculate Again</a>
-            </div>
 
             <div [hidden]='!showInput' class='future-value-input-section'>
                 <form (ngSubmit)='calculate()' #futureValueForm='ngForm' autocomplete="false">
@@ -57,8 +54,10 @@
             <table class='table table-condensed balance-details'>
                 <thead>
                     <tr>
+
                         <th colspan="7">
-                            <div class="result-horizontal">
+                            <a  class='re-calculate' href='#' (click)="toggleShowInput()">Re-Calculate</a>
+                            <div class="result-horizontal pull-right">
                                 <span id='principal' class='minor'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
                                 <span class='label'>Total Payments +</span>
                                 <span id='interest' class='minor'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
@@ -83,8 +82,7 @@
                     <td>{{d.beginBalance | number : '1.2-2'}}</td>
                     <td class='input-td'>
                         <input class='detail-monthly-payment' (blur)="updateDetail(d)" type="text" name='detail-monthly-payment' maxlength='5' required
-                            numeric-input   [(ngModel)]="d.periodPayment" #ratePercentInput='ngModel'
-                            autocomplete="false" />
+                            numeric-input [(ngModel)]="d.periodPayment" #ratePercentInput='ngModel' autocomplete="false" />
                     </td>
                     <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
                     <td class='input-td'>

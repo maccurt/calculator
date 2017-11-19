@@ -1,69 +1,70 @@
-#future-value-component{    
+#future-value-component {
     padding: 10px;
 }
 
-.show-input{
+.show-input {
     margin-bottom: 10px;
 }
-.future-value-input-section
-{
+
+.future-value-input-section {
     background-color: #F5F8F9;
     border: 1px solid #cccccc;
-    padding: 10px;    
-
+    padding: 10px;
     input {
         width: 120px;
     }
     margin-bottom: 10px;
 }
 
-.balance-details{
-    border: 1px solid #cccccc;        
-
-    tr:nth-child(odd){
+.balance-details {
+    border: 1px solid #cccccc;
+    input {
+        height: 23px !important;
+    }
+    tr:nth-child(odd) {
         background-color: #e6ffee;
     }
-    th{
-        border-right:1px solid #cccccc !important;
+    th {
+        border-right: 1px solid #cccccc !important;
+        .re-calculate {
+            font-size: small;
+            font-weight: normal;
+        }
     }
-    td{
+    td {
         text-align: right;
         padding-right: 5px;
-        border-right:1px solid #cccccc !important;    
+        border-right: 1px solid #cccccc !important;
     }
-    tfoot{
-        font-size:large;
+    tfoot {
+        font-size: large;
         font-weight: bold;
-        td{
+        td {
             border-top: 2px solid black !important;
-        }      
+        }
     }
-
-    input{
+    input {
         padding-left: 5px;
     }
-
-    .detail-rate-percent{
+    .detail-rate-percent {
         width: 50px;
     }
-    .detail-monthly-payment{
+    .detail-monthly-payment {
         width: 75px;
     }
-    
 }
 
-.result-horizontal{
-    .label{
+.result-horizontal {
+    .label {
         font-size: small;
-        color:black;
+        color: black;
         font-weight: normal;
     }
-    .minor{
+    .minor {
         font-weight: normal;
         font-size: x-large;
-    }        
-        
-    .major{
+    }
+    .major {
         font-weight: bold;
         font-size: x-large;
     }
@@ -77,23 +78,18 @@
 //      width: 150px;
 //      height: 100px;
 // }
-
-
 // #monthly-payment {
 //     width: 125px;
 // }
-
 // #rate-percent {
 //     width: 80px;
 // }
-
 // #years {
 //     width: 60px;   
 // }
-
 #calculate-result {
     background-color: #eeffe6;
-    #future-value{
+    #future-value {
         font-size: x-large;
-    }    
+    }
 }
