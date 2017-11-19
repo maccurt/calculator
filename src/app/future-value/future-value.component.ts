@@ -5,6 +5,8 @@ import { IFutureValueResult } from './ifuture-value-result';
 import { NgForm, AbstractControl } from '@angular/forms';
 import { ChartModule } from 'angular2-highcharts';
 import { BalanceSummary, IBalanceDetailItem } from 'app/future-value/IBalanceSummary.type';
+// import { parse } from 'path';
+import { detachEmbeddedView } from '@angular/core/src/view/view_attach';
 
 
 @Component({
@@ -54,13 +56,25 @@ export class FutureValueComponent implements OnInit {
     this.showResults = false;
   }
 
+  //TODO perhaps this should be in the numeric input
+  //so you don't have to do this all the time
+  forceNumber = (value: number): number => {
+    let newValue = 0;
+    if (value.toString() !== '' && !isNaN(value)) {
+      newValue = parseFloat(value.toString())
+    };
+    return newValue;
+  }
+
   updateDetail = (detail: IBalanceDetailItem) => {
 
-    if (detail.ratePercent.toString() !== '' && !isNaN(detail.ratePercent)) {
-      detail.ratePercent = parseFloat(detail.ratePercent.toString())
-    } else {
-      detail.ratePercent = 0;
-    }
+    detail.ratePercent = this.forceNumber(detail.ratePercent)
+    detail.periodPayment = this.forceNumber(detail.periodPayment)
+    // if (detail.ratePercent.toString() !== '' && !isNaN(detail.ratePercent)) {
+    //   detail.ratePercent = parseFloat(detail.ratePercent.toString())
+    // } else {
+    //   detail.ratePercent = 0;
+    // }
 
     this.futureValueService.calculateBalanceSummary(this.futureValueResult)
     this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest)

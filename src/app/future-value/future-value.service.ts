@@ -78,7 +78,7 @@ export class FutureValueService {
       endBalance = round(previousBalanceFv + this.futureValue(ratePercent / 12, 12, periodPayment, false), 2);
       paymentTotal += yearPaymentTotal;
 
-      let interest = round(endBalance - beginBalance - yearPaymentTotal, 2);
+      const interest = round(endBalance - beginBalance - yearPaymentTotal, 2);
  
       interestTotal += interest;
       interestTotal = round(interestTotal, 2);
