@@ -83,12 +83,14 @@
                     <td>{{d.period}}</td>
                     <td>{{d.beginBalance | number : '1.2-2'}}</td>
                     <td class='input-td'>
-                        <input class='detail-monthly-payment' (blur)="updateDetail(d)" type="text" name='detail-monthly-payment' maxlength='5' required
-                            numeric-input [(ngModel)]="d.periodPayment" #ratePercentInput='ngModel' autocomplete="false" />
+                        
+                        <input class='detail-monthly-payment' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text"
+                            name='detail-monthly-payment' maxlength='5' required numeric-input [(ngModel)]="d.periodPayment"
+                            #ratePercentInput='ngModel' autocomplete="false" />
                     </td>
                     <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
                     <td class='input-td'>
-                        <input class='detail-rate-percent' (blur)="updateDetail(d)" type="text" name='detail-ratePercent' maxlength='5' required
+                        <input class='detail-rate-percent' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-ratePercent' maxlength='5' required
                             numeric-input [min]='-20' [max]='40' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel'
                             autocomplete="false" />
                     </td>
