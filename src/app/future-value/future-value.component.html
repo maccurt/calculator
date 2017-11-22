@@ -1,120 +1,119 @@
 <!-- perhaps this bootstrap code should not be in here the class col-sm-5 -->
-<div id='future-value-component'>
 
-    <div class="row">
-        <div class='col-xs-12 col-sm-6 col-md-4'>
 
-            <div [hidden]='!showInput' class='future-value-input-section'>
-                <form (ngSubmit)='calculate()' #futureValueForm='ngForm' autocomplete="false">
-                    <div class='form-description'>
-                        Calculates the future value of a monthly investment.
+<div class="row">
+    <div class='col-xs-12 col-sm-12 col-md-4'>
+
+        <div [hidden]='!showInput' class='future-value-input-section'>
+            <form (ngSubmit)='calculate()' #futureValueForm='ngForm' autocomplete="false">
+                <div class='form-description'>
+                    Calculates the future value of a monthly investment.
+                </div>
+
+                <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
+                    <label for="monthly-payment" title="How much you will save each month. (1-99999)">Monthly Payment</label>
+                    <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="5" required numeric-input [(ngModel)]="monthlyPayment"
+                        #monthlyPaymentInput='ngModel' class="form-control" autocomplete="false" />
+                    <div class='error-message'>
+                        <span>Monthly Payment Is required</span>
                     </div>
+                </div>
 
-                    <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
-                        <label for="monthly-payment" title="How much you will save each month. (1-99999)">Monthly Payment</label>
-                        <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="5" required numeric-input [(ngModel)]="monthlyPayment"
-                            #monthlyPaymentInput='ngModel' class="form-control" autocomplete="false" />
-                        <div class='error-message'>
-                            <span>Monthly Payment Is required</span>
-                        </div>
+                <div class="form-group" [ngClass]="{'validation-error':showValidationError(ratePercentInput)}">
+                    <label for="rate-percent" title="The annual rate % you expect to make on your investment (1-20)">Annual Rate %</label>
+                    <input id='rate-percent' type="text" name='ratePercent' maxlength='5' required numeric-input [max]='20' [decimals]='2' [(ngModel)]="ratePercent"
+                        #ratePercentInput='ngModel' class="form-control" autocomplete="false" />
+                    <div class='error-message'>
+                        <span>Rate Percent Is required</span>
                     </div>
+                </div>
 
-                    <div class="form-group" [ngClass]="{'validation-error':showValidationError(ratePercentInput)}">
-                        <label for="rate-percent" title="The annual rate % you expect to make on your investment (1-20)">Annual Rate %</label>
-                        <input id='rate-percent' type="text" name='ratePercent' maxlength='5' required numeric-input [max]='20' [decimals]='2' [(ngModel)]="ratePercent"
-                            #ratePercentInput='ngModel' class="form-control" autocomplete="false" />
-                        <div class='error-message'>
-                            <span>Rate Percent Is required</span>
-                        </div>
+                <div class="form-group" [ngClass]="{'validation-error':showValidationError(yearsInput)}">
+                    <label for="years" title="The number of years you plan to save (1-99)"># Of Years</label>
+                    <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" #yearsInput='ngModel'
+                        class="form-control" autocomplete="false" />
+                    <div class='error-message'>
+                        <span># Of Years Is required</span>
                     </div>
+                </div>
 
-                    <div class="form-group" [ngClass]="{'validation-error':showValidationError(yearsInput)}">
-                        <label for="years" title="The number of years you plan to save (1-99)"># Of Years</label>
-                        <input id='years' type="text" name='years' maxlength="2" required numeric-input [(ngModel)]="years" #yearsInput='ngModel'
-                            class="form-control" autocomplete="false" />
-                        <div class='error-message'>
-                            <span># Of Years Is required</span>
-                        </div>
-                    </div>
+                <div>
+                    <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
+                    <span *ngIf='showSubmitError()'>Required Fields</span>
+                </div>
 
-                    <div>
-                        <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
-                        <span *ngIf='showSubmitError()'>Required Fields</span>
-                    </div>
-
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <div class="row" *ngIf="showResults">
+<div class="row" *ngIf="showResults">
 
-        <div class="col-xs-12 col-sm-6 col-md-8">
+    <div class="col-xs-12 col-sm-12 col-md-8">
 
-            <table class='table table-condensed balance-details'>
-                <thead>
-                    <tr>
+        <table class='table table-condensed balance-details'>
+            <thead>
+                <tr>
 
-                        <th colspan="7">
+                    <th colspan="7">
 
-                            <a class='re-calculate' href='#' (click)="toggleShowInput()">Re-Calculate</a>
+                        <a class='re-calculate' href='#' (click)="toggleShowInput()">Re-Calculate</a>
 
-                            <div class="result-horizontal pull-right">
-                                <span id='principal' class='minor'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
-                                <span class='description'>Total Payments +</span>
-                                <span id='interest' class='minor'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
-                                <span class='description'>Interest =</span>
-                                <span id='future-value' class='major'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Year</th>
-                        <th>Begin Balance</th>
-                        <th>Monthly Payment</th>
-                        <th>Payment Total</th>
-                        <th>Annual Rate %</th>
-                        <th>Interest</th>
-                        <th>End Balance</th>
-
-                    </tr>
-                </thead>
-                <tr *ngFor="let d of futureValueResult.detailItems">
-                    <td>{{d.period}}</td>
-                    <td>{{d.beginBalance | number : '1.2-2'}}</td>
-                    <td class='input-td'>
-                        
-                        <input class='detail-monthly-payment' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text"
-                            name='detail-monthly-payment' maxlength='5' required numeric-input [(ngModel)]="d.periodPayment"
-                            #ratePercentInput='ngModel' autocomplete="false" />
-                    </td>
-                    <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
-                    <td class='input-td'>
-                        <input class='detail-rate-percent' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-ratePercent' maxlength='5' required
-                            numeric-input [min]='-20' [max]='40' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel'
-                            autocomplete="false" />
-                    </td>
-                    <td>{{d.interest | number : '1.2-2'}}</td>
-                    <td>{{d.endBalance | number : '1.2-2'}}</td>
+                        <div class="result-horizontal pull-right">
+                            <span id='principal' class='minor'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
+                            <span class='description'>Total Payments +</span>
+                            <span id='interest' class='minor'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
+                            <span class='description'>Interest =</span>
+                            <span id='future-value' class='major'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</span>
+                        </div>
+                    </th>
                 </tr>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</td>
-                        <td></td>
-                        <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>
-                        <td>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</td>
-                    </tr>
-                </tfoot>
+                <tr>
+                    <th>Year</th>
+                    <th>Begin Balance</th>
+                    <th>Monthly Payment</th>
+                    <th>Payment Total</th>
+                    <th>Annual Rate %</th>
+                    <th>Interest</th>
+                    <th>End Balance</th>
 
-            </table>
+                </tr>
+            </thead>
+            <tr *ngFor="let d of futureValueResult.detailItems">
+                <td>{{d.period}}</td>
+                <td>{{d.beginBalance | number : '1.2-2'}}</td>
+                <td class='input-td'>
 
-        </div>
-        <div class="col-xs-6 col-md-4">
+                    <input class='detail-monthly-payment' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-monthly-payment'
+                        maxlength='5' required numeric-input [(ngModel)]="d.periodPayment" #ratePercentInput='ngModel' autocomplete="false"
+                    />
+                </td>
+                <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
+                <td class='input-td'>
+                    <input class='detail-rate-percent' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-ratePercent'
+                        maxlength='5' required numeric-input [min]='-20' [max]='40' [decimals]='2' [(ngModel)]="d.ratePercent"
+                        #ratePercentInput='ngModel' autocomplete="false" />
+                </td>
+                <td>{{d.interest | number : '1.2-2'}}</td>
+                <td>{{d.endBalance | number : '1.2-2'}}</td>
+            </tr>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</td>
+                    <td></td>
+                    <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>
+                    <td>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</td>
+                </tr>
+            </tfoot>
 
-            <chart class="future-value-chart" [options]="options"></chart>
-        </div>
+        </table>
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4">
+
+        <chart class="future-value-chart" [options]="options"></chart>
     </div>
 </div>
