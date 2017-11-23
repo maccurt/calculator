@@ -6,6 +6,7 @@ import { FutureValueRoutingModule } from './future-value/future-value-routing.mo
 import { FutureValueModule } from 'app/future-value/future-value.module';
 import { DirectivesModule } from './directives/directives.module';
 import { MathModule } from './math/math.module';
+import { StockQouteService } from './stock-qoute/stock-qoute.service';
 
 
 
@@ -16,7 +17,7 @@ import { MathModule } from './math/math.module';
   ],
   imports: [BrowserModule, AppRouteModule, FutureValueRoutingModule, FutureValueModule,
     DirectivesModule, MathModule],
-  providers: [],
+  providers: [StockQouteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
