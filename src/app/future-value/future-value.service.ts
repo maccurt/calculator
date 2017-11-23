@@ -9,9 +9,9 @@ export class FutureValueService {
 
   constructor(private mathService: MathService) { }
 
-  rateOfReturn = (principal: number, endTotal): number => {
-    const r = endTotal - principal;
-    return this.mathService.round(r / principal * 100, 2);
+  rateOfReturn = (currentValue: number, orignalValue): number => {
+    const r = currentValue - orignalValue;
+    return this.mathService.round(r / orignalValue * 100, 2);
   }
 
   monthlyPayments(ratePercent: number, numberOfYears: number, payment: number): number {
@@ -79,7 +79,7 @@ export class FutureValueService {
       paymentTotal += yearPaymentTotal;
 
       const interest = round(endBalance - beginBalance - yearPaymentTotal, 2);
- 
+
       interestTotal += interest;
       interestTotal = round(interestTotal, 2);
 
@@ -103,6 +103,9 @@ export class FutureValueService {
     balanceSummary.balance = balanceSummary.detailItems[numberOfYears - 1].endBalance;
     balanceSummary.interest = interestTotal;
     balanceSummary.paymentTotal = periodPayment * 12 * numberOfYears;
+
+
+    balanceSummary.rateOfReturn = this.rateOfReturn(balanceSummary.balance, balanceSummary.paymentTotal)
     return balanceSummary;
   }
 

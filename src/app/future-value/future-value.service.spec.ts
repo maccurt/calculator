@@ -58,8 +58,13 @@ describe('FutureValueService', () => {
   describe('rateOfReturn', () => {
 
     it('principal 100, end total 110 should return 10%', () => {
-      const rateOfReturn = futureValueService.rateOfReturn(100, 110);
+      const rateOfReturn = futureValueService.rateOfReturn(110, 100);
       expect(rateOfReturn).toBe(10);
+    });
+
+    it('current value 250,000 original value 200000 should calculate 25%', () => {
+      const rateOfReturn = futureValueService.rateOfReturn(250000, 200000);
+      expect(rateOfReturn).toBe(25);
     });
   });
 
@@ -69,9 +74,9 @@ describe('FutureValueService', () => {
       const result = futureValueService.monthlyPaymentsBalanceSummary(5, 1, 50);
       expect(result.detailItems[0].endBalance).toEqual(613.94);
 
-      // expect(result.balance).toBe(3400.3)
-      // expect(result.paymentTotal).toBe(3000)
-      // expect(result.interest).toBe(400.3)
+      expect(result.balance).toBe(613.94)
+      expect(result.paymentTotal).toBe(600)
+      expect(result.interest).toBe(13.94)      
     })
 
   });
@@ -82,6 +87,8 @@ describe('FutureValueService', () => {
       expect(result.balance).toBe(3400.29)
       expect(result.paymentTotal).toBe(3000)
       expect(result.interest).toBe(400.29)
+      expect(result.rateOfReturn).toBe(13.34)
+
     })
   });
 

@@ -4,6 +4,7 @@ export interface IBalanceSummary {
     interest: number;
     balance: number;
     paymentTotal: number;
+    rateOfReturn: number;
 }
 
 export interface IBalanceDetailItem {
@@ -19,9 +20,9 @@ export interface IBalanceDetailItem {
     balanceSummary: IBalanceSummary;
 }
 
-
 export class BalanceSummary implements IBalanceSummary {
     detailItems: Array<IBalanceDetailItem>;
+    rateOfReturn = 0; //TODO should this come in the constructor
     constructor(public principal: number, public paymentTotal: number, public interest: number, public balance: number) {
         this.detailItems = [];
     }
