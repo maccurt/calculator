@@ -8,9 +8,6 @@ import { DirectivesModule } from './directives/directives.module';
 import { MathModule } from './math/math.module';
 import { StockQuoteService } from './stock-quote/stock-quote.service';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent
