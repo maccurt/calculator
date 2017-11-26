@@ -29,10 +29,10 @@ export class FutureValueComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.monthlyPayment = 250;
-    // this.ratePercent = 12;
-    // this.years = 20;
-    // this.calculate();
+    this.monthlyPayment = 250;
+    this.ratePercent = 12;
+    this.years = 20;
+    this.calculate();
   }
 
   calculate = () => {

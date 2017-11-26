@@ -18,7 +18,7 @@ export class BalanceSummaryComponent implements OnInit {
 
   ngOnInit() { }
 
-  showOriginalInput = (): void => {
+  showOriginalInput = (): void => {    
     this.showOriginalInputEvent.emit();
   }
 
