@@ -51,66 +51,10 @@
 
     <div class="col-xs-12 col-sm-12 col-md-9">
 
-        <table class='table table-condensed balance-details'>
-            <thead>
-                <tr>
+        <app-balance-summary [summary]="futureValueResult" (calculateEvent)='handleCalculateEvent($event)' (showOriginalInputEvent)='handleShowOriginalInputEvent($event)'>
 
-                    <th colspan="7">
+        </app-balance-summary>
 
-                        <a class='re-calculate' href='#' (click)="toggleShowInput()">Re-Calculate</a>
-
-                        <div class="result-horizontal pull-right">
-                            <span id='principal' class='minor'>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
-                            <span class='description'>Payment  +</span>
-                            <span id='interest' class='minor'>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</span>
-                            <span class='description'>Interest =</span>
-                            <span id='future-value' class='major'>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</span>
-                            <span id='rate-of-return' title="rate of return">({{futureValueResult.rateOfReturn}}%)</span>
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th>Year</th>
-                    <th>Begin Balance</th>
-                    <th>Monthly Payment</th>
-                    <th>Payment Total</th>
-                    <th>Annual Rate %</th>
-                    <th>Interest</th>
-                    <th>End Balance</th>
-
-                </tr>
-            </thead>
-            <tr *ngFor="let d of futureValueResult.detailItems">
-                <td>{{d.period}}</td>
-                <td>{{d.beginBalance | number : '1.2-2'}}</td>
-                <td class='input-td'>
-
-                    <input class='detail-monthly-payment' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-monthly-payment'
-                        maxlength='5' required numeric-input [(ngModel)]="d.periodPayment" #ratePercentInput='ngModel' autocomplete="false"
-                    />
-                </td>
-                <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
-                <td class='input-td'>
-                    <input class='detail-rate-percent' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-ratePercent'
-                        maxlength='5' required numeric-input [min]='-20' [max]='99' [decimals]='2' [(ngModel)]="d.ratePercent"
-                        #ratePercentInput='ngModel' autocomplete="false" />
-                </td>
-                <td>{{d.interest | number : '1.2-2'}}</td>
-                <td>{{d.endBalance | number : '1.2-2'}}</td>
-            </tr>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{futureValueResult.paymentTotal| currency:'USD':true:'1.2-2'}}</td>
-                    <td></td>
-                    <td>{{futureValueResult.interest| currency:'USD':true:'1.2-2'}}</td>
-                    <td>{{futureValueResult.balance| currency:'USD':true:'1.2-2'}}</td>
-                </tr>
-            </tfoot>
-
-        </table>
 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3">

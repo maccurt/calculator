@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 export interface IStokeQuote {
@@ -25,6 +25,8 @@ export class StockQuoteService {
 
     const list: IStokeQuote[] = [];
     //TODO when we have a service put this in the API
+    //http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html
+    //https://seekingalpha.com/instablog/605212-robert-allan-schwartz/4831186-annual-returns-s-and-p-500-1928-2015
     list.push(this.createStockQuote(1928, 43.81));
     list.push(this.createStockQuote(1929, -8.30));
     list.push(this.createStockQuote(1930, -25.12));

@@ -5,9 +5,8 @@ import { IFutureValueResult } from './ifuture-value-result';
 import { NgForm, AbstractControl } from '@angular/forms';
 import { ChartModule } from 'angular2-highcharts';
 import { BalanceSummary, IBalanceDetailItem } from 'app/future-value/IBalanceSummary.type';
-// import { parse } from 'path';
 import { detachEmbeddedView } from '@angular/core/src/view/view_attach';
-
+import { BalanceSummaryComponent } from '../balance-summary/balance-summary.component';
 
 @Component({
   selector: 'app-future-value',
@@ -22,18 +21,18 @@ export class FutureValueComponent implements OnInit {
   futureValueResult: BalanceSummary;
   showResults = false;
   isSubmitError = false;
-  options: any;
   showInput = true;
+  options: any;
 
   constructor(public futureValueService: FutureValueService) {
     this.futureValueResult = <any>{}
   }
 
   ngOnInit() {
-    // this.monthlyPayment = 250;
-    // this.ratePercent = 12;
-    // this.years = 20;
-    // this.calculate();
+    this.monthlyPayment = 250;
+    this.ratePercent = 12;
+    this.years = 20;
+    this.calculate();
   }
 
   calculate = () => {
@@ -51,34 +50,14 @@ export class FutureValueComponent implements OnInit {
     this.showResults = this.form.valid;
   }
 
-  toggleShowInput = () => {
+  handleShowOriginalInputEvent = (): void => {
+    console.log('handleRecalculateEvent')
     this.showInput = true;
     this.showResults = false;
   }
 
-  //TODO perhaps this should be in the numeric input
-  //so you don't have to do this all the time
-  forceNumber = (value: number): number => {
-    let newValue = 0;
-    if (value.toString() !== '' && !isNaN(value)) {
-      newValue = parseFloat(value.toString())
-    };
-    return newValue;
-  }
-
-  updateDetail = (detail: IBalanceDetailItem) => {
-
-    detail.ratePercent = this.forceNumber(detail.ratePercent)
-    detail.periodPayment = this.forceNumber(detail.periodPayment)
-    // if (detail.ratePercent.toString() !== '' && !isNaN(detail.ratePercent)) {
-    //   detail.ratePercent = parseFloat(detail.ratePercent.toString())
-    // } else {
-    //   detail.ratePercent = 0;
-    // }
-
-    this.futureValueService.calculateBalanceSummary(this.futureValueResult)
+  handleCalculateEvent = (): void => {
     this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest)
-
   }
 
   //TODO fix this so you just pass in the object and not the individal numbers
