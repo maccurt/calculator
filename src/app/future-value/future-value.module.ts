@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FutureValueRoutingModule } from './future-value-routing.module';
 import { FutureValueComponent } from './future-value.component';
 import { DirectivesModule } from '../directives/directives.module';
-import { FutureValueService } from './future-value.service'
+import { FutureValueService } from './future-value.service';
 import { MathService } from '../math/math.service';
 import { ChartModule } from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
-import * as highcharts from 'highcharts'
+import * as highcharts from 'highcharts';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
 
 export function highchartsFactory() {
@@ -16,7 +16,7 @@ export function highchartsFactory() {
     lang: {
       thousandsSep: ','
     }
-  })
+  });
   return highcharts;
 }
 

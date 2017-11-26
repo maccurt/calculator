@@ -22,7 +22,7 @@ export class NumericInputDirective implements OnInit {
     ngOnInit(): void {
 
         if (isNaN(this.decimals)) {
-            this.decimals = 0
+            this.decimals = 0;
         }
         else {
             this.decimals = Math.abs(Math.floor(this.decimals));
@@ -36,14 +36,14 @@ export class NumericInputDirective implements OnInit {
 
     keyDown = (event: KeyboardEvent): void => {
         this.keyDownValue = this.el.nativeElement.value;
-    };
+    }
     keyUp = (event: KeyboardEvent): void => {
 
-        const inputValue = this.el.nativeElement.value
+        const inputValue = this.el.nativeElement.value;
 
         if (!isNaN(this.max)) {
             if (!isNaN(inputValue)) {
-                const num = Number(inputValue)
+                const num = Number(inputValue);
 
                 if (num > this.max) {
                     this.el.nativeElement.value = this.keyDownValue;
@@ -56,7 +56,7 @@ export class NumericInputDirective implements OnInit {
             this.el.nativeElement.value = this.keyDownValue;
         }
 
-    };
+    }
 
 
 
@@ -64,14 +64,14 @@ export class NumericInputDirective implements OnInit {
     checkNumericKey = (allowNegative: boolean, allowDecimalPrecision: boolean, character: string): boolean => {
 
         if (!allowNegative && allowDecimalPrecision) {
-            return /[0-9\.\ ]/.test(character)
+            return /[0-9\.\ ]/.test(character);
         }
 
         if (allowNegative && allowDecimalPrecision) {
-            return /[0-9\.\-\ ]/.test(character)
+            return /[0-9\.\-\ ]/.test(character);
         }
 
-        return /[0-9]/.test(character)
+        return /[0-9]/.test(character);
     }
 
     checkInput = (event: KeyboardEvent): void => {
@@ -101,7 +101,7 @@ export class NumericInputDirective implements OnInit {
             event.preventDefault();
             return;
         }
-    };
+    }
 
     //TODO this might not be needed and/or could be in a servide
     getPattern = (allowNegative: boolean, allowDecimalPrecision: boolean): RegExp => {
@@ -114,7 +114,7 @@ export class NumericInputDirective implements OnInit {
             return new RegExp(/^-?[0-9]?\d*(\.\d+)?$/);
         }
 
-        return new RegExp(/[0-9\.\ ]/)
+        return new RegExp(/[0-9\.\ ]/);
 
     }
 }

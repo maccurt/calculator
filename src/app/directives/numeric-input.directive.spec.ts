@@ -12,11 +12,11 @@ describe('NumericInputDirective', () => {
     it('allowNegative = false false, allowDecimal = false', () => {
       
       //Allow
-      expect(directive.checkNumericKey(false, false, '1')).toBeTruthy()
-      expect(directive.checkNumericKey(false, false, '9')).toBeTruthy()
+      expect(directive.checkNumericKey(false, false, '1')).toBeTruthy();
+      expect(directive.checkNumericKey(false, false, '9')).toBeTruthy();
 
       //Don't Allow
-      expect(directive.checkNumericKey(false, false, '.')).toBeFalsy()
+      expect(directive.checkNumericKey(false, false, '.')).toBeFalsy();
       expect(directive.checkNumericKey(false, false, '-')).toBeFalsy();
       expect(directive.checkNumericKey(false, false, 'A')).toBeFalsy();
       expect(directive.checkNumericKey(false, false, 'Z')).toBeFalsy();
@@ -26,8 +26,8 @@ describe('NumericInputDirective', () => {
     it('allowNegative = false false, allowDecimal = true', () => {
       
       //Allow
-      expect(directive.checkNumericKey(false, true, '1')).toBeTruthy()
-      expect(directive.checkNumericKey(false, true, '.')).toBeTruthy()
+      expect(directive.checkNumericKey(false, true, '1')).toBeTruthy();
+      expect(directive.checkNumericKey(false, true, '.')).toBeTruthy();
 
       //Don't Allow
       expect(directive.checkNumericKey(false, true, '-')).toBeFalsy();
@@ -39,8 +39,8 @@ describe('NumericInputDirective', () => {
     it('allowNegative = true, allowDecimal = true', () => {
       
       //Allow
-      expect(directive.checkNumericKey(true, true, '1')).toBeTruthy()
-      expect(directive.checkNumericKey(true, true, '.')).toBeTruthy()
+      expect(directive.checkNumericKey(true, true, '1')).toBeTruthy();
+      expect(directive.checkNumericKey(true, true, '.')).toBeTruthy();
       expect(directive.checkNumericKey(true, true, '-')).toBeTruthy();
       //Don't Allow
       

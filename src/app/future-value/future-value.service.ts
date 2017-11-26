@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MathService } from 'app/math/math.service'
-import { IFutureValueResult } from './ifuture-value-result'
-import { BalanceSummary, IBalanceSummary, BalanceDetailItem } from './IBalanceSummary.type'
+import { MathService } from 'app/math/math.service';
+import { IFutureValueResult } from './ifuture-value-result';
+import { BalanceSummary, IBalanceSummary, BalanceDetailItem } from './IBalanceSummary.type';
 
 
 @Injectable()
@@ -34,7 +34,7 @@ export class FutureValueService {
       principal: principal,
       interest: interest,
       futureValue: fv
-    }
+    };
 
     return result;
   }
@@ -105,7 +105,7 @@ export class FutureValueService {
     balanceSummary.paymentTotal = periodPayment * 12 * numberOfYears;
 
 
-    balanceSummary.rateOfReturn = this.rateOfReturn(balanceSummary.balance, balanceSummary.paymentTotal)
+    balanceSummary.rateOfReturn = this.rateOfReturn(balanceSummary.balance, balanceSummary.paymentTotal);
     return balanceSummary;
   }
 

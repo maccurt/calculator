@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FutureValueService } from './future-value.service'
+import { FutureValueService } from './future-value.service';
 import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
 import { NgForm, AbstractControl } from '@angular/forms';
@@ -25,22 +25,22 @@ export class FutureValueComponent implements OnInit {
   options: any;
 
   constructor(public futureValueService: FutureValueService) {
-    this.futureValueResult = <any>{}
+    this.futureValueResult = <any>{};
   }
 
   ngOnInit() {
-    this.monthlyPayment = 250;
-    this.ratePercent = 12;
-    this.years = 20;
-    this.calculate();
+    // this.monthlyPayment = 250;
+    // this.ratePercent = 12;
+    // this.years = 20;
+    // this.calculate();
   }
 
   calculate = () => {
     if (this.form.valid) {
 
       this.futureValueResult = this.futureValueService
-        .monthlyPaymentsBalanceSummary(this.ratePercent, this.years, this.monthlyPayment)
-      this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest)
+        .monthlyPaymentsBalanceSummary(this.ratePercent, this.years, this.monthlyPayment);
+      this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest);
       this.showInput = false;
     }
     else {
@@ -51,13 +51,13 @@ export class FutureValueComponent implements OnInit {
   }
 
   handleShowOriginalInputEvent = (): void => {
-    console.log('handleRecalculateEvent')
+    console.log('handleRecalculateEvent');
     this.showInput = true;
     this.showResults = false;
   }
 
   handleCalculateEvent = (): void => {
-    this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest)
+    this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest);
   }
 
   //TODO fix this so you just pass in the object and not the individal numbers
@@ -105,7 +105,7 @@ export class FutureValueComponent implements OnInit {
   showValidationError = (control: AbstractControl) => {
     //TODO I wish I could get the form passed in because I want to make this 
     //generic in the future so other controls can use it. Don't fret over it now
-    const showError = control.invalid && (control.touched || this.form.submitted)
+    const showError = control.invalid && (control.touched || this.form.submitted);
     return showError;
   }
 }

@@ -1,5 +1,5 @@
 export interface IFutureValueResult {
-    principal: number
+    principal: number;
     interest: number;
     futureValue: number;
 

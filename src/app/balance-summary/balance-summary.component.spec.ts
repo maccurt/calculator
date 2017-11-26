@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NgForm, AbstractControl, FormsModule } from '@angular/forms';
 import { BalanceSummaryComponent } from './balance-summary.component';
 
 describe('BalanceSummaryComponent', () => {
@@ -8,9 +8,10 @@ describe('BalanceSummaryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BalanceSummaryComponent ]
+      declarations: [BalanceSummaryComponent],
+      imports: [FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

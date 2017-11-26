@@ -16,7 +16,7 @@ export class StockQuoteService {
     return {
       year: year,
       rateOfReturn: rateOfReturn
-    }
+    };
   }
   sp500Years = (year: number, years: number): Observable<IStokeQuote[]> => {
     return this.sp500();
@@ -116,7 +116,7 @@ export class StockQuoteService {
     list.push(this.createStockQuote(2014, 13.52));
     list.push(this.createStockQuote(2015, 1.36));
     list.push(this.createStockQuote(2016, 11.74));
-    return Observable.of(list)
+    return Observable.of(list);
 
   }
 

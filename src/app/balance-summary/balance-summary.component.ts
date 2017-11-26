@@ -24,9 +24,9 @@ export class BalanceSummaryComponent implements OnInit {
 
   updateDetail = (detail: IBalanceDetailItem) => {
 
-    detail.ratePercent = this.forceNumber(detail.ratePercent)
-    detail.periodPayment = this.forceNumber(detail.periodPayment)
-    this.futureValueService.calculateBalanceSummary(this.summary)
+    detail.ratePercent = this.forceNumber(detail.ratePercent);
+    detail.periodPayment = this.forceNumber(detail.periodPayment);
+    this.futureValueService.calculateBalanceSummary(this.summary);
     this.calculateEvent.emit();
   }
 
@@ -35,8 +35,8 @@ export class BalanceSummaryComponent implements OnInit {
   forceNumber = (value: number): number => {
     let newValue = 0;
     if (value.toString() !== '' && !isNaN(value)) {
-      newValue = parseFloat(value.toString())
-    };
+      newValue = parseFloat(value.toString());
+    }
     return newValue;
   }
 

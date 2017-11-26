@@ -8,7 +8,7 @@ import { FutureValueService } from 'app/future-value/future-value.service';
   styleUrls: ['./test-pad.component.less']
 })
 export class TestPadComponent implements OnInit {
-  balanceSummary: BalanceSummary
+  balanceSummary: BalanceSummary;
   constructor(public futureValueSerive: FutureValueService) { }
 
   ngOnInit() {
