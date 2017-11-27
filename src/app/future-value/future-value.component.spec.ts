@@ -48,14 +48,13 @@ describe('FutureValueComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('the result should be false', () => {
-      expect(component.showResults).toBe(false);
-    });
+    // it('the result should be false', () => {
+    //   expect(component.showResults).toBe(false);
+    // });
 
   });
 
   describe('click the calculate button', () => {
-
 
     // detailItems: Array<IBalanceDetailItem>;
     // principal: number;
@@ -173,6 +172,24 @@ describe('FutureValueComponent', () => {
       const control = { invalid: false, touched: true };
       const result = component.showValidationError(<any>control);
       expect(result).toBe(false);
+    });
+  });
+
+  describe('handleCalculateEvent', () => {
+    it('should call createChart ', () => {
+      spyOn(component, 'createChart');
+      component.handleCalculateEvent();
+      expect(component.createChart).toHaveBeenCalled();
+    });
+  });
+
+  describe('handleShowOriginalInputEvent', () => {
+    it('should make showInput = false, showResult = true', () => {
+      component.showInput = null;
+      component.showResults = null;
+      component.handleShowOriginalInputEvent();
+      expect(component.showInput).toBe(true);
+      expect(component.showResults).toBe(false);
     });
   });
 });

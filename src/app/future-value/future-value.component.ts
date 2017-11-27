@@ -50,8 +50,7 @@ export class FutureValueComponent implements OnInit {
     this.showResults = this.form.valid;
   }
 
-  handleShowOriginalInputEvent = (): void => {
-    console.log('handleRecalculateEvent');
+  handleShowOriginalInputEvent = (): void => {    
     this.showInput = true;
     this.showResults = false;
   }
@@ -61,6 +60,8 @@ export class FutureValueComponent implements OnInit {
   }
 
   //TODO fix this so you just pass in the object and not the individal numbers
+  //Are you sure, perhaps it should be more generic, this should be in a service later
+  //so it won't know about principal, etc.. just 2 numbers
   createChart = (principal: number, interest: number) => {
 
     //TODO in the furtue move this to a service of some sort
@@ -94,7 +95,6 @@ export class FutureValueComponent implements OnInit {
         { name: 'Interest', y: interest, color: '#00FF00', dataLabels: dataLabels }],
       }]
     };
-
   }
 
   showSubmitError = () => {

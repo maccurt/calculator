@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgForm, AbstractControl, FormsModule } from '@angular/forms';
 import { BalanceSummaryComponent } from './balance-summary.component';
+import { NumericInputDirective } from 'app/directives/numeric-input.directive';
+import { DirectivesModule } from 'app/directives/directives.module';
+import { FutureValueService } from 'app/future-value/future-value.service';
+import { MathService } from 'app/math/math.service';
 
 describe('BalanceSummaryComponent', () => {
   let component: BalanceSummaryComponent;
@@ -9,7 +13,8 @@ describe('BalanceSummaryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BalanceSummaryComponent],
-      imports: [FormsModule]
+      imports: [FormsModule, DirectivesModule],
+      providers: [FutureValueService, MathService]
     })
       .compileComponents();
   }));
@@ -23,4 +28,11 @@ describe('BalanceSummaryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // describe('updateDetail', () => {
+  //   it('should behave...', () => {
+  //     component.updateDetail();
+  //   });
+  // });
+
 });
