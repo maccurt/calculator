@@ -1,4 +1,4 @@
-<!-- perhaps this bootstrap code should not be in here the class col-sm-5 -->
+<h1>FV Stock Quote</h1>
 
 
 <div class="row">
@@ -17,6 +17,14 @@
           <div class='error-message'>
             <span>Monthly Payment Is required</span>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reasonList">Index</label>
+          <select required class="form-control" id='indexList' name='indexList' [(ngModel)]='indexSelected' (ngModelChange)='indexChanged($event)'
+            #indexListSelect='ngModel'>
+            <option *ngFor='let index of indexList' [ngValue]='index'>{{index.name}}</option>
+          </select>
         </div>
 
         <div>
