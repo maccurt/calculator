@@ -1,0 +1,46 @@
+<!-- perhaps this bootstrap code should not be in here the class col-sm-5 -->
+
+
+<div class="row">
+  <div class='col-xs-8 col-sm-6 col-md-4'>
+
+    <div [hidden]='!showInput' class='future-value-input-section'>
+      <form (ngSubmit)='calculate()' #futureValueForm='ngForm' autocomplete="false">
+        <div class='form-description'>
+          Calculates the future value of a monthly investment.
+        </div>
+
+        <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
+          <label for="monthly-payment" title="How much you will save each month. (1-99999)">Monthly Payment</label>
+          <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="5" required numeric-input [(ngModel)]="monthlyPayment"
+            #monthlyPaymentInput='ngModel' class="form-control" autocomplete="false" />
+          <div class='error-message'>
+            <span>Monthly Payment Is required</span>
+          </div>
+        </div>
+
+        <div>
+          <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
+          <span *ngIf='showSubmitError()'>Required Fields</span>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="showResults">
+
+  <div class="col-xs-12 col-sm-12 col-md-9">
+
+    <app-balance-summary [summary]="futureValueResult" (calculateEvent)='handleCalculateEvent($event)' (showOriginalInputEvent)='handleShowOriginalInputEvent($event)'>
+
+    </app-balance-summary>
+
+
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-3">
+
+    <chart class="future-value-chart" [options]="options"></chart>
+  </div>
+</div>

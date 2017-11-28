@@ -10,6 +10,7 @@ import { ChartModule } from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import * as highcharts from 'highcharts';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
+import { FutureValueStockQouteComponent } from './future-value-stock-qoute/future-value-stock-qoute.component';
 
 export function highchartsFactory() {
   highcharts.setOptions({
@@ -23,7 +24,7 @@ export function highchartsFactory() {
 @NgModule({
   imports: [CommonModule, FutureValueRoutingModule,
     FormsModule, DirectivesModule, ChartModule],
-  declarations: [FutureValueComponent, BalanceSummaryComponent],
+  declarations: [FutureValueComponent, BalanceSummaryComponent, FutureValueStockQouteComponent],
   providers: [FutureValueService, MathService, {
     provide: HighchartsStatic,
     useFactory: highchartsFactory

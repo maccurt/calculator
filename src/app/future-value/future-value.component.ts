@@ -29,15 +29,15 @@ export class FutureValueComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.monthlyPayment = 250;
-    this.ratePercent = 12;
-    this.years = 20;
-    this.calculate();
+    // this.monthlyPayment = 250;
+    // this.ratePercent = 12;
+    // this.years = 20;
+    // this.calculate();
   }
 
   calculate = () => {
+    
     if (this.form.valid) {
-
       this.futureValueResult = this.futureValueService
         .monthlyPaymentsBalanceSummary(this.ratePercent, this.years, this.monthlyPayment);
       this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest);
@@ -50,7 +50,7 @@ export class FutureValueComponent implements OnInit {
     this.showResults = this.form.valid;
   }
 
-  handleShowOriginalInputEvent = (): void => {    
+  handleShowOriginalInputEvent = (): void => {
     this.showInput = true;
     this.showResults = false;
   }
