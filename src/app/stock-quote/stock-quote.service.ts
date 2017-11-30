@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { Subject } from 'rxjs/Subject';
+import { IIndex } from 'app/stock-quote/index.type';
 
 export interface IStokeQuote {
   year: number;
@@ -11,6 +13,20 @@ export interface IStokeQuote {
 export class StockQuoteService {
 
   constructor() { }
+
+  getIndexes = (): Observable<IIndex[]> => {
+    const subject = new Subject<IIndex[]>();
+
+    setTimeout(() => {
+      const indexList: IIndex[] = [];
+      indexList.push({ id: 1, name: 'SP 500' });
+      subject.next(indexList);
+      subject.complete();
+
+    }, 0);
+
+    return subject;
+  }
 
   createStockQuote = (year: number, rateOfReturn: number): IStokeQuote => {
     return {

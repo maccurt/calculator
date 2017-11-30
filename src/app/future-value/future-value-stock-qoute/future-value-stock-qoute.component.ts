@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IIndex } from 'app/stock-quote/index.type';
 import { AbstractControl, NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-future-value-stock-qoute',
@@ -8,17 +9,21 @@ import { AbstractControl, NgForm } from '@angular/forms';
   styleUrls: ['./future-value-stock-qoute.component.less']
 })
 export class FutureValueStockQouteComponent implements OnInit {
+  options: any;
   indexList: IIndex[];
   @ViewChild('futureValueForm') form: NgForm;
   isSubmitError = false;
-  showInput =true;
-  indexSelected:IIndex
-  constructor() { }
+  showInput = true;
+  indexSelected: IIndex;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.indexList = [];
-    this.indexList.push({ id: 1, name: 'SP 500' })
+    this.indexList = this.getIndexList();
     this.indexSelected = this.indexList[0];
+  }
+
+  getIndexList = (): IIndex[] => {
+    return this.route.snapshot.data.indexList;
   }
 
   showSubmitError = () => {
@@ -26,7 +31,7 @@ export class FutureValueStockQouteComponent implements OnInit {
     // return result;
   }
 
-  indexChanged = ():void => {  }
+  indexChanged = (): void => { };
 
   showValidationError = (control: AbstractControl) => {
     //TODO I wish I could get the form passed in because I want to make this 

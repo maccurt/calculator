@@ -21,7 +21,6 @@ export function highchartsFactory() {
   return highcharts;
 }
 
-
 describe('FutureValueComponent', () => {
   let component: FutureValueComponent;
   let fixture: ComponentFixture<FutureValueComponent>;
@@ -30,7 +29,8 @@ describe('FutureValueComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FutureValueComponent, BalanceSummaryComponent],
       imports: [FormsModule, DirectivesModule, ChartModule],
-      providers: [FutureValueService, MathService, { provide: HighchartsStatic, useFactory: highchartsFactory }],
+      providers: [FutureValueService, MathService,
+        { provide: HighchartsStatic, useFactory: highchartsFactory }],
     })
       .compileComponents();
   }));
