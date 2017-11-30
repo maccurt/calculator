@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { Subject } from 'rxjs/Subject';
-import { IIndex } from 'app/stock-quote/index.type';
-
-export interface IStokeQuote {
-  year: number;
-  rateOfReturn: number;
-}
+import { IIndex, IStockQuote } from 'app/stock-quote/index.type';
 
 @Injectable()
 export class StockQuoteService {
@@ -15,31 +10,30 @@ export class StockQuoteService {
   constructor() { }
 
   getIndexes = (): Observable<IIndex[]> => {
-    const subject = new Subject<IIndex[]>();
-
-    setTimeout(() => {
-      const indexList: IIndex[] = [];
-      indexList.push({ id: 1, name: 'SP 500' });
-      subject.next(indexList);
-      subject.complete();
-
-    }, 0);
-
-    return subject;
+    // const subject = new Subject<IIndex[]>();
+    const indexList: IIndex[] = [];
+    indexList.push({ id: 1, name: 'SP 500' });
+    return Observable.of(indexList);
   }
 
-  createStockQuote = (year: number, rateOfReturn: number): IStokeQuote => {
+  getIndexQuotes = (indexId): Observable<IStockQuote[]> => {
+    return this.sp500();
+  }
+
+  createStockQuote = (year: number, rateOfReturn: number): IStockQuote => {
     return {
       year: year,
       rateOfReturn: rateOfReturn
     };
   }
-  sp500Years = (year: number, years: number): Observable<IStokeQuote[]> => {
+
+  sp500Years = (year: number, years: number): Observable<IStockQuote[]> => {
     return this.sp500();
   }
-  sp500 = (): Observable<IStokeQuote[]> => {
 
-    const list: IStokeQuote[] = [];
+  sp500 = (): Observable<IStockQuote[]> => {
+
+    const list: IStockQuote[] = [];
     //TODO when we have a service put this in the API
     //http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histretSP.html
     //https://seekingalpha.com/instablog/605212-robert-allan-schwartz/4831186-annual-returns-s-and-p-500-1928-2015
