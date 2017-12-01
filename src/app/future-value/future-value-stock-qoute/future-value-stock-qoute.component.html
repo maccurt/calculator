@@ -27,6 +27,22 @@
           </select>
         </div>
 
+        <div class="form-group">
+          <label for="startQuote">Year Start</label>
+          <select required class="form-control" id='startQuote' name='startQuote' [(ngModel)]='startQuote' (ngModelChange)='startQuoteChanged($event)'
+            #startQuoteSelect='ngModel'>
+            <option *ngFor='let qoute of indexSelected.qoutes' [ngValue]='qoute'>{{qoute.year}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="endQuote">Year End</label>
+          <select required class="form-control" id='endQuote' name='endQuote' [(ngModel)]='endQuote' (ngModelChange)='endQuoteChanged($event)'
+            #endQuoteSelect='ngModel'>
+            <option *ngFor='let qoute of indexSelected.qoutes' [ngValue]='qoute'>{{qoute.year}}</option>
+          </select>
+        </div>
+
         <div>
           <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
           <span *ngIf='showSubmitError()'>Required Fields</span>

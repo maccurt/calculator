@@ -1,13 +1,13 @@
 <a class='show-original-input' (click)="showOriginalInput()">Show Orignal Input</a>
-<table class='table table-condensed balance-details'>
+<table *ngIf="summary" class='table table-condensed balance-details'>
     <thead>
         <tr>
 
-            <th colspan="7">             
+            <th colspan="7">
 
                 <div class="result-horizontal pull-right">
                     <span id='principal' class='minor'>{{summary.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
-                    <span class='description'>Payment  +</span>
+                    <span class='description'>Payment +</span>
                     <span id='interest' class='minor'>{{summary.interest| currency:'USD':true:'1.2-2'}}</span>
                     <span class='description'>Interest =</span>
                     <span id='future-value' class='major'>{{summary.balance| currency:'USD':true:'1.2-2'}}</span>
@@ -38,8 +38,8 @@
         <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
         <td class='input-td'>
             <input class='detail-rate-percent' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-ratePercent'
-                maxlength='5' required numeric-input [min]='-20' [max]='99' [decimals]='2' [(ngModel)]="d.ratePercent"
-                #ratePercentInput='ngModel' autocomplete="false" />
+                maxlength='5' required numeric-input [min]='-20' [max]='99' [decimals]='2' [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel'
+                autocomplete="false" />
         </td>
         <td>{{d.interest | number : '1.2-2'}}</td>
         <td>{{d.endBalance | number : '1.2-2'}}</td>

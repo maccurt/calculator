@@ -9,6 +9,7 @@ import { DirectivesModule } from 'app/directives/directives.module';
 import { ActivatedRoute } from '@angular/router';
 import { IIndex } from 'app/stock-quote/index.type';
 import { indexDebugNode } from '@angular/core/src/debug/debug_node';
+import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
 
 export function highchartsFactory() {
   highcharts.setOptions({ lang: { thousandsSep: ',' } });
@@ -32,11 +33,11 @@ describe('FutureValueStockQouteComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FutureValueStockQouteComponent, BalanceSummaryComponent],
       imports: [FormsModule, ChartModule, DirectivesModule],
-      providers: [{ provide: HighchartsStatic, useFactory: highchartsFactory },
-      {
-        provide: ActivatedRoute,
-        useValue: activateResponseMock
-      }]
+      providers: [StockQuoteService, { provide: HighchartsStatic, useFactory: highchartsFactory },
+        {
+          provide: ActivatedRoute,
+          useValue: activateResponseMock
+        }]
     })
       .compileComponents();
   }));
@@ -52,9 +53,19 @@ describe('FutureValueStockQouteComponent', () => {
   });
 
   it('should set SP500 as the selected index', () => {
-
     fixture.whenStable().then(() => {
       expect(component.indexSelected.name).toBe('SP 500');
     });
   });
+
+  it('the selected index should have qoutes', () => {
+    fixture.whenStable().then(() => {
+      expect(component.indexSelected.name).toBe('SP 500');
+      
+      expect(component.startQuote).toEqual(component.indexSelected.qoutes[0]);
+      expect(component.endQuote).toEqual(component.indexSelected.qoutes[88]);
+    });
+  });
+
+  
 });

@@ -16,7 +16,9 @@ export class BalanceSummaryComponent implements OnInit {
   @Output() calculateEvent = new EventEmitter();
   constructor(private futureValueService: FutureValueService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+      
+   }
 
   showOriginalInput = (): void => {    
     this.showOriginalInputEvent.emit();

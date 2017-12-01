@@ -16,13 +16,15 @@ export class FutureValueStockQouteComponent implements OnInit {
   isSubmitError = false;
   showInput = true;
   indexSelected: IIndex;
-  stockQouteList: IStockQuote[];
+  stockQuoteList: IStockQuote[];
+  startQuote: IStockQuote;
+  endQuote: IStockQuote;
   constructor(private route: ActivatedRoute, private stockQouteService: StockQuoteService) { }
 
   ngOnInit() {
     this.indexList = this.getIndexList();
     this.indexSelected = this.indexList[0];
-    this.indexChanged();    
+    this.setIndexQoutes();
   }
 
   getIndexList = (): IIndex[] => {
@@ -34,17 +36,29 @@ export class FutureValueStockQouteComponent implements OnInit {
     // return result;
   }
 
+  setIndexQoutes = () => {
+    this.stockQouteService.getIndexQuotes(this.indexSelected.id).subscribe((qoutes: IStockQuote[]) => {
+      this.indexSelected.qoutes = qoutes;
+      this.startQuote = this.indexSelected.qoutes[0];
+      this.endQuote = this.indexSelected.qoutes[this.indexSelected.qoutes.length - 1];
+
+    });
+  }
+
+  startQuoteChanged = () => {
+
+  }
+
+  endQuoteChanged = () => {
+
+  }
 
   indexChanged = (): void => {
 
     if (!this.indexSelected.qoutes) {
-      this.stockQouteService.getIndexQuotes(this.indexSelected.id).subscribe((qoutes: IStockQuote[]) => {
-        this.indexSelected.qoutes = qoutes;
-        console.log(this.indexSelected.qoutes);
-      })
+      this.setIndexQoutes();
     }
-
-  };
+  }
 
   showValidationError = (control: AbstractControl) => {
     //TODO I wish I could get the form passed in because I want to make this 
