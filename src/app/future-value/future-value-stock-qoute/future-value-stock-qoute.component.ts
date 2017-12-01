@@ -19,6 +19,7 @@ export class FutureValueStockQouteComponent implements OnInit {
   stockQuoteList: IStockQuote[];
   startQuote: IStockQuote;
   endQuote: IStockQuote;
+  invalidQuoteYear = false;
   constructor(private route: ActivatedRoute, private stockQouteService: StockQuoteService) { }
 
   ngOnInit() {
@@ -46,11 +47,15 @@ export class FutureValueStockQouteComponent implements OnInit {
   }
 
   startQuoteChanged = () => {
-
+    this.validateQoutes();
   }
 
   endQuoteChanged = () => {
+    this.validateQoutes();
+  }
 
+  validateQoutes = () => {
+    this.invalidQuoteYear = (this.startQuote.year > this.endQuote.year);
   }
 
   indexChanged = (): void => {
@@ -58,6 +63,10 @@ export class FutureValueStockQouteComponent implements OnInit {
     if (!this.indexSelected.qoutes) {
       this.setIndexQoutes();
     }
+  }
+
+  calculate = (): void => {
+    console.log('calculate');
   }
 
   showValidationError = (control: AbstractControl) => {

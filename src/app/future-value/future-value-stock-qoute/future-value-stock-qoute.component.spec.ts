@@ -61,11 +61,33 @@ describe('FutureValueStockQouteComponent', () => {
   it('the selected index should have qoutes', () => {
     fixture.whenStable().then(() => {
       expect(component.indexSelected.name).toBe('SP 500');
-      
+
       expect(component.startQuote).toEqual(component.indexSelected.qoutes[0]);
       expect(component.endQuote).toEqual(component.indexSelected.qoutes[88]);
     });
   });
 
-  
+  describe('validateQuoteYear', () => {
+    it('start year > end year should not be valid', () => {
+      component.startQuote.year = 2015;
+      component.endQuote.year = 2014;
+      component.validateQoutes();
+      expect(component.invalidQuoteYear).toBeTruthy();
+    });
+
+    it('start year < end year should not be valid', () => {
+      component.startQuote.year = 2013;
+      component.endQuote.year = 2014;
+      component.validateQoutes();
+      expect(component.invalidQuoteYear).toBeFalsy();
+    });
+
+    it('start year = end year should not be valid', () => {
+      component.startQuote.year = 2014;
+      component.endQuote.year = 2014;
+      component.validateQoutes();
+      expect(component.invalidQuoteYear).toBeFalsy();
+    });
+  });
+
 });
