@@ -16,6 +16,19 @@ export class StockQuoteService {
     return Observable.of(indexList);
   }
 
+  getQuoteListSlice = (quoteList: IStockQuote[], start: number, end: number): IStockQuote[] => {
+    const startIndex = this.findIndex(quoteList, start);
+    const endIndex = this.findIndex(quoteList, end);    
+    return quoteList.slice(startIndex, endIndex + 1);
+  }
+
+  findIndex = (quoteList: IStockQuote[], year: number): number => {
+    const index = quoteList.findIndex((q: IStockQuote) => {
+      return q.year === year;
+    });
+    return index;
+  }
+
   getIndexQuotes = (indexId): Observable<IStockQuote[]> => {
     return this.sp500();
   }

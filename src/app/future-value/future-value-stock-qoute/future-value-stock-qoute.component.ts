@@ -16,10 +16,12 @@ export class FutureValueStockQouteComponent implements OnInit {
   isSubmitError = false;
   showInput = true;
   indexSelected: IIndex;
-  stockQuoteList: IStockQuote[];
+  // stockQuoteList: IStockQuote[];
+  stockQuoteListSelected: IStockQuote[];
   startQuote: IStockQuote;
   endQuote: IStockQuote;
   invalidQuoteYear = false;
+
   constructor(private route: ActivatedRoute, private stockQouteService: StockQuoteService) { }
 
   ngOnInit() {
@@ -47,11 +49,18 @@ export class FutureValueStockQouteComponent implements OnInit {
   }
 
   startQuoteChanged = () => {
-    this.validateQoutes();
+    this.getQoutes();
   }
 
   endQuoteChanged = () => {
+    this.getQoutes();
+  }
+
+  getQoutes = () => {
     this.validateQoutes();
+    this.stockQuoteListSelected = this.stockQouteService
+      .getQuoteListSlice(this.indexSelected.qoutes, this.startQuote.year, this.endQuote.year);
+    console.log(this.stockQuoteListSelected);
   }
 
   validateQoutes = () => {
@@ -66,8 +75,9 @@ export class FutureValueStockQouteComponent implements OnInit {
   }
 
   calculate = (): void => {
-    console.log('calculate');
+
   }
+
 
   showValidationError = (control: AbstractControl) => {
     //TODO I wish I could get the form passed in because I want to make this 
