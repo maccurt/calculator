@@ -112,16 +112,14 @@ export class FutureValueService {
 
   balanceSummaryStockQuotes = (stockQuoteList: IStockQuote[], monthlyPayment: number): BalanceSummary => {
 
-    let balanceSummary: IBalanceSummary;
+    const balanceSummary = new BalanceSummary(0, 0, 0, 0);
 
     balanceSummary.detailItems = [];
 
     stockQuoteList.forEach((s: IStockQuote) => {
-
-      let bsd = new BalanceDetailItem(s.year, 0, monthlyPayment, 0, s.rateOfReturn, 0, 0, 0, 0)
+      const bsd = new BalanceDetailItem(s.year, 0, monthlyPayment, 0, s.rateOfReturn, 0, 0, 0, 0);
       balanceSummary.detailItems.push(bsd);
-
-    })
+    });
     this.calculateBalanceSummary(balanceSummary);
     return balanceSummary;
   }
