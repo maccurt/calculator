@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MathService } from 'app/math/math.service';
 import { IFutureValueResult } from './ifuture-value-result';
 import { BalanceSummary, IBalanceSummary, BalanceDetailItem } from './IBalanceSummary.type';
+import { IStockQuote } from 'app/stock-quote/index.type';
 
 
 @Injectable()
@@ -108,6 +109,23 @@ export class FutureValueService {
     balanceSummary.rateOfReturn = this.rateOfReturn(balanceSummary.balance, balanceSummary.paymentTotal);
     return balanceSummary;
   }
+
+  balanceSummaryStockQuotes = (stockQuoteList: IStockQuote[], monthlyPayment: number): BalanceSummary => {
+
+    let balanceSummary: IBalanceSummary;
+
+    balanceSummary.detailItems = [];
+
+    stockQuoteList.forEach((s: IStockQuote) => {
+
+      let bsd = new BalanceDetailItem(s.year, 0, monthlyPayment, 0, s.rateOfReturn, 0, 0, 0, 0)
+      balanceSummary.detailItems.push(bsd);
+
+    })
+    this.calculateBalanceSummary(balanceSummary);
+    return balanceSummary;
+  }
+
 
   calculateBalanceSummary(balanceSummary: BalanceSummary): void {
 

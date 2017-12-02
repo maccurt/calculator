@@ -1,13 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { StockQuoteService } from './stock-quote.service';
 import { IStockQuote } from 'app/stock-quote/index.type';
+import { MathService } from 'app/math/math.service';
 
 let service: StockQuoteService;
 
 describe('StockQuoteService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [StockQuoteService]
+      providers: [StockQuoteService, MathService]
     });
 
     service = TestBed.get(StockQuoteService);
@@ -17,6 +18,37 @@ describe('StockQuoteService', () => {
     it('should behave...', () => {
       expect(service).toBeDefined();
     });
+  });
+
+  describe('rateOfReturnAverage', () => {
+    it('should return average of 10', () => {
+
+      const quotes: IStockQuote[] = [];
+      quotes.push({ year: 2014, rateOfReturn: 10 });
+      quotes.push({ year: 2015, rateOfReturn: 10 });
+      quotes.push({ year: 2016, rateOfReturn: 10 });
+      quotes.push({ year: 2017, rateOfReturn: 10 });
+
+      var avg = service.rateOfReturnAverage(quotes);
+      expect(avg).toBe(10);
+    });
+
+    it('should return average of 7.5', () => {
+      const quotes: IStockQuote[] = [];
+      quotes.push({ year: 2014, rateOfReturn: 5 });
+      quotes.push({ year: 2015, rateOfReturn: 10 });
+      var avg = service.rateOfReturnAverage(quotes);
+      expect(avg).toBe(7.5);
+    });
+
+    it('should return average of 4.8', () => {
+      const quotes: IStockQuote[] = [];
+      quotes.push({ year: 2014, rateOfReturn: 4.3 });
+      quotes.push({ year: 2015, rateOfReturn: 5.3 });
+      var avg = service.rateOfReturnAverage(quotes);
+      expect(avg).toBe(4.8);
+    });
+
   });
 
   describe('Name of the group', () => {

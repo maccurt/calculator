@@ -3,6 +3,7 @@ import { IIndex, IStockQuote } from 'app/stock-quote/index.type';
 import { AbstractControl, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
+import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 
 @Component({
   selector: 'app-future-value-stock-qoute',
@@ -10,6 +11,7 @@ import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
   styleUrls: ['./future-value-stock-qoute.component.less']
 })
 export class FutureValueStockQouteComponent implements OnInit {
+  rateOfReturnAverage: number;
   options: any;
   indexList: IIndex[];
   @ViewChild('futureValueForm') form: NgForm;
@@ -21,6 +23,7 @@ export class FutureValueStockQouteComponent implements OnInit {
   startQuote: IStockQuote;
   endQuote: IStockQuote;
   invalidQuoteYear = false;
+  balanceSummary:IBalanceSummary
 
   constructor(private route: ActivatedRoute, private stockQouteService: StockQuoteService) { }
 
@@ -44,7 +47,6 @@ export class FutureValueStockQouteComponent implements OnInit {
       this.indexSelected.qoutes = qoutes;
       this.startQuote = this.indexSelected.qoutes[0];
       this.endQuote = this.indexSelected.qoutes[this.indexSelected.qoutes.length - 1];
-
     });
   }
 
@@ -60,7 +62,8 @@ export class FutureValueStockQouteComponent implements OnInit {
     this.validateQoutes();
     this.stockQuoteListSelected = this.stockQouteService
       .getQuoteListSlice(this.indexSelected.qoutes, this.startQuote.year, this.endQuote.year);
-    console.log(this.stockQuoteListSelected);
+    this.rateOfReturnAverage = this.stockQouteService.rateOfReturnAverage(this.stockQuoteListSelected)
+    
   }
 
   validateQoutes = () => {
@@ -76,6 +79,7 @@ export class FutureValueStockQouteComponent implements OnInit {
 
   calculate = (): void => {
 
+    
   }
 
 

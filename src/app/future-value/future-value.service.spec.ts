@@ -1,7 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { FutureValueService } from './future-value.service';
 import { MathService } from 'app/math/math.service';
-import { BalanceSummary } from 'app/future-value/IBalanceSummary.type';
+import { BalanceSummary, IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
+import { IStockQuote } from 'app/stock-quote/index.type';
 
 let futureValueService: FutureValueService;
 describe('FutureValueService', () => {
@@ -76,7 +77,7 @@ describe('FutureValueService', () => {
 
       expect(result.balance).toBe(613.94);
       expect(result.paymentTotal).toBe(600);
-      expect(result.interest).toBe(13.94);      
+      expect(result.interest).toBe(13.94);
     });
 
   });
@@ -259,6 +260,24 @@ describe('FutureValueService', () => {
         it('paymentTotal', () => {
           expect(balanceSummary.detailItems[0].paymentTotal).toEqual(1200);
         });
+      });
+
+    });
+
+    describe('balanceSummaryStockQuotes', () => {
+
+      let summary: IBalanceSummary;
+      const stockQouteList: IStockQuote[] = [];
+      stockQouteList.push({ year: 2015, rateOfReturn: 10 });
+      stockQouteList.push({ year: 2016, rateOfReturn: 10 });
+      beforeEach(() => {
+        summary = futureValueService.balanceSummaryStockQuotes(stockQouteList, 100);
+      });
+
+      it('should have a 2 details items', () => {
+
+        expect(summary.detailItems.length).toBe(2);
+
       });
 
     });

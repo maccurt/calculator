@@ -3,11 +3,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { Subject } from 'rxjs/Subject';
 import { IIndex, IStockQuote } from 'app/stock-quote/index.type';
+import { MathService } from 'app/math/math.service';
 
 @Injectable()
 export class StockQuoteService {
 
-  constructor() { }
+  constructor(private mathService: MathService) { }
 
   getIndexes = (): Observable<IIndex[]> => {
     // const subject = new Subject<IIndex[]>();
@@ -16,9 +17,20 @@ export class StockQuoteService {
     return Observable.of(indexList);
   }
 
+  rateOfReturnAverage = (quoteList: IStockQuote[]): number => {
+
+    let sum = 0;
+    quoteList.forEach((q: IStockQuote) => {
+      sum += q.rateOfReturn;
+    })
+
+    var avg = this.mathService.round(sum / quoteList.length, 2);
+    return avg;
+  }
+
   getQuoteListSlice = (quoteList: IStockQuote[], start: number, end: number): IStockQuote[] => {
     const startIndex = this.findIndex(quoteList, start);
-    const endIndex = this.findIndex(quoteList, end);    
+    const endIndex = this.findIndex(quoteList, end);
     return quoteList.slice(startIndex, endIndex + 1);
   }
 
