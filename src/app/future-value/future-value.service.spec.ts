@@ -274,10 +274,20 @@ describe('FutureValueService', () => {
         summary = futureValueService.balanceSummaryStockQuotes(stockQouteList, 100);
       });
 
+      it('balance should be 2644.70', () => {
+        expect(summary.balance).toBe(2644.70);
+      });
+
+      it('paymentTotal should be 2400', () => {
+        expect(summary.paymentTotal).toBe(2400);
+      });
+
+      it('rateOfReturn should be 10.2', () => {
+        expect(summary.rateOfReturn).toBe(10.2);
+      });
+
       it('should have a 2 details items', () => {
-
         expect(summary.detailItems.length).toBe(2);
-
       });
 
     });

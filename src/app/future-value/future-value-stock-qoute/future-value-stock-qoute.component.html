@@ -49,10 +49,24 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="rateOfReturnAverage">Averge Rate of Return</label>
-          <input id='rateOfReturnAverage' disabled type="text" name='rateOfReturnAverage' [(ngModel)]="rateOfReturnAverage" class="form-control"
-            autocomplete="false" />
+        <div class='row'>
+
+          <div class='col-sm-6'>
+            <div class="form-group">
+              <label for="rateOfReturnAverage">Average % Rate</label>
+              <input id='rateOfReturnAverage' disabled type="text" name='rateOfReturnAverage' [(ngModel)]="rateOfReturnAverage" class="form-control"
+                autocomplete="false" />
+            </div>
+          </div>
+
+          <div class='col-sm-6'>
+            <div class="form-group">
+              <label for="yearsSelected"># Years</label>
+              <input id='yearsSelected' disabled type="text" name='yearsSelected' [(ngModel)]="yearsSelected" class="form-control"
+                autocomplete="false" />
+            </div>
+          </div>
+
         </div>
 
         <div>

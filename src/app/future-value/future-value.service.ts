@@ -159,5 +159,6 @@ export class FutureValueService {
     balanceSummary.paymentTotal = paymentTotal;
     balanceSummary.balance = balanceSummary.detailItems[balanceSummary.detailItems.length - 1].endBalance;
     balanceSummary.interest = this.mathService.round(balanceSummary.interest, 2);
+    balanceSummary.rateOfReturn = this.rateOfReturn(balanceSummary.balance, balanceSummary.paymentTotal);
   }
 }

@@ -11,6 +11,7 @@ import { IIndex } from 'app/stock-quote/index.type';
 import { indexDebugNode } from '@angular/core/src/debug/debug_node';
 import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
 import { MathService } from 'app/math/math.service';
+import { FutureValueService } from 'app/future-value/future-value.service';
 
 export function highchartsFactory() {
   highcharts.setOptions({ lang: { thousandsSep: ',' } });
@@ -34,7 +35,7 @@ describe('FutureValueStockQouteComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FutureValueStockQouteComponent, BalanceSummaryComponent],
       imports: [FormsModule, ChartModule, DirectivesModule],
-      providers: [MathService, StockQuoteService, { provide: HighchartsStatic, useFactory: highchartsFactory },
+      providers: [MathService, FutureValueService, StockQuoteService, { provide: HighchartsStatic, useFactory: highchartsFactory },
         {
           provide: ActivatedRoute,
           useValue: activateResponseMock
