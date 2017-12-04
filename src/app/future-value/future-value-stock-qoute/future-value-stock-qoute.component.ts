@@ -100,4 +100,8 @@ export class FutureValueStockQouteComponent implements OnInit {
     // const showError = control.invalid && (control.touched || this.form.submitted);
     // return showError;
   }
+  handleShowOriginalInputEvent = () => {
+    this.showInput = true;
+    this.showResults = false;
+  }
 }
