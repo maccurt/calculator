@@ -12,7 +12,7 @@
 
         <div class="form-group" [ngClass]="{'validation-error':showValidationError(monthlyPaymentInput)}">
           <label for="monthly-payment" title="How much you will save each month. (1-99999)">Monthly Payment</label>
-          <input id='monthly-payment' type="text" name='monthlyPaymentInput' maxlength="5" required numeric-input [(ngModel)]="monthlyPayment"
+          <input id='monthly-payment' type="number" name='monthlyPaymentInput' maxlength="5" required numeric-input [(ngModel)]="monthlyPayment"
             #monthlyPaymentInput='ngModel' class="form-control" autocomplete="false" />
           <div class='error-message'>
             <span>Monthly Payment Is required</span>

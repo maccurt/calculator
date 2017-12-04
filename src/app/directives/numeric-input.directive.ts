@@ -35,10 +35,17 @@ export class NumericInputDirective implements OnInit {
     }
 
     keyDown = (event: KeyboardEvent): void => {
+        //Prevent the arrow down or up from changing the numeric input type from 
+        //changing the numer
+        if (event.keyCode === 40 || event.keyCode === 38){        
+            event.preventDefault();
+            return;
+        }
         this.keyDownValue = this.el.nativeElement.value;
+        console.log('keyDown',event)
     }
     keyUp = (event: KeyboardEvent): void => {
-
+    
         const inputValue = this.el.nativeElement.value;
 
         if (!isNaN(this.max)) {

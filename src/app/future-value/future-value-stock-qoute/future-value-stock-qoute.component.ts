@@ -86,9 +86,9 @@ export class FutureValueStockQouteComponent implements OnInit {
   calculate = (): void => {
 
     //You have to figure out how to force angular to keep it a number
-    const payment = parseFloat(this.monthlyPayment.toString());
+    //const payment = parseFloat(this.monthlyPayment.toString());
     this.balanceSummary = this.futureValueService
-      .balanceSummaryStockQuotes(this.stockQuoteListSelected, payment);
+      .balanceSummaryStockQuotes(this.stockQuoteListSelected, this.monthlyPayment);
     console.log(this.balanceSummary);
     this.showResults = true;
     this.showInput = false;
