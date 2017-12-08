@@ -1,5 +1,7 @@
-import { Directive, ElementRef, OnInit, Input } from '@angular/core';
+import { Directive, ElementRef, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { validateConfig } from '@angular/router/src/config';
+import { checkAndUpdateDirectiveInline } from '@angular/core/src/view/provider';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Directive({
     selector: '[numeric-input]',
@@ -11,13 +13,14 @@ import { validateConfig } from '@angular/router/src/config';
     }
 })
 export class NumericInputDirective implements OnInit {
+    @Output() ngModelChange: EventEmitter<any> = new EventEmitter(false);
 
     @Input() min = 0;
     @Input() max: number;
     @Input() decimals: number;
     keyDownValue = '';
 
-    constructor(private el: ElementRef) { }
+    constructor(private el: ElementRef, private change: ChangeDetectorRef) { }
 
     ngOnInit(): void {
 
@@ -37,15 +40,16 @@ export class NumericInputDirective implements OnInit {
     keyDown = (event: KeyboardEvent): void => {
         //Prevent the arrow down or up from changing the numeric input type from 
         //changing the numer
-        if (event.keyCode === 40 || event.keyCode === 38){        
+        if (event.keyCode === 40 || event.keyCode === 38) {
             event.preventDefault();
             return;
         }
         this.keyDownValue = this.el.nativeElement.value;
-        console.log('keyDown',event)
+        console.log('keyDown', event)
     }
+
     keyUp = (event: KeyboardEvent): void => {
-    
+
         const inputValue = this.el.nativeElement.value;
 
         if (!isNaN(this.max)) {
@@ -53,7 +57,12 @@ export class NumericInputDirective implements OnInit {
                 const num = Number(inputValue);
 
                 if (num > this.max) {
+
                     this.el.nativeElement.value = this.keyDownValue;
+
+
+                    this.ngModelChange.emit(this.el.nativeElement.value);
+
                 }
             }
         }
@@ -62,10 +71,7 @@ export class NumericInputDirective implements OnInit {
         if (inputValue.indexOf('-') > 0) {
             this.el.nativeElement.value = this.keyDownValue;
         }
-
     }
-
-
 
     //TODO move this to a serive
     checkNumericKey = (allowNegative: boolean, allowDecimalPrecision: boolean, character: string): boolean => {
