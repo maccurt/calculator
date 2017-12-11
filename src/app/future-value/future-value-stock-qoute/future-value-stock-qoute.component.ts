@@ -84,7 +84,7 @@ export class FutureValueStockQouteComponent implements OnInit {
 
   stockIndexChanged = (): void => {
 
-    if (!this.indexSelected.qoutes) {
+    if (!this.indexSelected.qoutes || this.indexSelected.qoutes.length === 0) {
       this.setIndexQoutes();
     }
   }

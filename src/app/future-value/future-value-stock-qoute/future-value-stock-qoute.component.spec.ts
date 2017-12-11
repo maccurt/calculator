@@ -168,7 +168,6 @@ describe('FutureValueStockQouteComponent', () => {
       }));
     });
 
-
     describe('end qoute select', () => {
 
       it('should call startQuoteChanged ', async(() => {
@@ -186,7 +185,7 @@ describe('FutureValueStockQouteComponent', () => {
     describe('calculate', () => {
 
       beforeEach(() => {
-        
+
       });
 
       beforeEach(() => {
@@ -238,13 +237,39 @@ describe('FutureValueStockQouteComponent', () => {
 
     });
 
-    describe('stockIndexChanged', () => {      
-      
-      
-      it('should behave...', () => {
+    describe('stockIndexChanged', () => {
 
+      it('when qoutes is empty array it should call setIndexQuotes', () => {
+
+        component.stockIndexList[0].qoutes = [];
+        spyOn(component, 'setIndexQoutes')
+        component.stockIndexChanged();
+        expect(component.setIndexQoutes).toHaveBeenCalled();
 
       });
+
+      it('when qoutes is undefined it should call setIndexQuotes', () => {
+
+        component.stockIndexList[0].qoutes = undefined;
+        spyOn(component, 'setIndexQoutes')
+        component.stockIndexChanged();
+        expect(component.setIndexQoutes).toHaveBeenCalled();
+
+      });
+
+      it('when qoutes is null it should call setIndexQuotes', () => {
+        component.stockIndexList[0].qoutes = null;
+        spyOn(component, 'setIndexQoutes')
+        component.stockIndexChanged();
+        expect(component.setIndexQoutes).toHaveBeenCalled();
+      });;
+
+      it('when qoutes has elements it NOT should call setIndexQuotes', () => {        
+        spyOn(component, 'setIndexQoutes')
+        component.stockIndexChanged();
+        expect(component.setIndexQoutes).not.toHaveBeenCalled();
+      });;
+
     });
   });
 });
