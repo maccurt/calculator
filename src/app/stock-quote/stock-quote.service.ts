@@ -22,9 +22,9 @@ export class StockQuoteService {
     let sum = 0;
     quoteList.forEach((q: IStockQuote) => {
       sum += q.rateOfReturn;
-    })
+    });
 
-    var avg = this.mathService.round(sum / quoteList.length, 2);
+    const avg = this.mathService.round(sum / quoteList.length, 2);
     return avg;
   }
 

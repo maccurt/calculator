@@ -104,8 +104,6 @@ export class FutureValueService {
     balanceSummary.balance = balanceSummary.detailItems[numberOfYears - 1].endBalance;
     balanceSummary.interest = interestTotal;
     balanceSummary.paymentTotal = periodPayment * 12 * numberOfYears;
-
-
     balanceSummary.rateOfReturn = this.rateOfReturn(balanceSummary.balance, balanceSummary.paymentTotal);
     return balanceSummary;
   }

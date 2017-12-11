@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FutureValueStockQouteComponent } from './future-value-stock-qoute.component';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
 import { ChartModule } from 'angular2-highcharts';
 import * as highcharts from 'highcharts';
@@ -12,6 +13,12 @@ import { indexDebugNode } from '@angular/core/src/debug/debug_node';
 import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
 import { MathService } from 'app/math/math.service';
 import { FutureValueService } from 'app/future-value/future-value.service';
+import { element } from 'protractor';
+import { filter } from 'rxjs/operator/filter';
+import { error } from 'selenium-webdriver';
+import { start } from 'repl';
+import { exec } from 'child_process';
+
 
 export function highchartsFactory() {
   highcharts.setOptions({ lang: { thousandsSep: ',' } });
@@ -35,11 +42,10 @@ describe('FutureValueStockQouteComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FutureValueStockQouteComponent, BalanceSummaryComponent],
       imports: [FormsModule, ChartModule, DirectivesModule],
-      providers: [MathService, FutureValueService, StockQuoteService, { provide: HighchartsStatic, useFactory: highchartsFactory },
-        {
-          provide: ActivatedRoute,
-          useValue: activateResponseMock
-        }]
+      providers: [MathService, FutureValueService,
+        StockQuoteService,
+        { provide: HighchartsStatic, useFactory: highchartsFactory },
+        { provide: ActivatedRoute, useValue: activateResponseMock }]
     })
       .compileComponents();
   }));
@@ -90,6 +96,155 @@ describe('FutureValueStockQouteComponent', () => {
       component.validateQoutes();
       expect(component.invalidQuoteYear).toBeFalsy();
     });
-  });
 
+
+    describe('setSelectedQuotes', () => {
+
+      describe('invalidQuoteYear = true', () => {
+
+        beforeEach(() => {
+          component.invalidQuoteYear = true;
+          spyOn(component, 'validateQoutes');
+          component.setSelectedQuotes();
+        });
+
+        it('reateOfReturnAverage should be 0', () => {
+          expect(component.rateOfReturnAverage).toBe(0);
+        });
+
+        it('yearsSelected should be 0', () => {
+          expect(component.yearsSelected).toBe(0);
+        });
+
+      });
+
+    });
+
+    describe('invalid year message', () => {
+
+      it('should show error message when invalid qoute year is true', async(() => {
+        component.invalidQuoteYear = true;
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          const errorSpan = <HTMLSpanElement>fixture.debugElement.query(By.css('#invalidYearMessage')).nativeElement;
+          expect(errorSpan).toBeDefined();
+          expect(errorSpan.innerHTML).toEqual('Start Year Can Not Be Greater Than The End Year');
+        });
+      }));
+    });
+
+
+    describe('startQuoteChanged', () => {
+
+      it('when invoked should call setSeletedQoutes', () => {
+        spyOn(component, 'setSelectedQuotes');
+        component.startQuoteChanged();
+        expect(component.setSelectedQuotes).toHaveBeenCalled();
+      });
+
+    });
+
+    describe('endQuoteChanged', () => {
+
+      it('when invoked should call setSeletedQoutes', () => {
+        spyOn(component, 'setSelectedQuotes');
+        component.endQuoteChanged();
+        expect(component.setSelectedQuotes).toHaveBeenCalled();
+      });
+
+    });
+
+    describe('start qoute select', () => {
+
+      it('should call startQuoteChanged ', async(() => {
+        fixture.whenStable().then(() => {
+          const startYearSelect = <HTMLSelectElement>fixture.debugElement.query(By.css('#startQuote')).nativeElement;
+          expect(startYearSelect).toBeDefined();
+          spyOn(component, 'startQuoteChanged');
+          startYearSelect.value = '1: Object';
+          startYearSelect.dispatchEvent(new Event('change'));
+          expect(component.startQuoteChanged).toHaveBeenCalledWith(component.indexSelected.qoutes[1]);
+        });
+      }));
+    });
+
+
+    describe('end qoute select', () => {
+
+      it('should call startQuoteChanged ', async(() => {
+        fixture.whenStable().then(() => {
+          const startYearSelect = <HTMLSelectElement>fixture.debugElement.query(By.css('#endQuote')).nativeElement;
+          expect(startYearSelect).toBeDefined();
+          spyOn(component, 'endQuoteChanged');
+          startYearSelect.value = '1: Object';
+          startYearSelect.dispatchEvent(new Event('change'));
+          expect(component.endQuoteChanged).toHaveBeenCalledWith(component.indexSelected.qoutes[1]);
+        });
+      }));
+    });
+
+    describe('calculate', () => {
+
+      beforeEach(() => {
+        
+      });
+
+      beforeEach(() => {
+        spyOn(component.futureValueService, 'balanceSummaryStockQuotes');
+      });
+
+      describe('form is invalid', () => {
+        beforeEach(() => {
+          component.isSubmitError = false;
+          component.form = <any>{ valid: false };
+          component.calculate();
+        });
+
+        it('is submit error should be true', () => {
+          expect(component.isSubmitError).toBeTruthy();
+        });
+
+        it('show results should be false', () => {
+          expect(component.showResults).toBeFalsy();
+        });
+
+        it('it should not call balanceSummaryStockQuotes', () => {
+          expect(component.futureValueService.balanceSummaryStockQuotes).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('form is valid', () => {
+        beforeEach(() => {
+          component.monthlyPayment = 1234.43;
+          component.isSubmitError = false;
+          component.form = <any>{ valid: true };
+          component.calculate();
+        });
+
+        it('is submit error should be false', () => {
+          expect(component.isSubmitError).toBeFalsy();
+        });
+
+        it('show results should be true', () => {
+          expect(component.showResults).toBeTruthy();
+        });
+
+        it('it should not call balanceSummaryStockQuotes', () => {
+
+          expect(component.futureValueService.balanceSummaryStockQuotes)
+            .toHaveBeenCalledWith(component.stockQuoteListSelected, component.monthlyPayment);
+        });
+      });
+
+    });
+
+    describe('stockIndexChanged', () => {      
+      
+      
+      it('should behave...', () => {
+
+
+      });
+    });
+  });
 });

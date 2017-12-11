@@ -2,15 +2,15 @@ import { NumericInputDirective } from './numeric-input.directive';
 
 describe('NumericInputDirective', () => {
   it('should create an instance', () => {
-    const directive = new NumericInputDirective(null);
+    const directive = new NumericInputDirective(null, null);
     expect(directive).toBeTruthy();
   });
 
   describe('checkNumericKey', () => {
-    const directive = new NumericInputDirective(null);
+    const directive = new NumericInputDirective(null, null);
 
     it('allowNegative = false false, allowDecimal = false', () => {
-      
+
       //Allow
       expect(directive.checkNumericKey(false, false, '1')).toBeTruthy();
       expect(directive.checkNumericKey(false, false, '9')).toBeTruthy();
@@ -24,7 +24,7 @@ describe('NumericInputDirective', () => {
     });
 
     it('allowNegative = false false, allowDecimal = true', () => {
-      
+
       //Allow
       expect(directive.checkNumericKey(false, true, '1')).toBeTruthy();
       expect(directive.checkNumericKey(false, true, '.')).toBeTruthy();
@@ -37,13 +37,13 @@ describe('NumericInputDirective', () => {
     });
 
     it('allowNegative = true, allowDecimal = true', () => {
-      
+
       //Allow
       expect(directive.checkNumericKey(true, true, '1')).toBeTruthy();
       expect(directive.checkNumericKey(true, true, '.')).toBeTruthy();
       expect(directive.checkNumericKey(true, true, '-')).toBeTruthy();
       //Don't Allow
-      
+
       expect(directive.checkNumericKey(true, true, 'A')).toBeFalsy();
       expect(directive.checkNumericKey(true, true, 'Z')).toBeFalsy();
 

@@ -17,7 +17,7 @@ export class FutureValueStockQouteComponent implements OnInit {
   monthlyPayment: number;
   rateOfReturnAverage: number;
   options: any;
-  indexList: IIndex[];
+  stockIndexList: IIndex[];
   @ViewChild('futureValueForm') form: NgForm;
   isSubmitError = false;
   showInput = true;
@@ -29,12 +29,12 @@ export class FutureValueStockQouteComponent implements OnInit {
   invalidQuoteYear = false;
   balanceSummary: IBalanceSummary;
 
-  constructor(private route: ActivatedRoute,
-    private stockQouteService: StockQuoteService, private futureValueService: FutureValueService) { }
+  constructor(public route: ActivatedRoute,
+    public stockQouteService: StockQuoteService, public futureValueService: FutureValueService) { }
 
   ngOnInit() {
-    this.indexList = this.getIndexList();
-    this.indexSelected = this.indexList[0];
+    this.stockIndexList = this.getIndexList();
+    this.indexSelected = this.stockIndexList[0];
     this.setIndexQoutes();
     this.setSelectedQuotes();
   }
@@ -44,8 +44,8 @@ export class FutureValueStockQouteComponent implements OnInit {
   }
 
   showSubmitError = () => {
-    // const result = !this.form.valid && this.form.submitted && this.isSubmitError;
-    // return result;
+    const result = !this.form.valid && this.form.submitted && this.isSubmitError;
+    return result;
   }
 
   setIndexQoutes = () => {
@@ -66,17 +66,23 @@ export class FutureValueStockQouteComponent implements OnInit {
 
   setSelectedQuotes = () => {
     this.validateQoutes();
-    this.stockQuoteListSelected = this.stockQouteService
-      .getQuoteListSlice(this.indexSelected.qoutes, this.startQuote.year, this.endQuote.year);
-    this.rateOfReturnAverage = this.stockQouteService.rateOfReturnAverage(this.stockQuoteListSelected);
-    this.yearsSelected = this.stockQuoteListSelected.length;
+    if (!this.invalidQuoteYear) {
+      this.stockQuoteListSelected = this.stockQouteService
+        .getQuoteListSlice(this.indexSelected.qoutes, this.startQuote.year, this.endQuote.year);
+      this.rateOfReturnAverage = this.stockQouteService.rateOfReturnAverage(this.stockQuoteListSelected);
+      this.yearsSelected = this.stockQuoteListSelected.length;
+    }
+    else {
+      this.rateOfReturnAverage = 0;
+      this.yearsSelected = 0;
+    }
   }
 
   validateQoutes = () => {
     this.invalidQuoteYear = (this.startQuote.year > this.endQuote.year);
   }
 
-  indexChanged = (): void => {
+  stockIndexChanged = (): void => {
 
     if (!this.indexSelected.qoutes) {
       this.setIndexQoutes();
@@ -85,20 +91,21 @@ export class FutureValueStockQouteComponent implements OnInit {
 
   calculate = (): void => {
 
-    //You have to figure out how to force angular to keep it a number
-    //const payment = parseFloat(this.monthlyPayment.toString());
-    this.balanceSummary = this.futureValueService
-      .balanceSummaryStockQuotes(this.stockQuoteListSelected, this.monthlyPayment);
-    console.log(this.balanceSummary);
-    this.showResults = true;
-    this.showInput = false;
+    if (this.form.valid) {
+      this.balanceSummary = this.futureValueService
+        .balanceSummaryStockQuotes(this.stockQuoteListSelected, this.monthlyPayment);
+      this.showResults = true;
+      this.showInput = false;
+    } else {
+      this.isSubmitError = true;
+    }
+
+    this.showResults = this.form.valid;
   }
 
   showValidationError = (control: AbstractControl) => {
-    //TODO I wish I could get the form passed in because I want to make this 
-    //generic in the future so other controls can use it. Don't fret over it now
-    // const showError = control.invalid && (control.touched || this.form.submitted);
-    // return showError;
+    const showError = control.invalid && (control.touched || this.form.submitted);
+    return showError;
   }
   handleShowOriginalInputEvent = () => {
     this.showInput = true;

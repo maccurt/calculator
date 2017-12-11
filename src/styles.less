@@ -1,55 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.error-container {
+    height: 15px;
+    color: red;
 }
 
 .error-message {
     height: 15px;
-    span{
+    span {
+        // the problem with this is the display is none and won't work with
         display: none;
+        color: red;
     }
-    
 }
 
-.validation-hint{
-    font-style:oblique;
-    font-weight:lighter;
+.validation-hint {
+    font-style: oblique;
+    font-weight: lighter;
     margin-left: 1px;
 }
+
 .validation-error {
-
-    input{
-        background-color:  #ffd6cc;            
+    input,
+    select {
+        background-color: #ffd6cc;
     }
-
-    .error-message{
-
-        span{
-            color:red;
-            display:block;
+    .error-message {
+        span {
+            color: red;
+            display: block;
         }
     }
 }
+
 // TODO can we move this into a less file called table, or numeric display, etc.
-.total-line{
-    border-top:2px solid black;
+.total-line {
+    border-top: 2px solid black;
     font-weight: bold;
 }
 
 table {
-    
-        td.number{
-            text-align: right;
-        }
-    
+    td.number {
+        text-align: right;
+    }
 }
 
-.form-description{    
+.form-description {
     border-bottom: 1px solid black;
     margin-bottom: 10px;
-    padding-bottom:5px;    
+    padding-bottom: 5px;
 }
-

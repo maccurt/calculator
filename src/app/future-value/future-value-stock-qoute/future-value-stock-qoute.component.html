@@ -1,6 +1,3 @@
-<h1>FV Stock Quote</h1>
-
-
 <div class="row">
   <div class='col-xs-8 col-sm-6 col-md-4'>
 
@@ -21,15 +18,15 @@
 
         <div class="form-group">
           <label for="reasonList">Index</label>
-          <select required class="form-control" id='indexList' name='indexList' [(ngModel)]='indexSelected' (ngModelChange)='indexChanged($event)'
+          <select required class="form-control" id='indexList' name='indexList' [(ngModel)]='indexSelected' (ngModelChange)='stockIndexChanged($event)'
             #indexListSelect='ngModel'>
-            <option *ngFor='let index of indexList' [ngValue]='index'>{{index.name}}</option>
+            <option *ngFor='let index of stockIndexList' [ngValue]='index'>{{index.name}}</option>
           </select>
         </div>
 
-        <div class='row'>
+        <div class='row year-row'>
           <div class='col-sm-6'>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'validation-error':invalidQuoteYear}">
               <label for="startQuote">Start</label>
               <select required class="form-control" id='startQuote' name='startQuote' [(ngModel)]='startQuote' (ngModelChange)='startQuoteChanged($event)'
                 #startQuoteSelect='ngModel'>
@@ -39,7 +36,7 @@
           </div>
 
           <div class='col-sm-6'>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'validation-error':invalidQuoteYear}">
               <label for="endQuote">End</label>
               <select required class="form-control" id='endQuote' name='endQuote' [(ngModel)]='endQuote' (ngModelChange)='endQuoteChanged($event)'
                 #endQuoteSelect='ngModel'>
@@ -47,12 +44,22 @@
               </select>
             </div>
           </div>
+
+          <div class='col-sm-12'>
+
+            <div class='error-container'>
+              <span *ngIf="invalidQuoteYear" id="invalidYearMessage">Start Year Can Not Be Greater Than The End Year</span>
+            </div>
+
+          </div>
+
         </div>
+
 
         <div class='row'>
 
           <div class='col-sm-6'>
-            <div class="form-group">
+            <div class="form-group" >
               <label for="rateOfReturnAverage">Average % Rate</label>
               <input id='rateOfReturnAverage' disabled type="text" name='rateOfReturnAverage' [(ngModel)]="rateOfReturnAverage" class="form-control"
                 autocomplete="false" />
@@ -62,11 +69,10 @@
           <div class='col-sm-6'>
             <div class="form-group">
               <label for="yearsSelected"># Years</label>
-              <input id='yearsSelected' disabled type="text" name='yearsSelected' [(ngModel)]="yearsSelected" class="form-control"
-                autocomplete="false" />
+              <input id='yearsSelected' disabled type="text" name='yearsSelected' [(ngModel)]="yearsSelected" class="form-control" autocomplete="false"
+              />
             </div>
           </div>
-
         </div>
 
         <div>
