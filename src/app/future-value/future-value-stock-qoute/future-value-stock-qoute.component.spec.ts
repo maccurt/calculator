@@ -163,9 +163,9 @@ describe('FutureValueStockQouteComponent', () => {
           spyOn(component, 'startQuoteChanged');
           startYearSelect.value = '1: Object';
           startYearSelect.dispatchEvent(new Event('change'));
-          expect(component.startQuoteChanged).toHaveBeenCalledWith(component.indexSelected.qoutes[1]);
+          expect(component.startQuoteChanged).toHaveBeenCalled();
         });
-      }));
+      })); 
     });
 
     describe('end qoute select', () => {
@@ -177,7 +177,7 @@ describe('FutureValueStockQouteComponent', () => {
           spyOn(component, 'endQuoteChanged');
           startYearSelect.value = '1: Object';
           startYearSelect.dispatchEvent(new Event('change'));
-          expect(component.endQuoteChanged).toHaveBeenCalledWith(component.indexSelected.qoutes[1]);
+          expect(component.endQuoteChanged).toHaveBeenCalled();
         });
       }));
     });
@@ -242,7 +242,7 @@ describe('FutureValueStockQouteComponent', () => {
       it('when qoutes is empty array it should call setIndexQuotes', () => {
 
         component.stockIndexList[0].qoutes = [];
-        spyOn(component, 'setIndexQoutes')
+        spyOn(component, 'setIndexQoutes');
         component.stockIndexChanged();
         expect(component.setIndexQoutes).toHaveBeenCalled();
 
@@ -251,7 +251,7 @@ describe('FutureValueStockQouteComponent', () => {
       it('when qoutes is undefined it should call setIndexQuotes', () => {
 
         component.stockIndexList[0].qoutes = undefined;
-        spyOn(component, 'setIndexQoutes')
+        spyOn(component, 'setIndexQoutes');
         component.stockIndexChanged();
         expect(component.setIndexQoutes).toHaveBeenCalled();
 
@@ -259,16 +259,16 @@ describe('FutureValueStockQouteComponent', () => {
 
       it('when qoutes is null it should call setIndexQuotes', () => {
         component.stockIndexList[0].qoutes = null;
-        spyOn(component, 'setIndexQoutes')
+        spyOn(component, 'setIndexQoutes');
         component.stockIndexChanged();
         expect(component.setIndexQoutes).toHaveBeenCalled();
-      });;
+      });
 
-      it('when qoutes has elements it NOT should call setIndexQuotes', () => {        
-        spyOn(component, 'setIndexQoutes')
+      it('when qoutes has elements it NOT should call setIndexQuotes', () => {
+        spyOn(component, 'setIndexQoutes');
         component.stockIndexChanged();
         expect(component.setIndexQoutes).not.toHaveBeenCalled();
-      });;
+      });
 
     });
   });

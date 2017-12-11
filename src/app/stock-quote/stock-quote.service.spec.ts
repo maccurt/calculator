@@ -29,7 +29,7 @@ describe('StockQuoteService', () => {
       quotes.push({ year: 2016, rateOfReturn: 10 });
       quotes.push({ year: 2017, rateOfReturn: 10 });
 
-      var avg = service.rateOfReturnAverage(quotes);
+      const avg = service.rateOfReturnAverage(quotes);
       expect(avg).toBe(10);
     });
 
@@ -37,7 +37,7 @@ describe('StockQuoteService', () => {
       const quotes: IStockQuote[] = [];
       quotes.push({ year: 2014, rateOfReturn: 5 });
       quotes.push({ year: 2015, rateOfReturn: 10 });
-      var avg = service.rateOfReturnAverage(quotes);
+      const avg = service.rateOfReturnAverage(quotes);
       expect(avg).toBe(7.5);
     });
 
@@ -45,7 +45,7 @@ describe('StockQuoteService', () => {
       const quotes: IStockQuote[] = [];
       quotes.push({ year: 2014, rateOfReturn: 4.3 });
       quotes.push({ year: 2015, rateOfReturn: 5.3 });
-      var avg = service.rateOfReturnAverage(quotes);
+      const avg = service.rateOfReturnAverage(quotes);
       expect(avg).toBe(4.8);
     });
 

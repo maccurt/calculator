@@ -18,7 +18,7 @@
 
         <div class="form-group">
           <label for="reasonList">Index</label>
-          <select required class="form-control" id='indexList' name='indexList' [(ngModel)]='indexSelected' (ngModelChange)='stockIndexChanged($event)'
+          <select required class="form-control" id='indexList' name='indexList' [(ngModel)]='indexSelected' (ngModelChange)='stockIndexChanged()'
             #indexListSelect='ngModel'>
             <option *ngFor='let index of stockIndexList' [ngValue]='index'>{{index.name}}</option>
           </select>
@@ -28,7 +28,7 @@
           <div class='col-sm-6'>
             <div class="form-group" [ngClass]="{'validation-error':invalidQuoteYear}">
               <label for="startQuote">Start</label>
-              <select required class="form-control" id='startQuote' name='startQuote' [(ngModel)]='startQuote' (ngModelChange)='startQuoteChanged($event)'
+              <select required class="form-control" id='startQuote' name='startQuote' [(ngModel)]='startQuote' (ngModelChange)='startQuoteChanged()'
                 #startQuoteSelect='ngModel'>
                 <option *ngFor='let qoute of indexSelected.qoutes' [ngValue]='qoute'>{{qoute.year}}</option>
               </select>
@@ -38,7 +38,7 @@
           <div class='col-sm-6'>
             <div class="form-group" [ngClass]="{'validation-error':invalidQuoteYear}">
               <label for="endQuote">End</label>
-              <select required class="form-control" id='endQuote' name='endQuote' [(ngModel)]='endQuote' (ngModelChange)='endQuoteChanged($event)'
+              <select required class="form-control" id='endQuote' name='endQuote' [(ngModel)]='endQuote' (ngModelChange)='endQuoteChanged()'
                 #endQuoteSelect='ngModel'>
                 <option *ngFor='let qoute of indexSelected.qoutes' [ngValue]='qoute'>{{qoute.year}}</option>
               </select>

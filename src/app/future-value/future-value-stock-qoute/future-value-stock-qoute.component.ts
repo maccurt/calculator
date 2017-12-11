@@ -22,7 +22,6 @@ export class FutureValueStockQouteComponent implements OnInit {
   isSubmitError = false;
   showInput = true;
   indexSelected: IIndex;
-  // stockQuoteList: IStockQuote[];
   stockQuoteListSelected: IStockQuote[];
   startQuote: IStockQuote;
   endQuote: IStockQuote;
@@ -107,12 +106,13 @@ export class FutureValueStockQouteComponent implements OnInit {
     const showError = control.invalid && (control.touched || this.form.submitted);
     return showError;
   }
+
   handleShowOriginalInputEvent = () => {
     this.showInput = true;
     this.showResults = false;
   }
 
-  handleCalculateEvent = (event): void => {
+  handleCalculateEvent = (event: any): void => {
     //console.log('handleCalculateEvent');
   }
 }
