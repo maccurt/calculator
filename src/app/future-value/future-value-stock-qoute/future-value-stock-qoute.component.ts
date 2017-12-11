@@ -111,4 +111,8 @@ export class FutureValueStockQouteComponent implements OnInit {
     this.showInput = true;
     this.showResults = false;
   }
+
+  handleCalculateEvent = (event): void => {
+    //console.log('handleCalculateEvent');
+  }
 }

@@ -44,8 +44,7 @@ export class NumericInputDirective implements OnInit {
             event.preventDefault();
             return;
         }
-        this.keyDownValue = this.el.nativeElement.value;
-        console.log('keyDown', event)
+        this.keyDownValue = this.el.nativeElement.value;        
     }
 
     keyUp = (event: KeyboardEvent): void => {
