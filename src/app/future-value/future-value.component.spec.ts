@@ -12,6 +12,8 @@ import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import * as highcharts from 'highcharts';
 import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
+import { ResponsiveModule } from 'ng2-responsive';
+
 export function highchartsFactory() {
   highcharts.setOptions({
     lang: {
@@ -21,14 +23,14 @@ export function highchartsFactory() {
   return highcharts;
 }
 
-describe('FutureValueComponent', () => {
+describe('FutureValueComponent', () => {  
   let component: FutureValueComponent;
   let fixture: ComponentFixture<FutureValueComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FutureValueComponent, BalanceSummaryComponent],
-      imports: [FormsModule, DirectivesModule, ChartModule],
+      imports: [FormsModule, DirectivesModule, ChartModule, ResponsiveModule],
       providers: [FutureValueService, MathService,
         { provide: HighchartsStatic, useFactory: highchartsFactory }],
     })

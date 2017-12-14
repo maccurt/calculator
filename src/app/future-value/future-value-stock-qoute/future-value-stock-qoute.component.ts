@@ -6,8 +6,8 @@ import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
 import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 import { FutureValueService } from 'app/future-value/future-value.service';
 
+
 @Component({
-  selector: 'app-future-value-stock-qoute',
   templateUrl: './future-value-stock-qoute.component.html',
   styleUrls: ['./future-value-stock-qoute.component.less']
 })
@@ -36,6 +36,12 @@ export class FutureValueStockQouteComponent implements OnInit {
     this.indexSelected = this.stockIndexList[0];
     this.setIndexQoutes();
     this.setSelectedQuotes();
+    // //for testing only
+    // this.startQuote = this.indexSelected.qoutes[44];
+    // this.monthlyPayment = 25;
+    // this.setSelectedQuotes();
+    // this.calculate();
+
   }
 
   getIndexList = (): IIndex[] => {

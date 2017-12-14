@@ -12,6 +12,7 @@ import * as highcharts from 'highcharts';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
 import { FutureValueStockQouteComponent } from './future-value-stock-qoute/future-value-stock-qoute.component';
 import { IndexListResolver } from 'app/stock-quote/index-list.resolver';
+import { ResponsiveModule } from 'ng2-responsive';
 
 export function highchartsFactory() {
   highcharts.setOptions({
@@ -24,7 +25,7 @@ export function highchartsFactory() {
 
 @NgModule({
   imports: [CommonModule, FutureValueRoutingModule,
-    FormsModule, DirectivesModule, ChartModule],
+    FormsModule, DirectivesModule, ChartModule, ResponsiveModule],
   declarations: [FutureValueComponent, BalanceSummaryComponent, FutureValueStockQouteComponent],
   providers: [FutureValueService, MathService,
     {

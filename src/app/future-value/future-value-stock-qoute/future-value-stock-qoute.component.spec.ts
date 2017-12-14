@@ -18,6 +18,7 @@ import { filter } from 'rxjs/operator/filter';
 import { error } from 'selenium-webdriver';
 import { start } from 'repl';
 import { exec } from 'child_process';
+import { ResponsiveModule } from 'ng2-responsive';
 
 
 export function highchartsFactory() {
@@ -41,7 +42,7 @@ describe('FutureValueStockQouteComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FutureValueStockQouteComponent, BalanceSummaryComponent],
-      imports: [FormsModule, ChartModule, DirectivesModule],
+      imports: [FormsModule, ChartModule, DirectivesModule, ResponsiveModule],
       providers: [MathService, FutureValueService,
         StockQuoteService,
         { provide: HighchartsStatic, useFactory: highchartsFactory },
@@ -165,7 +166,7 @@ describe('FutureValueStockQouteComponent', () => {
           startYearSelect.dispatchEvent(new Event('change'));
           expect(component.startQuoteChanged).toHaveBeenCalled();
         });
-      })); 
+      }));
     });
 
     describe('end qoute select', () => {
