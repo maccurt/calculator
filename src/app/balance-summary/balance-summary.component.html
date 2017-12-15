@@ -25,7 +25,7 @@
             </div>
 
             <div class='row'>
-                <div class='col-xs-8'>
+                <div class='col-xs-12'>
                     <div class="form-group ">
                         <label>Future Value</label>
                         <br>
@@ -50,7 +50,7 @@
                 <div class='col-xs-4'>
                     <div class="form-group">
                         <label>Payment</label>
-                        <input class='detail-monthly-payment form-control' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text"
+                        <input class='detail-monthly-payment form-control' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="number"
                             name='detail-monthly-payment' maxlength='5' required numeric-input [(ngModel)]="d.periodPayment"
                             #ratePercentInput='ngModel' autocomplete="false" />
                     </div>
@@ -72,7 +72,7 @@
                 <div class='col-xs-4'>
                     <div class="form-group">
                         <label>APR %</label>
-                        <input class='detail-rate-percent form-control' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text"
+                        <input class='detail-rate-percent form-control' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="number"
                             name='detail-ratePercent' maxlength='5' required numeric-input [min]='-20' [max]='99' [decimals]='2'
                             [(ngModel)]="d.ratePercent" #ratePercentInput='ngModel' autocomplete="false" />
                     </div>
@@ -132,13 +132,13 @@
                 <td>{{d.beginBalance | number : '1.2-2'}}</td>
                 <td class='input-td'>
 
-                    <input class='detail-monthly-payment' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-monthly-payment'
+                    <input class='detail-monthly-payment' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="number" name='detail-monthly-payment'
                         maxlength='5' required numeric-input [(ngModel)]="d.periodPayment" #ratePercentInput='ngModel' autocomplete="false"
                     />
                 </td>
                 <td>{{d.yearPaymentTotal | number : '1.2-2'}}</td>
                 <td class='input-td'>
-                    <input class='detail-rate-percent' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="text" name='detail-ratePercent'
+                    <input class='detail-rate-percent' (change)="updateDetail(d)" [ngModelOptions]="{updateOn: 'blur'}" type="number" name='detail-ratePercent'
                         maxlength='5' required numeric-input [min]='-20' [max]='99' [decimals]='2' [(ngModel)]="d.ratePercent"
                         #ratePercentInput='ngModel' autocomplete="false" />
                 </td>
