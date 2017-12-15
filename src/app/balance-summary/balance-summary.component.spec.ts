@@ -20,15 +20,15 @@ describe('BalanceSummaryComponent', () => {
       .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(BalanceSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
-  it('should create', () => {
+  it('why is this test failing', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
 
   // describe('updateDetail', () => {
   //   it('should behave...', () => {

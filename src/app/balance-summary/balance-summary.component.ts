@@ -17,10 +17,10 @@ export class BalanceSummaryComponent implements OnInit {
   constructor(private futureValueService: FutureValueService) { }
 
   ngOnInit() {
-      
-   }
 
-  showOriginalInput = (): void => {    
+  }
+
+  showOriginalInput = (): void => {
     this.showOriginalInputEvent.emit();
   }
 

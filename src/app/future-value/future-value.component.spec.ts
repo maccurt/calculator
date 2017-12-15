@@ -23,7 +23,7 @@ export function highchartsFactory() {
   return highcharts;
 }
 
-describe('FutureValueComponent', () => {  
+describe('FutureValueComponent', () => {
   let component: FutureValueComponent;
   let fixture: ComponentFixture<FutureValueComponent>;
 
@@ -99,19 +99,26 @@ describe('FutureValueComponent', () => {
     });
 
     it('future value should be correct', () => {
-      const futureValue = <HTMLDivElement>fixture.nativeElement.querySelector('#future-value');
-      expect(futureValue.innerHTML).toBe('$500,112.33');
+      fixture.whenStable().then(() => {
+        const futureValue = <HTMLDivElement>fixture.nativeElement.querySelector('#future-value');
+        expect(futureValue.innerHTML).toBe('$500,112.33');
+      });
     });
 
-    it('total payment should be correct', () => {
-      const principal = <HTMLDivElement>fixture.nativeElement.querySelector('#principal');
-      expect(principal.innerHTML).toBe('$500,000.00');
-    });
+    it('total payment should be correct', async(() => {
+      fixture.whenStable().then(() => {
+        const principal = <HTMLDivElement>fixture.nativeElement.querySelector('#principal');
+        expect(principal.innerHTML).toBe('$500,000.00');
+      });
+    }));
 
-    it('interst should be correct', () => {
-      const interest = <HTMLDivElement>fixture.nativeElement.querySelector('#interest');
-      expect(interest.innerHTML).toBe('$9,999.33');
-    });
+    it('interst should be correct', async(() => {
+      fixture.whenStable().then(() => {
+        const interest = <HTMLDivElement>fixture.nativeElement.querySelector('#interest');
+        expect(interest.innerHTML).toBe('$9,999.33');
+      });
+
+    }));
   });
 
   describe('calculate', () => {

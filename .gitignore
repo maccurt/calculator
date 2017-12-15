@@ -41,3 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 TESTS-PhantomJS_2.1.1_(Windows_8_0.0.0).xml
+TESTS-PhantomJS_2.1.1_(Windows_7_0.0.0).xml
