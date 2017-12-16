@@ -1,34 +1,54 @@
+<!-- This is how you figured out how to do the drop down menu for nx-bootstrap -->
+<!-- https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli-project/ -->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-        aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Calculator</a>
+      <!-- <a class="navbar-brand">
+              <img src="assets/img/ngx-bootstrap.svg" class="logo">
+            </a> -->
+      <span class="navbar-brand">Calculator Beta 1.0.0</span>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li>
-          <a routerLink="/futureValue">Future Value </a>
-        </li>
-        <li>
-          <a routerLink="/futureValueStockQoute">Future Value Stock Index </a>
-        </li>
-
-        <!-- <li><a routerLink="/sum">Sum </a></li> -->
-
-      </ul>
-
-    </div>
-    
+    <ul class="nav navbar-nav">
+      <!-- <li class="active"><a href="#">
+              Link <span class="sr-only">(current)</span>
+            </a></li> -->
+      <!-- <li><a href="#">Link</a></li> -->
+      <li class="dropdown" dropdown>
+        <!-- {1} -->
+        <a dropdownToggle role="button">
+          Financial Calculators
+          <span class="caret"></span>
+        </a>
+        <ul *dropdownMenu class="dropdown-menu">
+          <li>
+            <a routerLink="/futureValue">Future Value </a>
+          </li>
+          <li>
+            <a routerLink="/futureValueStockQoute">Stock Index What If Calculator </a>
+          </li>
+          <!-- <li>
+            <a href="#">Action</a>
+          </li>
+          <li>
+            <a href="#">Another action</a>
+          </li>
+          <li>
+            <a href="#">Something else here</a>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li>
+            <a href="#">Separated link</a>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li>
+            <a href="#">One more separated link</a>
+          </li> -->
+        </ul>
+      </li>
+    </ul>
   </div>
 </nav>
 
 <div class='container'>
-        <router-outlet></router-outlet>
-      </div>
+  <router-outlet></router-outlet>
+</div>
