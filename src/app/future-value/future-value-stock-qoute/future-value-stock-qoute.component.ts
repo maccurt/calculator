@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IIndex, IStockQuote } from 'app/stock-quote/index.type';
 import { AbstractControl, NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
 import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 import { FutureValueService } from 'app/future-value/future-value.service';
+import { Calculator } from 'app/calculator/calculator.type';
 
 
 @Component({
   templateUrl: './future-value-stock-qoute.component.html',
   styleUrls: ['./future-value-stock-qoute.component.less']
 })
-export class FutureValueStockQouteComponent implements OnInit {
+export class FutureValueStockQouteComponent extends Calculator implements OnInit {
   yearsSelected: number;
   showResults = false;
   monthlyPayment: number;
@@ -28,8 +29,12 @@ export class FutureValueStockQouteComponent implements OnInit {
   invalidQuoteYear = false;
   balanceSummary: IBalanceSummary;
 
-  constructor(public route: ActivatedRoute,
-    public stockQouteService: StockQuoteService, public futureValueService: FutureValueService) { }
+  constructor(public route: ActivatedRoute, public stockQouteService: StockQuoteService,
+    public futureValueService: FutureValueService, router: Router
+  ) {
+    super(router);
+
+  }
 
   ngOnInit() {
     this.stockIndexList = this.getIndexList();

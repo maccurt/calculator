@@ -13,6 +13,7 @@ import * as highcharts from 'highcharts';
 import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
 import { ResponsiveModule } from 'ng2-responsive';
+import { Router } from '@angular/router';
 
 export function highchartsFactory() {
   highcharts.setOptions({
@@ -23,6 +24,20 @@ export function highchartsFactory() {
   return highcharts;
 }
 
+let routerMock = {
+
+  navigate: null,
+  routeReuseStrategy: {
+    return {
+      shouldReuseRoute: function () {
+
+      }
+    }
+  }
+};
+
+routerMock.navigate = jasmine.createSpy('navigate');
+
 describe('FutureValueComponent', () => {
   let component: FutureValueComponent;
   let fixture: ComponentFixture<FutureValueComponent>;
@@ -32,7 +47,10 @@ describe('FutureValueComponent', () => {
       declarations: [FutureValueComponent, BalanceSummaryComponent],
       imports: [FormsModule, DirectivesModule, ChartModule, ResponsiveModule],
       providers: [FutureValueService, MathService,
-        { provide: HighchartsStatic, useFactory: highchartsFactory }],
+        { provide: HighchartsStatic, useFactory: highchartsFactory },
+        { provide: Router, useValue: routerMock }
+
+      ],
     })
       .compileComponents();
   }));

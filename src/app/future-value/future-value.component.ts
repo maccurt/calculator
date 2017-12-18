@@ -7,13 +7,15 @@ import { ChartModule } from 'angular2-highcharts';
 import { BalanceSummary, IBalanceDetailItem } from 'app/future-value/IBalanceSummary.type';
 import { detachEmbeddedView } from '@angular/core/src/view/view_attach';
 import { BalanceSummaryComponent } from '../balance-summary/balance-summary.component';
+import { Router, NavigationEnd } from '@angular/router';
+import { Calculator } from 'app/calculator/calculator.type';
 
 @Component({
   selector: 'app-future-value',
   templateUrl: './future-value.component.html',
   styleUrls: ['./future-value.component.less']
 })
-export class FutureValueComponent implements OnInit {
+export class FutureValueComponent extends Calculator implements OnInit {
   @ViewChild('futureValueForm') form: NgForm;
   ratePercent: number;
   years: number;
@@ -24,8 +26,10 @@ export class FutureValueComponent implements OnInit {
   showInput = true;
   options: any;
 
-  constructor(public futureValueService: FutureValueService) {
+  constructor(public futureValueService: FutureValueService, router: Router) {
+    super(router);
     this.futureValueResult = <any>{};
+
   }
 
   ngOnInit() {
@@ -36,7 +40,7 @@ export class FutureValueComponent implements OnInit {
   }
 
   calculate = () => {
-    
+
     if (this.form.valid) {
       this.futureValueResult = this.futureValueService
         .monthlyPaymentsBalanceSummary(this.ratePercent, this.years, this.monthlyPayment);

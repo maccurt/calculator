@@ -5,7 +5,10 @@ import { FutureValueStockQouteComponent } from 'app/future-value/future-value-st
 import { IndexListResolver } from '../stock-quote/index-list.resolver';
 const routes: Routes = [
   { path: 'futureValue', component: FutureValueComponent },
-  { path: 'futureValueStockQoute', component: FutureValueStockQouteComponent, resolve: { indexList: IndexListResolver } }
+  {
+    path: 'futureValueStockQoute', component: FutureValueStockQouteComponent, resolve: { indexList: IndexListResolver },
+  },
+  { path: 'futureValueStockQoute/:mode', component: FutureValueStockQouteComponent, resolve: { indexList: IndexListResolver } }
 ];
 
 @NgModule({
