@@ -7,7 +7,7 @@ import { ChartModule } from 'angular2-highcharts';
 import * as highcharts from 'highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { DirectivesModule } from 'app/directives/directives.module';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IIndex } from 'app/stock-quote/index.type';
 import { indexDebugNode } from '@angular/core/src/debug/debug_node';
 import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
@@ -20,6 +20,16 @@ import { start } from 'repl';
 import { exec } from 'child_process';
 import { ResponsiveModule } from 'ng2-responsive';
 
+const routerMock = {
+  navigate: null,
+  events: {
+    subscribe: () => { }
+  },
+  routeReuseStrategy: {
+    shouldReuseRoute: function () {
+    }
+  }
+};
 
 export function highchartsFactory() {
   highcharts.setOptions({ lang: { thousandsSep: ',' } });
@@ -46,7 +56,9 @@ describe('FutureValueStockQouteComponent', () => {
       providers: [MathService, FutureValueService,
         StockQuoteService,
         { provide: HighchartsStatic, useFactory: highchartsFactory },
-        { provide: ActivatedRoute, useValue: activateResponseMock }]
+        { provide: ActivatedRoute, useValue: activateResponseMock },
+        { provide: Router, useValue: routerMock }
+      ]
     })
       .compileComponents();
   }));
