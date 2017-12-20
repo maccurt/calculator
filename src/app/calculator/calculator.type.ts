@@ -2,7 +2,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 export class Calculator {
     constructor(router: Router) {
-
+    
         router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;
         };

@@ -15,6 +15,7 @@ import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.com
 import { ResponsiveModule } from 'ng2-responsive';
 import { Router } from '@angular/router';
 
+
 export function highchartsFactory() {
   highcharts.setOptions({
     lang: {
@@ -27,11 +28,12 @@ export function highchartsFactory() {
 let routerMock = {
 
   navigate: null,
+  events: {
+    subscribe: () => { }
+  },
   routeReuseStrategy: {
-    return {
-      shouldReuseRoute: function () {
 
-      }
+    shouldReuseRoute: function () {
     }
   }
 };
