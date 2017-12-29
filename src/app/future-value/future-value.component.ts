@@ -7,13 +7,21 @@ import { ChartModule } from 'angular2-highcharts';
 import { BalanceSummary, IBalanceDetailItem } from 'app/future-value/IBalanceSummary.type';
 import { detachEmbeddedView } from '@angular/core/src/view/view_attach';
 import { BalanceSummaryComponent } from '../balance-summary/balance-summary.component';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Calculator } from 'app/calculator/calculator.type';
+
+interface IParams {
+  monthlyPayment: number;
+}
+
 
 @Component({
   selector: 'app-future-value',
   templateUrl: './future-value.component.html',
   styleUrls: ['./future-value.component.less']
 })
-export class FutureValueComponent implements OnInit {
+
+export class FutureValueComponent extends Calculator implements OnInit {
   @ViewChild('futureValueForm') form: NgForm;
   ratePercent: number;
   years: number;
@@ -24,19 +32,50 @@ export class FutureValueComponent implements OnInit {
   showInput = true;
   options: any;
 
-  constructor(public futureValueService: FutureValueService) {
+  constructor(public futureValueService: FutureValueService, router: Router,
+    private activatedRoute: ActivatedRoute) {
+    super(router, activatedRoute);
     this.futureValueResult = <any>{};
   }
 
   ngOnInit() {
-    // this.monthlyPayment = 250;
-    // this.ratePercent = 12;
-    // this.years = 20;
-    // this.calculate();
+
+    this.activatedRoute.params.subscribe((params) => {
+
+      const monthlyPayment = this.getNumericParms(params, 'monthlyPayment');
+      const ratePercent = this.getNumericParms(params, 'rate');
+      const years = this.getNumericParms(params, 'years');
+      this.validateQueryStringParams(monthlyPayment, ratePercent, years);
+    });
+  }
+
+  validateQueryStringParams = (monthlyPayment: any, ratePercent: any, years: any) => {
+
+
+    if (monthlyPayment && !isNaN(monthlyPayment) && monthlyPayment >= 1 && monthlyPayment <= 99999) {
+      this.monthlyPayment = monthlyPayment
+    }
+    else {
+      this.monthlyPayment = null;
+    }
+
+    if (ratePercent && !isNaN(ratePercent) && ratePercent >= 0 && ratePercent <= 99) {
+
+      this.ratePercent = ratePercent
+    } else {
+      this.ratePercent = null;
+    }
+
+    if (years && !isNaN(years) && years >= 1 && years <= 99) {
+      this.years = years
+    }
+    else {
+      this.years = null;
+    }
   }
 
   calculate = () => {
-    
+
     if (this.form.valid) {
       this.futureValueResult = this.futureValueService
         .monthlyPaymentsBalanceSummary(this.ratePercent, this.years, this.monthlyPayment);

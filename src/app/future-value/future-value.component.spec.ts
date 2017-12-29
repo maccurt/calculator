@@ -13,6 +13,9 @@ import * as highcharts from 'highcharts';
 import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
 import { ResponsiveModule } from 'ng2-responsive';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
 
 export function highchartsFactory() {
   highcharts.setOptions({
@@ -23,6 +26,28 @@ export function highchartsFactory() {
   return highcharts;
 }
 
+let routerMock = {
+
+  navigate: null,
+  events: {
+    subscribe: () => { }
+  },
+  routeReuseStrategy: {
+
+    shouldReuseRoute: function () {
+    }
+  }
+};
+
+routerMock.navigate = jasmine.createSpy('navigate');
+
+let route = {
+  navigate: null,
+  params: Observable.of('nothing')
+}
+route.navigate = jasmine.createSpy('navigate');
+
+
 describe('FutureValueComponent', () => {
   let component: FutureValueComponent;
   let fixture: ComponentFixture<FutureValueComponent>;
@@ -32,7 +57,11 @@ describe('FutureValueComponent', () => {
       declarations: [FutureValueComponent, BalanceSummaryComponent],
       imports: [FormsModule, DirectivesModule, ChartModule, ResponsiveModule],
       providers: [FutureValueService, MathService,
-        { provide: HighchartsStatic, useFactory: highchartsFactory }],
+        { provide: HighchartsStatic, useFactory: highchartsFactory },
+        { provide: Router, useValue: routerMock },
+        { provide: ActivatedRoute, useValue: route, }
+
+      ],
     })
       .compileComponents();
   }));
@@ -53,6 +82,18 @@ describe('FutureValueComponent', () => {
     // it('the result should be false', () => {
     //   expect(component.showResults).toBe(false);
     // });
+
+  });
+
+  describe('validateQueryStringParams', () => {
+
+    it('all over max', () => {
+
+      component.validateQueryStringParams('100000', '99.1', '100')
+      expect(component.monthlyPayment).toBeNull()
+      expect(component.ratePercent).toBeNull()
+      expect(component.years).toBeNull()
+    });
 
   });
 
