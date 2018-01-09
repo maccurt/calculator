@@ -11,11 +11,21 @@ import { StockQuoteService } from './stock-quote/stock-quote.service';
 import { BalanceSummaryComponent } from './balance-summary/balance-summary.component';
 import { TestPadComponent } from './test-pad/test-pad.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { WeightComponent } from './weight-component/weight.component';
+import { Routes } from '@angular/router';
+import { FutureValueStockQouteComponent } from 'app/future-value/future-value-stock-qoute/future-value-stock-qoute.component';
+import { IndexListResolver } from 'app/stock-quote/index-list.resolver';
+
+const routes: Routes = [
+  { path: 'weight', component: WeightComponent },
+  { path: 'futureValueStockQoute', component: FutureValueStockQouteComponent, resolve: { indexList: IndexListResolver } }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestPadComponent
+    TestPadComponent,
+    WeightComponent
   ],
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
