@@ -8,32 +8,41 @@
 
       <div class="form-group" [ngClass]="{'validation-error':showValidationError(quantityInput)}">
         <label for="quantity" title="How Many Weights">Quantity</label>
-        <input id='quantity' type="number" name='quantityInput' maxlength="5" required numeric-input [(ngModel)]="quantity"
-          #quantityInput='ngModel' class="form-control" autocomplete="false" />
+        <input id='quantity' type="number" name='quantityInput' maxlength="5" required numeric-input [(ngModel)]="quantity" #quantityInput='ngModel'
+          class="form-control" autocomplete="false" />
         <div class='error-message'>
           <span>Quantity Is required</span>
         </div>
       </div>
 
       <div class="form-group" [ngClass]="{'validation-error':showValidationError(ouncesInput)}">
-          <label for="ounces" title="What Does Each Sinker Weight?">Ounces</label>
-          <input id='ounces' type="number" name='ounces' maxlength='5' required numeric-input [max]='20' [decimals]='2' [(ngModel)]="ounces"
-              #ouncesInput='ngModel' class="form-control" autocomplete="false" />
-          <div class='error-message'>
-              <span>Ounces Is required</span>
-          </div>
+        <label for="ounces" title="What Does Each Sinker Weight?">Ounces</label>
+        <input id='ounces' type="number" name='ounces' maxlength='5' required numeric-input [max]='20' [decimals]='2' [(ngModel)]="ounces"
+          #ouncesInput='ngModel' class="form-control" autocomplete="false" />
+        <div class='error-message'>
+          <span>Ounces Is required</span>
+        </div>
       </div>
 
       <div class="form-group" [ngClass]="{'validation-error':showValidationError(costInput)}">
-          <label for="cost" title="What is the cost/price of all the sinkers?">Cost</label>
-          <input id='cost' type="number" name='cost' maxlength='5' required numeric-input [max]='100' [decimals]='2' [(ngModel)]="cost"
-              #costInput='ngModel' class="form-control" autocomplete="false" />
-          <div class='error-message'>
-              <span>Cost Is required</span>
-          </div>
+        <label for="cost" title="What is the cost/price of all the sinkers?">Cost</label>
+        <input id='cost' type="number" name='cost' maxlength='5' required numeric-input [max]='100' [decimals]='2' [(ngModel)]="cost"
+          #costInput='ngModel' class="form-control" autocomplete="false" />
+        <div class='error-message'>
+          <span>Cost Is required</span>
+        </div>
       </div>
 
-      
+      <div class="form-group" >
+        <label for="shippingCost" title="How much is the shipping and handling?">Shipping & Handling</label>
+        <input id='shippingCost' type="number" name='shippingCost' maxlength='5' numeric-input [max]='100' [decimals]='2' [(ngModel)]="shippingCost"
+          #shippingCostInput='ngModel' class="form-control" autocomplete="false" />
+      </div>
+
+      <div>
+        <button id='calculate-button' type="submit" class="btn btn-primary">Calculate</button>
+        <span *ngIf='showSubmitError()'>Required Fields</span>
+      </div>
 
     </form>
   </div>
