@@ -37,14 +37,43 @@ export class NumericInputDirective implements OnInit {
         event.preventDefault();
     }
 
+    // isDecimalPrecisionViolated = (event: KeyboardEvent): boolean => {
+
+
+    //     //This won't work because it won't allow you to put the whole number
+    //     if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+    //         if (this.decimals > 0) {
+    //             const decimalIndex = this.el.nativeElement.value.indexOf('.');
+    //             if (decimalIndex >= 0) {
+    //                 const diff = this.el.nativeElement.value.length - decimalIndex;
+    //                 if (diff > this.decimals) {
+    //                     return true;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+
     keyDown = (event: KeyboardEvent): void => {
+
         //Prevent the arrow down or up from changing the numeric input type from 
         //changing the numer
         if (event.keyCode === 40 || event.keyCode === 38) {
             event.preventDefault();
             return;
         }
-        this.keyDownValue = this.el.nativeElement.value;        
+
+        const input = <HTMLInputElement>this.el.nativeElement;
+        console.log(<HTMLInputElement>this.el.nativeElement.selectionStart);
+
+
+        // if (this.isDecimalPrecisionViolated(event)) {
+        //     event.preventDefault();
+        //     return;
+        // }
+
+        this.keyDownValue = this.el.nativeElement.value;
     }
 
     keyUp = (event: KeyboardEvent): void => {
@@ -56,12 +85,8 @@ export class NumericInputDirective implements OnInit {
                 const num = Number(inputValue);
 
                 if (num > this.max) {
-
                     this.el.nativeElement.value = this.keyDownValue;
-
-
                     this.ngModelChange.emit(this.el.nativeElement.value);
-
                 }
             }
         }
@@ -70,6 +95,21 @@ export class NumericInputDirective implements OnInit {
         if (inputValue.indexOf('-') > 0) {
             this.el.nativeElement.value = this.keyDownValue;
         }
+
+        //Don't allow there to be more decmials than allowed
+        //Why do you not like this?
+        //because it forces cursor to be at the end of the value
+        //it jumps the curor around
+        //TODO can you fix the above issues?
+        const decimalIndex = this.el.nativeElement.value.indexOf('.');
+        if (decimalIndex >= 0) {
+            const diff = this.el.nativeElement.value.length - decimalIndex;
+            if (diff > this.decimals + 1) {
+                console.log('prevented');
+                this.el.nativeElement.value = this.keyDownValue;
+            }
+        }
+
     }
 
     //TODO move this to a serive

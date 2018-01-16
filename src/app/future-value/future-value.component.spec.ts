@@ -44,7 +44,7 @@ routerMock.navigate = jasmine.createSpy('navigate');
 let route = {
   navigate: null,
   params: Observable.of('nothing')
-}
+};
 route.navigate = jasmine.createSpy('navigate');
 
 
@@ -89,10 +89,10 @@ describe('FutureValueComponent', () => {
 
     it('all over max', () => {
 
-      component.validateQueryStringParams('100000', '99.1', '100')
-      expect(component.monthlyPayment).toBeNull()
-      expect(component.ratePercent).toBeNull()
-      expect(component.years).toBeNull()
+      component.validateQueryStringParams('100000', '99.1', '100');
+      expect(component.monthlyPayment).toBeNull();
+      expect(component.ratePercent).toBeNull();
+      expect(component.years).toBeNull();
     });
 
   });

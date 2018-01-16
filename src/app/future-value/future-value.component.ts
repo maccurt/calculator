@@ -53,7 +53,7 @@ export class FutureValueComponent extends Calculator implements OnInit {
 
 
     if (monthlyPayment && !isNaN(monthlyPayment) && monthlyPayment >= 1 && monthlyPayment <= 99999) {
-      this.monthlyPayment = monthlyPayment
+      this.monthlyPayment = monthlyPayment;
     }
     else {
       this.monthlyPayment = null;
@@ -61,13 +61,13 @@ export class FutureValueComponent extends Calculator implements OnInit {
 
     if (ratePercent && !isNaN(ratePercent) && ratePercent >= 0 && ratePercent <= 99) {
 
-      this.ratePercent = ratePercent
+      this.ratePercent = ratePercent;
     } else {
       this.ratePercent = null;
     }
 
     if (years && !isNaN(years) && years >= 1 && years <= 99) {
-      this.years = years
+      this.years = years;
     }
     else {
       this.years = null;

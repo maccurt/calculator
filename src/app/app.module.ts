@@ -15,6 +15,9 @@ import { WeightComponent } from './weight-component/weight.component';
 import { Routes } from '@angular/router';
 import { FutureValueStockQouteComponent } from 'app/future-value/future-value-stock-qoute/future-value-stock-qoute.component';
 import { IndexListResolver } from 'app/stock-quote/index-list.resolver';
+import { HttpClientModule } from '@angular/common/http';
+import { JsonpModule } from '@angular/http';
+import { WeightService } from 'app/weight-component/weight.service';
 
 const routes: Routes = [
   { path: 'weight', component: WeightComponent },
@@ -30,8 +33,8 @@ const routes: Routes = [
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
     DirectivesModule, MathModule,
-    FormsModule, BsDropdownModule.forRoot()],
-  providers: [StockQuoteService],
+    FormsModule, BsDropdownModule.forRoot(), HttpClientModule, JsonpModule],
+  providers: [StockQuoteService, WeightService],
 
   bootstrap: [AppComponent]
 })

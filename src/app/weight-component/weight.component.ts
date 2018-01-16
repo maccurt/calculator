@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, NgForm } from '@angular/forms';
 import { MathService } from 'app/math/math.service';
+import { WeightService, ICostPerOzResult, ISinkerWeight, ISinkerGroups } from 'app/weight-component/weight.service';
 
 @Component({
   selector: 'app-weight-component',
@@ -12,34 +13,36 @@ export class WeightComponent implements OnInit {
   quantity: number;
   ounces: number;
   cost: number;
+
   shippingCost: number;
-  costPerOz: number;
+  result: ICostPerOzResult;
   isSubmitError = false;
-  ouncesTotal = 0
-  costTotal = 0;
-  constructor(private mathService: MathService) { }
+  showResults = false;
+
+  sinkerGroups: ISinkerGroups[];
+  constructor(private mathService: MathService, private weightService: WeightService) { }
 
   ngOnInit() {
 
     this.quantity = 25;
     this.ounces = 8;
-    this.cost = 25.99
-    this.shippingCost = 5
-    this.costPerOz;
+    this.cost = 25.99;
+    this.shippingCost = 5;
+    this.calculate();
 
-    this.ouncesTotal = 0;
+    this.weightService.getWeights().subscribe((sinkerGroups: ISinkerGroups[]) => {
+      this.sinkerGroups = sinkerGroups;
+    });
   }
 
   calculate = () => {
+    if (this.form.valid) {
+      this.result = this.weightService.getCostPerOunce(this.quantity, this.ounces, this.cost, this.shippingCost);
+    } else {
+      this.isSubmitError = true;
+    }
 
-    //TODO move this to a service...
-    const totalOunces = this.mathService.round(this.quantity * this.ounces, 2)
-    const totalCost = this.mathService.round(this.cost + this.shippingCost, 2);
-    const costPerOz = this.mathService.round(totalCost / totalOunces, 2);
-    console.log('cost per oz', costPerOz);
-    this.costPerOz = costPerOz;
-    this.costTotal = totalCost;
-
+    this.showResults = this.form.valid;
   }
 
   showSubmitError = () => {

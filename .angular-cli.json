@@ -21,7 +21,8 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "styles.less"
+        "./styles/styles.less",
+        "./styles/table.less"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -54,7 +55,6 @@
   },
   "defaults": {
     "styleExt": "less",
-    "component": {
-    }
+    "component": {}
   }
 }
