@@ -20,7 +20,7 @@ export interface ISinkerWeight {
   costPerOunce: number;
 }
 
-export interface ISinkerGroups {
+export interface ISinkerGroup {
   title: string;
   results: ISinkerWeight[];
 }
@@ -48,15 +48,15 @@ export class WeightService {
     return result;
   }  
 
-  getWeights = (): Observable<ISinkerGroups[]> => {
+  getWeights = (): Observable<ISinkerGroup[]> => {
 
     // tslint:disable-next-line:quotemark    
 
 
 
-    const weightObject: ISinkerGroups[] = JSON.parse(this.getData());
+    const weightObject: ISinkerGroup[] = JSON.parse(this.getData());
 
-    weightObject.forEach((groups: ISinkerGroups) => {
+    weightObject.forEach((groups: ISinkerGroup) => {
 
       groups.results.forEach(weight => {
         const result = this.getCostPerOunce(weight.quantity, weight.ounce, weight.price, 0);

@@ -18,6 +18,7 @@ import { IndexListResolver } from 'app/stock-quote/index-list.resolver';
 import { HttpClientModule } from '@angular/common/http';
 import { JsonpModule } from '@angular/http';
 import { WeightService } from 'app/weight-component/weight.service';
+import { WeightListComponent } from './weight-list/weight-list.component';
 
 const routes: Routes = [
   { path: 'weight', component: WeightComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TestPadComponent,
-    WeightComponent
+    WeightComponent,
+    WeightListComponent
   ],
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
