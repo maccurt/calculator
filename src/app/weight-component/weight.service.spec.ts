@@ -1,78 +1,78 @@
-import { TestBed, inject } from '@angular/core/testing';
+// import { TestBed, inject } from '@angular/core/testing';
 
-import { WeightService } from './weight.service';
-import { ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem } from './weight.types';
-import { MathService } from 'app/math/math.service';
+// import { WeightService } from './weight.service';
+// import { ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem } from './weight.types';
+// import { MathService } from 'app/math/math.service';
 
-describe('WeightService', () => {
+// describe('WeightService', () => {
 
-  let service: WeightService;
+//   let service: WeightService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [WeightService, MathService]
-    });
-    service = TestBed.get(WeightService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       providers: [WeightService, MathService]
+//     });
+//     service = TestBed.get(WeightService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
 
-  describe('Cost per oz', () => {
+//   describe('Cost per oz', () => {
 
-    let result: ICostPerOzResult;
+//     let result: ICostPerOzResult;
 
-    describe('$25 cost 8 oz $25.99 cost $5 S&H', () => {
-      beforeEach(() => {
-        result = service.getCostPerOunce(25, 8, 25.99, 5);
-      });
+//     describe('$25 cost 8 oz $25.99 cost $5 S&H', () => {
+//       beforeEach(() => {
+//         result = service.getCostPerOunce(25, 8, 25.99, 5);
+//       });
 
-      it('ounceTotal', () => {
-        expect(result.ounceTotal).toBe(200);
+//       it('ounceTotal', () => {
+//         expect(result.ounceTotal).toBe(200);
 
-      });
-      it('costTotal should be 30.99', () => {
-        expect(result.costTotal).toBe(30.99);
-      });
+//       });
+//       it('costTotal should be 30.99', () => {
+//         expect(result.costTotal).toBe(30.99);
+//       });
 
-      it('cost per oz should be .15', () => {
-        expect(result.costPerOunce).toBe(.15);
-      });
-    });
+//       it('cost per oz should be .15', () => {
+//         expect(result.costPerOunce).toBe(.15);
+//       });
+//     });
 
-    describe('$25 cost 8 oz $25.99 cost FREE S&H', () => {
-      beforeEach(() => {
-        result = service.getCostPerOunce(25, 8, 25.99, 0);
-      });
+//     describe('$25 cost 8 oz $25.99 cost FREE S&H', () => {
+//       beforeEach(() => {
+//         result = service.getCostPerOunce(25, 8, 25.99, 0);
+//       });
 
-      it('ounceTotal', () => {
-        expect(result.ounceTotal).toBe(200);
+//       it('ounceTotal', () => {
+//         expect(result.ounceTotal).toBe(200);
 
-      });
-      it('costTotal should be 25.99', () => {
-        expect(result.costTotal).toBe(25.99);
-      });
+//       });
+//       it('costTotal should be 25.99', () => {
+//         expect(result.costTotal).toBe(25.99);
+//       });
 
-      it('cost per oz should be .13', () => {
-        expect(result.costPerOunce).toBe(.13);
-      });
-    });
+//       it('cost per oz should be .13', () => {
+//         expect(result.costPerOunce).toBe(.13);
+//       });
+//     });
 
-  });
+//   });
 
-  // describe('get weights', () => {
+//   // describe('get weights', () => {
 
-  //   it('should behave...', () => {
+//   //   it('should behave...', () => {
 
-  //     service.getWeights().subscribe((data: ISinkerWeightGroupItem[]) => {
+//   //     service.getWeights().subscribe((data: ISinkerWeightGroupItem[]) => {
 
-  //       console.log(data[1].title);
+//   //       console.log(data[1].title);
 
 
-  //     });
+//   //     });
 
-  //   });
+//   //   });
 
-  // });
-});
+//   // });
+// });
