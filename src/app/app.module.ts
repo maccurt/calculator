@@ -35,7 +35,7 @@ const routes: Routes = [
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
     DirectivesModule, MathModule,
-    FormsModule, BsDropdownModule.forRoot(), HttpClientModule, JsonpModule],
+    FormsModule, BsDropdownModule.forRoot(), HttpClientModule, JsonpModule,HttpClientModule],
   providers: [StockQuoteService, WeightService],
 
   bootstrap: [AppComponent]

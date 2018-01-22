@@ -1,6 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { WeightService, ICostPerOzResult, ISinkerWeight, ISinkerGroups } from './weight.service';
+import { WeightService } from './weight.service';
+import { ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem } from './weight.types';
 import { MathService } from 'app/math/math.service';
 
 describe('WeightService', () => {
@@ -60,18 +61,18 @@ describe('WeightService', () => {
 
   });
 
-  describe('get weights', () => {
+  // describe('get weights', () => {
 
-    it('should behave...', () => {
+  //   it('should behave...', () => {
 
-      service.getWeights().subscribe((data: ISinkerGroups[]) => { 
-        
-        console.log(data[1].title);
-        
+  //     service.getWeights().subscribe((data: ISinkerWeightGroupItem[]) => {
 
-      });
+  //       console.log(data[1].title);
 
-    });
 
-  });
+  //     });
+
+  //   });
+
+  // });
 });

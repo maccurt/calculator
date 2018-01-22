@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WeightService, ISinkerWeight, ISinkerGroup } from 'app/weight-component/weight.service';
+import { WeightService } from 'app/weight-component/weight.service';
+import { ISinkerWeightGroup, ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem } from 'app/weight-component/weight.types';
 
 @Component({
   selector: 'app-weight-list',
@@ -8,15 +9,22 @@ import { WeightService, ISinkerWeight, ISinkerGroup } from 'app/weight-component
 })
 export class WeightListComponent implements OnInit {
 
-  weightGroupList: ISinkerGroup[];
+  group: ISinkerWeightGroup;
+  filterSinkerWeightGroupItems:ISinkerWeightGroupItem[]
+  ounceSelected: string
   constructor(private weightService: WeightService) { }
 
   ngOnInit() {
 
-    this.weightService.getWeights().subscribe((weightGroupList: ISinkerGroup[]) => {
-
-      this.weightGroupList = weightGroupList;
+    this.weightService.GetSinkerWeightGroup().subscribe((group: ISinkerWeightGroup) => {
+      this.group = group;
+      this.filterSinkerWeightGroupItems = this.group.items;
     });
+  }
+
+  ounceChanged = (ounce: any) => {
+
+    this.filterSinkerWeightGroupItems = this.weightService.filterByOunce(this.group.items, ounce);
 
   }
 }
