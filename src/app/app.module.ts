@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JsonpModule } from '@angular/http';
 import { WeightService } from 'app/weight-component/weight.service';
 import { WeightListComponent } from './weight-list/weight-list.component';
+import {ScrollToModule} from 'ng2-scroll-to';
 
 const routes: Routes = [
   { path: 'weight', component: WeightComponent },
@@ -35,7 +36,9 @@ const routes: Routes = [
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
     DirectivesModule, MathModule,
-    FormsModule, BsDropdownModule.forRoot(), HttpClientModule, JsonpModule,HttpClientModule],
+    FormsModule, BsDropdownModule.forRoot(),
+    HttpClientModule, JsonpModule, HttpClientModule,
+    ScrollToModule.forRoot()],
   providers: [StockQuoteService, WeightService],
 
   bootstrap: [AppComponent]

@@ -42,7 +42,7 @@ export class WeightListComponent implements OnInit {
       this.group = group;
       this.filterSinkerWeightGroupItems = this.group.items;
       this.ounceSelected = this.group.ounceList[0];
-      this.sinkerTypeSelected = this.group.sinkerTypeList[0];      
+      this.sinkerTypeSelected = this.group.sinkerTypeList[0];
 
       this.sortList();
     });
@@ -89,5 +89,10 @@ export class WeightListComponent implements OnInit {
       item.results = lodash.orderBy(item.results, [this.sortBySelected.field], [direction]);
       console.log('sorted');
     });
+  }
+
+  anchorTag = (value: string): string => {
+    const tag = value.replace(/ /g, '');
+    return tag;
   }
 }
