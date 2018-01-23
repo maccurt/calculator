@@ -20,6 +20,7 @@ import { JsonpModule } from '@angular/http';
 import { WeightService } from 'app/weight-component/weight.service';
 import { WeightListComponent } from './weight-list/weight-list.component';
 import {ScrollToModule} from 'ng2-scroll-to';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'weight', component: WeightComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
     AppComponent,
     TestPadComponent,
     WeightComponent,
-    WeightListComponent
+    WeightListComponent,
+    HomeComponent
   ],
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,

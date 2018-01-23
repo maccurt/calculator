@@ -5,9 +5,11 @@ import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.com
 import { TestPadComponent } from 'app/test-pad/test-pad.component';
 import { WeightComponent } from 'app/weight-component/weight.component';
 import { WeightListComponent } from 'app/weight-list/weight-list.component';
+import { HomeComponent } from 'app/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: FutureValueComponent },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'weight', component: WeightComponent },
   { path: 'weightList', component: WeightListComponent }
 ];
