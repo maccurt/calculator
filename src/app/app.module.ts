@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JsonpModule } from '@angular/http';
 import { WeightService } from 'app/weight-component/weight.service';
 import { WeightListComponent } from './weight-list/weight-list.component';
-import {ScrollToModule} from 'ng2-scroll-to';
+import { ScrollToModule } from 'ng2-scroll-to';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -35,12 +35,12 @@ const routes: Routes = [
     WeightListComponent,
     HomeComponent
   ],
-  imports: [BrowserModule, AppRouteModule,
+  imports: [BrowserModule.withServerTransition({ appId: 'calculator' }), AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
     DirectivesModule, MathModule,
     FormsModule, BsDropdownModule.forRoot(),
     HttpClientModule, JsonpModule, HttpClientModule,
-    ScrollToModule.forRoot()],
+  ScrollToModule.forRoot()],
   providers: [StockQuoteService, WeightService],
 
   bootstrap: [AppComponent]
