@@ -1,17 +1,17 @@
 <div *ngIf='filterSinkerWeightGroupItems'>
 
-  <div class="row">
-    <div class="filter-container">
+  <div class="row " style="background-color:azure">    
 
-      <div class="col-xs-6 col-sm-6 col-lg-3">
-        <label>Sinker Types</label>
+      <div class="col-lg-3">
+        
+        <!-- <label>Sinker Types</label>
         <select class="form-control" id='sinkerTypeList' name='sinkerTypeList' [(ngModel)]='sinkerTypeSelected' (ngModelChange)='sinkerTypeChanged($event)'
           #sinkerTypeListSelect='ngModel'>
           <option *ngFor='let sinkerType of group.sinkerTypeList' [ngValue]='sinkerType'>{{sinkerType.text}}</option>
-        </select>
+        </select> -->
       </div>
 
-      <div class="col-xs-6 col-sm-6 col-lg-3">
+      <div class="col-lg-3">
         <label>Sinker Oz. Size</label>
         <select class="form-control" id='ounceList' name='ounceList' [(ngModel)]='ounceSelected' (ngModelChange)='ounceChanged($event)'
           #ounceListSelect='ngModel'>
@@ -19,7 +19,7 @@
         </select>
       </div>
 
-      <div class="col-xs-6 col-sm-6 col-lg-2">
+      <div class="col-lg-2">
         <label>Sort By</label>
         <select class="form-control" id='sortByList' name='sortByList' [(ngModel)]='sortBySelected' (ngModelChange)='sortByChanged($event)'
           #sortByListSelect='ngModel'>
@@ -27,14 +27,14 @@
         </select>
       </div>
 
-      <div class="col-xs-6 col-sm-6 col-lg-2">
+      <div class="col-lg-2">
         <label>Sort By Direction </label>
         <select class="form-control" id='sortByDirectionList' name='sortByDirectionList' [(ngModel)]='sortByDirectionSelected' (ngModelChange)='sortByDirectionChanged($event)'
           #sortByDirectionListSelect='ngModel'>
           <option *ngFor='let sortByDirection of sortByDirectionList' [ngValue]='sortByDirection'>{{sortByDirection.text}}</option>
         </select>
       </div>
-    </div>
+    
   </div>
 
   <div class="row">
