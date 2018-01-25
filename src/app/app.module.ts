@@ -10,7 +10,6 @@ import { MathModule } from './math/math.module';
 import { StockQuoteService } from './stock-quote/stock-quote.service';
 import { BalanceSummaryComponent } from './balance-summary/balance-summary.component';
 import { TestPadComponent } from './test-pad/test-pad.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { WeightComponent } from './weight-component/weight.component';
 import { Routes } from '@angular/router';
 import { FutureValueStockQouteComponent } from 'app/future-value/future-value-stock-qoute/future-value-stock-qoute.component';
@@ -38,7 +37,7 @@ const routes: Routes = [
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
     DirectivesModule, MathModule,
-    FormsModule, BsDropdownModule.forRoot(),
+    FormsModule,
     HttpClientModule, JsonpModule, HttpClientModule,
     ScrollToModule.forRoot()],
   providers: [StockQuoteService, WeightService],

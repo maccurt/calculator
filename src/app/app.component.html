@@ -1,77 +1,42 @@
 <!-- This is how you figured out how to do the drop down menu for nx-bootstrap -->
 <!-- https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli-project/ -->
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <!-- <a class="navbar-brand">
-              <img src="assets/img/ngx-bootstrap.svg" class="logo">
-            </a> -->
-      <span class="navbar-brand">
-        <a  title='Home Page' routerLink="/home">Love Code Fish </a>
-      </span>
-    </div>
-    <ul class="nav navbar-nav">
-      <!-- <li class="active"><a href="#">
-              Link <span class="sr-only">(current)</span>
-            </a></li> -->
-      <!-- <li><a href="#">Link</a></li> -->
-      <li class="dropdown" dropdown>
-        <!-- {1} -->
-        <a dropdownToggle role="button">
-          Financial Calculators
-          <span class="caret"></span>
-        </a>
-        <ul *dropdownMenu class="dropdown-menu">
-          <li>
-            <a routerLink="/futureValue">Future Value </a>
-          </li>
-          <li>
-            <a routerLink="/futureValueStockQoute">Stock Index What If Calculator </a>
-          </li>
-          <!-- <li>
-            <a href="#">Action</a>
-          </li>
-          <li>
-            <a href="#">Another action</a>
-          </li>
-          <li>
-            <a href="#">Something else here</a>
-          </li>
-          <li role="separator" class="divider"></li>
-          <li>
-            <a href="#">Separated link</a>
-          </li>
-          <li role="separator" class="divider"></li>
-          <li>
-            <a href="#">One more separated link</a>
-          </li> -->
-        </ul>
-      </li>
 
-      <li>
-        <a routerLink="/weightList">Bulk Fishing Sinkers Free Shipping!!!</a>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-      <!-- <li class="dropdown" dropdown>        
-        <a dropdownToggle role="button">Fishing
-          <span class="caret"></span>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
         </a>
-        <ul *dropdownMenu class="dropdown-menu">
-          <li>
-            <a routerLink="/weight">Weight & Sinkers: Cost Per Ounce Calculator </a>
-          </li>
-          <li>
-            <a routerLink="/weightList">Bulk Fishin Sinkers & Weights</a>
-          </li>          
-        </ul>
-      </li> -->
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <a class='big-muddy-fishing' href="http://www.bigmuddyfishing.com/" target="_blank" title="Go To My Fishing Blog.." >Big Muddy Fishing Blog</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
-
 </nav>
 
 <div class='container'>
