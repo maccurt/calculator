@@ -18,8 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { JsonpModule } from '@angular/http';
 import { WeightService } from 'app/weight-component/weight.service';
 import { WeightListComponent } from './weight-list/weight-list.component';
-import {ScrollToModule} from 'ng2-scroll-to';
+import { ScrollToModule } from 'ng2-scroll-to';
 import { HomeComponent } from './home/home.component';
+import { ResponsiveModule } from 'ng2-responsive';
 
 const routes: Routes = [
   { path: 'weight', component: WeightComponent },
@@ -36,7 +37,7 @@ const routes: Routes = [
   ],
   imports: [BrowserModule, AppRouteModule,
     FutureValueRoutingModule, FutureValueModule,
-    DirectivesModule, MathModule,
+    DirectivesModule, MathModule, ResponsiveModule,
     FormsModule,
     HttpClientModule, JsonpModule, HttpClientModule,
     ScrollToModule.forRoot()],

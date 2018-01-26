@@ -1,3 +1,24 @@
+.mobile:nth-child(odd) {
+    background-color:rgba(0,0,0,.05);
+}
+
+
+.mobile {
+    border: 1px solid #cccccc;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    margin-bottom:10px;
+    .row {
+        padding-left: 5px;
+    }
+    .data {
+        font-weight: 700;
+    }
+    .title {
+        font-weight: normal;
+        font-size: 14px;
+    }    
+}
 
 select {
     padding-left: 4px; // You overrode this so lowest to highest would fit in the sorty by direction
@@ -7,17 +28,14 @@ select {
     border: 1px solid #cccccc;
     padding-top: 5px;
     padding-bottom: 10px;
-    overflow: auto;
     margin-bottom: 10px;
     background-color: azure;
-    width: 100%;
 }
 
-.scroll-to-container{
+.scroll-to-container {
     border: 1px solid #cccccc;
-    overflow: auto;
     margin-bottom: 3px;
-    .scroll-to{
+    .scroll-to {
         margin-right: 20px;
     }
 }
