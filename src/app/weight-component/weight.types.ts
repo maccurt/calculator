@@ -21,8 +21,12 @@ export interface ISinkerWeight {
   price: number;
   ounce: number;
   quantity: number;
-  ounceTotal: number;
+  // ounceTotal: number;
   costPerOunce: number;
+  isFreeShipping: boolean;
+  include: boolean;
+  postalCode: string;
+  location: string;
 }
 
 export interface ISinkerWeightGroupItem {
