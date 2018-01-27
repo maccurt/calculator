@@ -20,7 +20,9 @@ export class WeightListComponent implements OnInit {
   sortBySelected: ISortBy;
   sortByDirectionList: IValueText[];
   sortByDirectionSelected: IValueText;
-  constructor(private weightService: WeightService) { }
+  constructor(private weightService: WeightService) {
+    
+   }
 
   ngOnInit() {
 
