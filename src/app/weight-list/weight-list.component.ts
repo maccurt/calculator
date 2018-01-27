@@ -85,9 +85,7 @@ export class WeightListComponent implements OnInit {
       if (this.sortByDirectionSelected.value === 2) {
         direction = 'desc';
       }
-
-      item.results = lodash.orderBy(item.results, [this.sortBySelected.field], [direction]);
-      console.log('sorted');
+      item.results = lodash.orderBy(item.results, [this.sortBySelected.field], [direction]);      
     });
   }
 

@@ -1,10 +1,5 @@
-<!-- This is how you figured out how to do the drop down menu for nx-bootstrap -->
-<!-- https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli-project/ -->
-
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" title='Home Page' routerLink="/home">Love Code Fish </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom:1px solid #cccccc" >
+  <a class="navbar-brand" title='Home Page' routerLink="/home"><i class='fa fa-heart' style="color:red;"></i> Love Code Fish </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +9,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/weightList">Bulk Fishing Sinkers Free Shipping!!!</a>
+        <a class="nav-link " routerLink="/weightList">Bulk Fishing Sinkers</a>
 
       </li>
       <li class="nav-item dropdown">
@@ -30,15 +25,15 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="http://www.bigmuddyfishing.com/" target="_blank">Blog: BigMuddyFishing.com</a>
+      <li class="nav-item ">
+        <a class="nav-link active" title='Go To My Fishing Blog' href="http://www.bigmuddyfishing.com/" target="_blank">BigMuddyFishing.com</a>
 
       </li>
     </ul>
 
   </div>
 </nav>
-
+<br>
 <div class='container'>
 
   <router-outlet></router-outlet>
