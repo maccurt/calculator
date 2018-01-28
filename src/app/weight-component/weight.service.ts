@@ -1,9 +1,7 @@
 import { Injectable, group } from '@angular/core';
 import { MathService } from 'app/math/math.service';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 import * as lodash from 'lodash';
-import { single } from 'rxjs/operator/single';
 import { ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem, ISinkerWeightGroup } from 'app/weight-component/weight.types';
 import { HttpClient } from '@angular/common/http';
 

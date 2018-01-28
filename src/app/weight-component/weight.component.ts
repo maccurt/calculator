@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, NgForm } from '@angular/forms';
 import { MathService } from 'app/math/math.service';
 import { WeightService } from 'app/weight-component/weight.service';
-import {  ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem, ISinkerWeightGroup } from 'app/weight-component/weight.types';
+import { ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem, ISinkerWeightGroup } from 'app/weight-component/weight.types';
 
 @Component({
   selector: 'app-weight-component',
@@ -21,7 +21,7 @@ export class WeightComponent implements OnInit {
   showResults = false;
 
   sinkerGroups: ISinkerWeightGroupItem[];
-  group:ISinkerWeightGroup
+  group: ISinkerWeightGroup;
   constructor(private mathService: MathService, private weightService: WeightService) { }
 
 
@@ -34,7 +34,7 @@ export class WeightComponent implements OnInit {
     this.calculate();
 
     this.weightService.GetSinkerWeightGroup().subscribe((group: ISinkerWeightGroup) => {
-      this.sinkerGroups = group.items
+      this.sinkerGroups = group.items;
     });
   }
 

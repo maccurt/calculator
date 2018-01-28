@@ -26,7 +26,7 @@ export function highchartsFactory() {
   return highcharts;
 }
 
-let routerMock = {
+const routerMock = {
 
   navigate: null,
   events: {

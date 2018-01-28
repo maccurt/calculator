@@ -13,11 +13,11 @@ import { indexDebugNode } from '@angular/core/src/debug/debug_node';
 import { StockQuoteService } from 'app/stock-quote/stock-quote.service';
 import { MathService } from 'app/math/math.service';
 import { FutureValueService } from 'app/future-value/future-value.service';
-import { element } from 'protractor';
-import { filter } from 'rxjs/operator/filter';
-import { error } from 'selenium-webdriver';
-import { start } from 'repl';
-import { exec } from 'child_process';
+// import { element } from 'protractor';
+// import { filter } from 'rxjs/operator/filter';
+// import { error } from 'selenium-webdriver';
+// import { start } from 'repl';
+// import { exec } from 'child_process';
 import { ResponsiveModule } from 'ng2-responsive';
 import { Observable } from 'rxjs/Observable';
 
