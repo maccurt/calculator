@@ -6,8 +6,10 @@ import { WeightService } from 'app/weight-component/weight.service';
 import { MathService } from 'app/math/math.service';
 import { ISinkerWeightGroup } from 'app/weight-component/weight.types';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+import { By } from '@angular/platform-browser';
 
 describe('WeightListComponent', () => {
     let component: WeightListComponent;
@@ -16,12 +18,16 @@ describe('WeightListComponent', () => {
 
     const sinkerWeightGroupMock: ISinkerWeightGroup = {
         ounceList: [{ value: 0, text: 'All' }],
-        sinkerTypeList: [{ value: 0, text: 'All' }],
+        sinkerTypeList: [
+            { value: 0, text: 'All Sinkers' },
+            { value: 1, text: 'Bank Sinkers' },
+            { value: 2, text: 'No Roll Sinkers' }
+        ],
         items: [
             {
                 title: 'Bank Sinkers',
                 results: [{
-                    itemId: '182019926630',                    
+                    itemId: '182019926630',
                     title: '#20 OZ. BANK 20 PCS. LEAD BANK SINKERS FAST SHIPPING 1 DAY',
                     price: 48.95,
                     isFreeShipping: true,
@@ -38,28 +44,64 @@ describe('WeightListComponent', () => {
         ]
     };
 
-
-    const mock =
-
-
-        beforeEach(async(() => {
-            TestBed.configureTestingModule({
-                declarations: [WeightListComponent],
-                providers: [WeightService, MathService, HttpClient],
-                imports: [FormsModule, ResponsiveModule, HttpClientModule]
-            })
-                .compileComponents();
-            weightService = TestBed.get(WeightService);
-            spyOn(weightService, 'GetSinkerWeightGroup').and.returnValue(Observable.of(sinkerWeightGroupMock));
-        }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [WeightListComponent],
+            providers: [WeightService, MathService, HttpClient],
+            imports: [FormsModule, ResponsiveModule, HttpClientModule]
+        })
+            .compileComponents();
+        weightService = TestBed.get(WeightService);
+        spyOn(weightService, 'GetSinkerWeightGroup').and.returnValue(Observable.of(sinkerWeightGroupMock));
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(WeightListComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
-    
-    it('should create', () => {
-        expect(component).toBeTruthy();
+
+    describe('Sinker Types', () => {
+
+        let sinkerTypeSelect: HTMLSelectElement;
+        beforeEach(async(() => {
+            sinkerTypeSelect = fixture.debugElement.query(By.css('#sinkerTypeList')).nativeElement;
+        }));
+
+        it('The sinker type selected should be the first in the array', () => {
+            fixture.whenStable().then(() => {
+                expect(sinkerTypeSelect.options[0].text).toEqual(sinkerWeightGroupMock.sinkerTypeList[0].text);
+
+            });
+        });
+
+        it('the sinker selectd should equal the first in the array', () => {
+            fixture.whenStable().then(() => {
+                expect(component.sinkerTypeSelected).toEqual(sinkerWeightGroupMock.sinkerTypeList[0]);
+
+            });
+        });
     });
+
+    describe('sinker Oz Size', () => {
+
+        let ounceListSelect: HTMLSelectElement;
+        beforeEach(async(() => {
+            ounceListSelect = fixture.debugElement.query(By.css('#ounceList')).nativeElement;
+        }));
+
+        it('The ounce list selecte selected option should be the first in the array', () => {
+            fixture.whenStable().then(() => {
+                expect(ounceListSelect.options[0].text).toEqual(sinkerWeightGroupMock.ounceList[0].text);
+
+            });
+        });
+
+        it('the sinker selectd should equal the first in the array', () => {
+            fixture.whenStable().then(() => {
+                expect(component.ounceSelected).toEqual(sinkerWeightGroupMock.ounceList[0]);
+            });
+        });
+    });
+
 });

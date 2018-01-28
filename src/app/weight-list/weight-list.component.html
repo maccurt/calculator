@@ -1,47 +1,58 @@
 <div *ngIf='filterSinkerWeightGroupItems'>
 
-  <div class="row filter-container " style="background-color:azure">
+  <div class="row">
+    <div class="col-lg-12 filter-container">
 
-    <div class="col-6 col-md-6 col-lg-3">
+      <div class="row">
 
-      <div class="form-group">
-        <label for="sinkerTypeList">Sinker Types</label>
-        <select class="form-control" id='sinkerTypeList' name='sinkerTypeList' [(ngModel)]='sinkerTypeSelected' (ngModelChange)='sinkerTypeChanged($event)'
-          #sinkerTypeListSelect='ngModel'>
-          <option *ngFor='let sinkerType of group.sinkerTypeList' [ngValue]='sinkerType'>{{sinkerType.text}}</option>
-        </select>
+        <div class="col-6 col-md-6 col-lg-3">
+
+          <div class="form-group">
+            <label for="sinkerTypeList">Sinker Types</label>
+            <select class="form-control" id='sinkerTypeList' name='sinkerTypeList' [(ngModel)]='sinkerTypeSelected' #sinkerTypeListSelect='ngModel'>
+              <option *ngFor='let sinkerType of group.sinkerTypeList' [ngValue]='sinkerType'>{{sinkerType.text}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6 col-md-6 col-lg-3">
+          <div class="form-group">
+            <label for='ounceList'>Sinker Oz. Size</label>
+            <select class="form-control" id='ounceList' name='ounceList' [(ngModel)]='ounceSelected' (ngModelChange)='ounceChanged($event)'
+              #ounceListSelect='ngModel'>
+              <option *ngFor='let oz of group.ounceList' [ngValue]='oz'>{{oz.text}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-6 col-lg-3">
+          <div class="form-group">
+            <label for='sortByList'>Sort By</label>
+
+            <select class="form-control" id='sortByList' name='sortByList' [(ngModel)]='sortBySelected' (ngModelChange)='sortByChanged($event)'
+              #sortByListSelect='ngModel'>
+              <option *ngFor='let sortBy of sortByList' [ngValue]='sortBy'>{{sortBy.text}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-6  col-lg-3">
+          <label>Sort By Direction </label>
+          <select class="form-control" id='sortByDirectionList' name='sortByDirectionList' [(ngModel)]='sortByDirectionSelected' (ngModelChange)='sortByDirectionChanged($event)'
+            #sortByDirectionListSelect='ngModel'>
+            <option *ngFor='let sortByDirection of sortByDirectionList' [ngValue]='sortByDirection'>{{sortByDirection.text}}</option>
+          </select>
+        </div>
+
       </div>
-    </div>
-    <div class="col-6 col-md-6 col-lg-3">
-      <div class="form-group">
-        <label for='ounceList'>Sinker Oz. Size</label>
-        <select class="form-control" id='ounceList' name='ounceList' [(ngModel)]='ounceSelected' (ngModelChange)='ounceChanged($event)'
-          #ounceListSelect='ngModel'>
-          <option *ngFor='let oz of group.ounceList' [ngValue]='oz'>{{oz.text}}</option>
-        </select>
-      </div>
-    </div>
 
-    <div class="col-6 col-md-6 col-lg-3">
-      <div class="form-group">
-        <label for='sortByList'>Sort By</label>
-
-        <select class="form-control" id='sortByList' name='sortByList' [(ngModel)]='sortBySelected' (ngModelChange)='sortByChanged($event)'
-          #sortByListSelect='ngModel'>
-          <option *ngFor='let sortBy of sortByList' [ngValue]='sortBy'>{{sortBy.text}}</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-6  col-lg-3">
-      <label>Sort By Direction </label>
-      <select class="form-control" id='sortByDirectionList' name='sortByDirectionList' [(ngModel)]='sortByDirectionSelected' (ngModelChange)='sortByDirectionChanged($event)'
-        #sortByDirectionListSelect='ngModel'>
-        <option *ngFor='let sortByDirection of sortByDirectionList' [ngValue]='sortByDirection'>{{sortByDirection.text}}</option>
-      </select>
-    </div>
-
+      <div class="row">
+          <div class="col-12">
+           <i title='this is the best deal in your filtered list' class='cell-icon fa fa-heart' style="color:red;"></i> = Best Deal $ Per Oz Of Filtered Sinkers
+          </div>
+        </div>
+    </div>   
   </div>
+
 
   <div class="row scroll-to-container">
 
@@ -68,30 +79,34 @@
               <span *ngIf="groupItem.results.length === 0">:There are no "{{groupItem.title}}" for your selected filter </span>
             </div>
 
-
             <div *ngIf="groupItem.results.length > 0">
 
               <div class='mobile-container' *responsive="{bootstrap:['xs']}">
                 <div class="mobile" *ngFor="let w of groupItem.results">
                   <div class='row'>
-                      <div class="col-12 title"><a href="{{w.url}}" target="_blank"> {{w.title}} </a></div>
+                    <div class="col-12 title">
+                      <a href="{{w.url}}" target="_blank"> {{w.title}} </a>
+                    </div>
                   </div>
                   <div class='row no-gutters'>
-                      <div class="col-3 header">Quantity:</div>
-                      <div class="col-2 data" >{{w.quantity}}</div>
-                      <div class="col-3 header">Oz:</div>
-                      <div class="col-2 data">{{w.ounce}}</div>
+                    <div class="col-3 header">Quantity:</div>
+                    <div class="col-2 data">{{w.quantity}}</div>
+                    <div class="col-3 header">Oz:</div>
+                    <div class="col-3 data">{{w.ounce}}</div>
 
                   </div>
                   <div class="row no-gutters">
-                      <div class="col-3 header">Price:</div>
-                      <div class="col-2 data">{{w.price | number : '1.2-2'}}</div>
-                      <div class="col-3 header">$ Per Oz:</div>
-                      <div class="col-2 data">{{w.costPerOunce | number : '1.2-2'}}</div>
+                    <div class="col-3 header">Price:</div>
+                    <div class="col-2 data">{{w.price | number : '1.2-2'}}</div>
+                    <div class="col-3 header">$ Per Oz:</div>
+                    <div class="col-3 data">{{w.costPerOunce | number : '1.2-2'}}
+                      <i *ngIf='w.isBestDeal' title='this is the best deal in your filtered list' class='cell-icon fa fa-heart' style="color:red;"></i>
+                    </div>
                   </div>
-                  
                 </div>
               </div>
+
+
               <table class='table table-striped table-sm' *responsive="{bootstrap:['xl','lg','md','sm']}">
                 <thead>
                   <tr>
@@ -100,7 +115,6 @@
                     <th class='oz'>Oz</th>
                     <th class='price'>Price</th>
                     <th class='costPerOz'>$ Per Oz</th>
-                    <!-- <th class='buy'>Buy</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -110,11 +124,10 @@
                     </td>
                     <td>{{w.quantity}}</td>
                     <td>{{w.ounce}}</td>
-                    <td>{{w.price | number : '1.2-2'}}</td>
-                    <td>{{w.costPerOunce | number : '1.2-2'}}</td>
-                    <!-- <td>
-                      <a href="{{w.url}}" target="_blank"> Click </a>
-                    </td> -->
+                    <td>{{w.price | number : '1.2-2'}} </td>
+                    <td>{{w.costPerOunce | number : '1.2-2'}}
+                      <i *ngIf='w.isBestDeal' title='this is the best deal in your filtered list' class='cell-icon fa fa-heart' style="color:red;"></i>
+                    </td>
                   </tr>
                 </tbody>
               </table>

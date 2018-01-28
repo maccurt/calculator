@@ -29,6 +29,17 @@ export class WeightService {
     return result;
   }
 
+  setBestDeal = (items: ISinkerWeightGroupItem[]) => {
+
+    items.forEach((sinkerWeightGroupItem: ISinkerWeightGroupItem) => {
+      const orderList: ISinkerWeight[] = lodash.orderBy(sinkerWeightGroupItem.results, ['costPerOunce']);
+      orderList.forEach((sinkerWeight: ISinkerWeight) => {
+        sinkerWeight.isBestDeal = (sinkerWeight.costPerOunce === orderList[0].costPerOunce);
+      });
+    });
+
+  }
+
   filterByOunce = (items: ISinkerWeightGroupItem[], ounce: number): ISinkerWeightGroupItem[] => {
 
     const filterItems: ISinkerWeightGroupItem[] = [];
@@ -55,7 +66,7 @@ export class WeightService {
   GetSinkerWeightGroup = (): Observable<ISinkerWeightGroup> => {
 
     return this.httpClient
-      //  .get<ISinkerWeightGroup>('http://localhost/CalculatorRest/api/SinkerWeightGroup');
-      .get<ISinkerWeightGroup>('https://profitdreamercalculatorapi.azurewebsites.net/api/SinkerWeightGroup');
+      //.get<ISinkerWeightGroup>('http://localhost/CalculatorRest/api/SinkerWeightGroup');
+    .get<ISinkerWeightGroup>('https://profitdreamercalculatorapi.azurewebsites.net/api/SinkerWeightGroup');
   }
 }

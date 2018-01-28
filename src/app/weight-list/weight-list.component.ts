@@ -21,8 +21,8 @@ export class WeightListComponent implements OnInit {
   sortByDirectionList: IValueText[];
   sortByDirectionSelected: IValueText;
   constructor(private weightService: WeightService) {
-    
-   }
+
+  }
 
   ngOnInit() {
 
@@ -58,11 +58,9 @@ export class WeightListComponent implements OnInit {
     else {
       this.filterSinkerWeightGroupItems = this.weightService.filterByOunce(this.group.items, parseInt(ounce.text, 10));
     }
+    this.weightService.setBestDeal(this.filterSinkerWeightGroupItems);
   }
 
-  sinkerTypeChanged = (sinkerType: IValueText) => {
-
-  }
 
   showOnlyThisType = (sinkerWeightGroupItem: ISinkerWeightGroupItem): boolean => {
     if (this.sinkerTypeSelected.value === 0) {
@@ -87,8 +85,10 @@ export class WeightListComponent implements OnInit {
       if (this.sortByDirectionSelected.value === 2) {
         direction = 'desc';
       }
-      item.results = lodash.orderBy(item.results, [this.sortBySelected.field], [direction]);      
+      item.results = lodash.orderBy(item.results, [this.sortBySelected.field], [direction]);
     });
+
+    this.weightService.setBestDeal(this.filterSinkerWeightGroupItems);
   }
 
   anchorTag = (value: string): string => {

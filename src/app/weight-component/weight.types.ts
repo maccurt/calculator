@@ -27,6 +27,7 @@ export interface ISinkerWeight {
   include: boolean;
   postalCode: string;
   location: string;
+  isBestDeal?: boolean;
 }
 
 export interface ISinkerWeightGroupItem {
