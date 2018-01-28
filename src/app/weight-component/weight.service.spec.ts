@@ -1,12 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { WeightService } from './weight.service';
 import { ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem, ISinkerWeightGroup } from './weight.types';
 import { MathService } from 'app/math/math.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-
-
 
 describe('WeightService', () => {
 
@@ -15,7 +12,7 @@ describe('WeightService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [WeightService, MathService, HttpClient],
-            imports[HttpClientModule]
+            imports: [HttpClientModule]
         });
         service = TestBed.get(WeightService);
     });
@@ -82,18 +79,14 @@ describe('WeightService', () => {
             ];
 
             service.setBestDeal(<any>items);
-
-
             expect(items[0].results[0].isBestDeal).toBe(true);
             expect(items[0].results[1].isBestDeal).toBe(false);
             expect(items[0].results[2].isBestDeal).toBe(true);
-
             expect(items[1].results[0].isBestDeal).toBe(false);
             expect(items[1].results[1].isBestDeal).toBe(true);
 
         });
 
     });
-
 
 });
