@@ -39,7 +39,7 @@ const routes: Routes = [
     FutureValueRoutingModule, FutureValueModule,
     DirectivesModule, MathModule, ResponsiveModule,
     FormsModule,
-    HttpClientModule, JsonpModule, HttpClientModule,
+    HttpClientModule, JsonpModule,
     ScrollToModule.forRoot()],
   providers: [StockQuoteService, WeightService],
 

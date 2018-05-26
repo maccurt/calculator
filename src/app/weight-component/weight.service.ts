@@ -1,7 +1,8 @@
 import { Injectable, group } from '@angular/core';
 import { MathService } from 'app/math/math.service';
 import { Observable } from 'rxjs/Observable';
-import * as lodash from 'lodash';
+import orderBy from 'lodash-es/orderby';
+import filter from 'lodash-es/filter';
 import { ICostPerOzResult, ISinkerWeight, ISinkerWeightGroupItem, ISinkerWeightGroup } from 'app/weight-component/weight.types';
 import { HttpClient } from '@angular/common/http';
 
@@ -30,7 +31,10 @@ export class WeightService {
   setBestDeal = (items: ISinkerWeightGroupItem[]) => {
 
     items.forEach((sinkerWeightGroupItem: ISinkerWeightGroupItem) => {
-      const orderList: ISinkerWeight[] = lodash.orderBy(sinkerWeightGroupItem.results, ['costPerOunce']);
+      const orderList: ISinkerWeight[] = orderBy(sinkerWeightGroupItem.results, ['costPerOunce']);
+
+      
+
       orderList.forEach((sinkerWeight: ISinkerWeight) => {
         sinkerWeight.isBestDeal = (sinkerWeight.costPerOunce === orderList[0].costPerOunce);
       });
@@ -44,7 +48,7 @@ export class WeightService {
 
     items.forEach((sinkerWeightGroupItem: ISinkerWeightGroupItem) => {
 
-      const sinkers: ISinkerWeight[] = lodash.filter(sinkerWeightGroupItem.results, (sinker: ISinkerWeight) => {
+      const sinkers: ISinkerWeight[] = filter(sinkerWeightGroupItem.results, (sinker: ISinkerWeight) => {
         return sinker.ounce === ounce;
       });
 
@@ -65,6 +69,6 @@ export class WeightService {
 
     return this.httpClient
       //.get<ISinkerWeightGroup>('http://localhost/CalculatorRest/api/SinkerWeightGroup');
-    .get<ISinkerWeightGroup>('https://profitdreamercalculatorapi.azurewebsites.net/api/SinkerWeightGroup');
+      .get<ISinkerWeightGroup>('https://profitdreamercalculatorapi.azurewebsites.net/api/SinkerWeightGroup');
   }
 }

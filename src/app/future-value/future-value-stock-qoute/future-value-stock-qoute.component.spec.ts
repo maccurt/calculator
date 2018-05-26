@@ -1,11 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FutureValueStockQouteComponent } from './future-value-stock-qoute.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; 
 import { By } from '@angular/platform-browser';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
-import { ChartModule } from 'angular2-highcharts';
-import * as highcharts from 'highcharts';
-import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { DirectivesModule } from 'app/directives/directives.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IIndex } from 'app/stock-quote/index.type';
@@ -17,10 +14,10 @@ import { ResponsiveModule } from 'ng2-responsive';
 import { Observable } from 'rxjs/Observable';
 
 
-export function highchartsFactory() {
-  highcharts.setOptions({ lang: { thousandsSep: ',' } });
-  return highcharts;
-}
+// export function highchartsFactory() {
+//   highcharts.setOptions({ lang: { thousandsSep: ',' } });
+//   return highcharts;
+// }
 describe('FutureValueStockQouteComponent', () => {
   let component: FutureValueStockQouteComponent;
   let fixture: ComponentFixture<FutureValueStockQouteComponent>;
@@ -39,15 +36,12 @@ describe('FutureValueStockQouteComponent', () => {
     navigate = jasmine.createSpy('navigate');
   }
 
-
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FutureValueStockQouteComponent, BalanceSummaryComponent],
-      imports: [FormsModule, ChartModule, DirectivesModule, ResponsiveModule],
+      imports: [FormsModule,  DirectivesModule, ResponsiveModule],
       providers: [MathService, FutureValueService,
-        StockQuoteService,
-        { provide: HighchartsStatic, useFactory: highchartsFactory },
+        StockQuoteService,        
         { provide: ActivatedRoute, useValue: activateResponseMock },
         { provide: Router, useClass: MockRouter }]
     })

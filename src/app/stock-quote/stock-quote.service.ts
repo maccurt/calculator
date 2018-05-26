@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+
+import 'rxjs/add/observable/of';
+
 import { IIndex, IStockQuote } from 'app/stock-quote/index.type';
 import { MathService } from 'app/math/math.service';
 
@@ -10,7 +13,7 @@ export class StockQuoteService {
   constructor(private mathService: MathService) { }
 
   getIndexes = (): Observable<IIndex[]> => {
-    
+
     const indexList: IIndex[] = [];
     indexList.push({ id: 1, name: 'SP 500' });
     return Observable.of(indexList);

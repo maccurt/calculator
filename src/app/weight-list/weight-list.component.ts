@@ -4,7 +4,9 @@ import {
   ISinkerWeightGroup, ICostPerOzResult,
   ISinkerWeight, ISinkerWeightGroupItem, IValueText, ISortBy
 } from 'app/weight-component/weight.types';
-import * as lodash from 'lodash';
+
+
+import orderBy from 'lodash-es/orderby';
 @Component({
   selector: 'app-weight-list',
   templateUrl: './weight-list.component.html',
@@ -85,7 +87,7 @@ export class WeightListComponent implements OnInit {
       if (this.sortByDirectionSelected.value === 2) {
         direction = 'desc';
       }
-      item.results = lodash.orderBy(item.results, [this.sortBySelected.field], [direction]);
+      item.results = orderBy(item.results, [this.sortBySelected.field], [direction]);
     });
 
     this.weightService.setBestDeal(this.filterSinkerWeightGroupItems);

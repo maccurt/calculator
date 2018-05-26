@@ -3,7 +3,7 @@ import { FutureValueService } from './future-value.service';
 import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
 import { NgForm, AbstractControl } from '@angular/forms';
-import { ChartModule } from 'angular2-highcharts';
+// import { ChartModule } from 'angular2-highcharts';
 import { BalanceSummary, IBalanceDetailItem } from 'app/future-value/IBalanceSummary.type';
 import { detachEmbeddedView } from '@angular/core/src/view/view_attach';
 import { BalanceSummaryComponent } from '../balance-summary/balance-summary.component';
@@ -79,7 +79,7 @@ export class FutureValueComponent extends Calculator implements OnInit {
     if (this.form.valid) {
       this.futureValueResult = this.futureValueService
         .monthlyPaymentsBalanceSummary(this.ratePercent, this.years, this.monthlyPayment);
-      this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest);
+     // this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest);
       this.showInput = false;
     }
     else {
@@ -95,46 +95,46 @@ export class FutureValueComponent extends Calculator implements OnInit {
   }
 
   handleCalculateEvent = (): void => {
-    this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest);
+   // this.createChart(this.futureValueResult.paymentTotal, this.futureValueResult.interest);
   }
 
   //TODO fix this so you just pass in the object and not the individal numbers
   //Are you sure, perhaps it should be more generic, this should be in a service later
   //so it won't know about principal, etc.. just 2 numbers
-  createChart = (principal: number, interest: number) => {
+  // createChart = (principal: number, interest: number) => {
 
-    //TODO in the furtue move this to a service of some sort
-    const dataLabels = { distance: 5 };
+  //   //TODO in the furtue move this to a service of some sort
+  //   const dataLabels = { distance: 5 };
 
-    this.options = {
+  //   this.options = {
 
-      title: {
-        text: null
-      },
-      credits: {
-        enabled: false
-      },
-      chart: {
-        type: 'pie',
-        width: 300,
-        height: 180,
-        spacing: [5, 1, 1, 1],
-        borderWidth: 0,
-        borderColor: '#cccccc'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          slicedOffset: 3
-        }
-      },
-      series: [{
-        name: ' ',
-        data: [{ name: 'Total Payment', y: principal, color: '#0000FF', dataLabels: dataLabels, sliced: true, },
-        { name: 'Interest', y: interest, color: '#00FF00', dataLabels: dataLabels }],
-      }]
-    };
-  }
+  //     title: {
+  //       text: null
+  //     },
+  //     credits: {
+  //       enabled: false
+  //     },
+  //     chart: {
+  //       type: 'pie',
+  //       width: 300,
+  //       height: 180,
+  //       spacing: [5, 1, 1, 1],
+  //       borderWidth: 0,
+  //       borderColor: '#cccccc'
+  //     },
+  //     plotOptions: {
+  //       pie: {
+  //         allowPointSelect: true,
+  //         slicedOffset: 3
+  //       }
+  //     },
+  //     series: [{
+  //       name: ' ',
+  //       data: [{ name: 'Total Payment', y: principal, color: '#0000FF', dataLabels: dataLabels, sliced: true, },
+  //       { name: 'Interest', y: interest, color: '#00FF00', dataLabels: dataLabels }],
+  //     }]
+  //   };
+  // }
 
   showSubmitError = () => {
     const result = !this.form.valid && this.form.submitted && this.isSubmitError;
