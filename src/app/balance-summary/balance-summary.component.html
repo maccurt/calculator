@@ -10,7 +10,7 @@
                     <div class="form-group sub-answer">
                         <label>Payment</label>
                         <br>
-                        <label class='label-input'>{{summary.paymentTotal| currency:'USD':true:'1.2-2'}}</label>
+                        <label class='label-input'>{{summary.paymentTotal| currency:'USD':'symbol':'1.2-2'}}</label>
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
                     <div class="form-group sub-answer">
                         <label>Interest</label>
                         <br>
-                        <label class='label-input'>{{summary.interest| currency:'USD':true:'1.2-2'}}</label>
+                        <label class='label-input'>{{summary.interest| currency:'USD':'symbol':'1.2-2'}}</label>
                     </div>
                 </div>
 
@@ -29,7 +29,7 @@
                     <div class="form-group ">
                         <label>Future Value</label>
                         <br>
-                        <label class='label-input answer'>{{summary.balance| currency:'USD':true:'1.2-2'}}</label>
+                        <label class='label-input answer'>{{summary.balance| currency:'USD':'symbol':'1.2-2'}}</label>
                     </div>
                 </div>
 
@@ -107,11 +107,11 @@
                     <th colspan="7">
 
                         <div class="result-horizontal pull-right">
-                            <span id='principal' class='minor'>{{summary.paymentTotal| currency:'USD':true:'1.2-2'}}</span>
+                            <span id='principal' class='minor'>{{summary.paymentTotal| currency:'USD':'symbol':'1.2-2'}}</span>
                             <span class='description'>Payment +</span>
-                            <span id='interest' class='minor'>{{summary.interest| currency:'USD':true:'1.2-2'}}</span>
+                            <span id='interest' class='minor'>{{summary.interest| currency:'USD':'symbol':'1.2-2'}}</span>
                             <span class='description'>Interest =</span>
-                            <span id='future-value' class='major'>{{summary.balance| currency:'USD':true:'1.2-2'}}</span>
+                            <span id='future-value' class='major'>{{summary.balance| currency:'USD':'symbol':'1.2-2'}}</span>
                             <span id='rate-of-return' title="rate of return">({{summary.rateOfReturn}}%)</span>
                         </div>
                     </th>
@@ -150,10 +150,10 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>{{summary.paymentTotal| currency:'USD':true:'1.2-2'}}</td>
+                    <td>{{summary.paymentTotal| currency:'USD':'symbol':'1.2-2'}}</td>
                     <td></td>
-                    <td>{{summary.interest| currency:'USD':true:'1.2-2'}}</td>
-                    <td>{{summary.balance| currency:'USD':true:'1.2-2'}}</td>
+                    <td>{{summary.interest| currency:'USD':'symbol':'1.2-2'}}</td>
+                    <td>{{summary.balance| currency:'USD':'symbol':'1.2-2'}}</td>
                 </tr>
             </tfoot>
 

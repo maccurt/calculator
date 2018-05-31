@@ -7,9 +7,9 @@ import { CurrencyPipe } from '@angular/common';
 import { IFutureValueResult } from './ifuture-value-result';
 import { DirectivesModule } from 'app/directives/directives.module';
 import { NumericInputDirective } from 'app/directives/numeric-input.directive';
-import { ChartModule } from 'angular2-highcharts';
-import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
-import * as highcharts from 'highcharts';
+// import { ChartModule } from 'angular2-highcharts';
+// import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+// import * as highcharts from 'highcharts';
 import { IBalanceSummary } from 'app/future-value/IBalanceSummary.type';
 import { BalanceSummaryComponent } from 'app/balance-summary/balance-summary.component';
 import { ResponsiveModule } from 'ng2-responsive';
@@ -17,14 +17,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 
-export function highchartsFactory() {
-  highcharts.setOptions({
-    lang: {
-      thousandsSep: ','
-    }
-  });
-  return highcharts;
-}
+// export function highchartsFactory() {
+//   highcharts.setOptions({
+//     lang: {
+//       thousandsSep: ','
+//     }
+//   });
+//   return highcharts;
+// }
 
 const routerMock = {
 
@@ -41,7 +41,7 @@ const routerMock = {
 
 routerMock.navigate = jasmine.createSpy('navigate');
 
-let route = {
+const route = {
   navigate: null,
   params: Observable.of('nothing')
 };
@@ -55,9 +55,8 @@ describe('FutureValueComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FutureValueComponent, BalanceSummaryComponent],
-      imports: [FormsModule, DirectivesModule, ChartModule, ResponsiveModule],
+      imports: [FormsModule, DirectivesModule, ResponsiveModule],
       providers: [FutureValueService, MathService,
-        { provide: HighchartsStatic, useFactory: highchartsFactory },
         { provide: Router, useValue: routerMock },
         { provide: ActivatedRoute, useValue: route, }
 
@@ -146,20 +145,20 @@ describe('FutureValueComponent', () => {
       });
     });
 
-    it('total payment should be correct', async(() => {
+    it('total payment should be correct',() => {
       fixture.whenStable().then(() => {
         const principal = <HTMLDivElement>fixture.nativeElement.querySelector('#principal');
         expect(principal.innerHTML).toBe('$500,000.00');
       });
-    }));
+    });
 
-    it('interst should be correct', async(() => {
+    it('interest should be correct', () => {
       fixture.whenStable().then(() => {
         const interest = <HTMLDivElement>fixture.nativeElement.querySelector('#interest');
         expect(interest.innerHTML).toBe('$9,999.33');
       });
+    });
 
-    }));
   });
 
   describe('calculate', () => {
@@ -173,12 +172,12 @@ describe('FutureValueComponent', () => {
       expect(component.futureValueService.monthlyPaymentsBalanceSummary).toHaveBeenCalledWith(5, 6, 50);
     });
 
-    it('should call createChart with 777,888', () => {
-      spyOn(component.futureValueService, 'monthlyPaymentsBalanceSummary').and.returnValue({ paymentTotal: 777, interest: 888 });
-      spyOn(component, 'createChart');
-      component.calculate();
-      expect(component.createChart).toHaveBeenCalledWith(777, 888);
-    });
+    // it('should call createChart with 777,888', () => {
+    //   spyOn(component.futureValueService, 'monthlyPaymentsBalanceSummary').and.returnValue({ paymentTotal: 777, interest: 888 });
+    //   spyOn(component, 'createChart');
+    //   component.calculate();
+    //   expect(component.createChart).toHaveBeenCalledWith(777, 888);
+    // });
 
     it('should set isSubmitError to true', () => {
       component.form = <any>{ valid: false, submitted: true };
@@ -225,13 +224,13 @@ describe('FutureValueComponent', () => {
     });
   });
 
-  describe('handleCalculateEvent', () => {
-    it('should call createChart ', () => {
-      spyOn(component, 'createChart');
-      component.handleCalculateEvent();
-      expect(component.createChart).toHaveBeenCalled();
-    });
-  });
+  // describe('handleCalculateEvent', () => {
+  //   it('should call createChart ', () => {
+  //     spyOn(component, 'createChart');
+  //     component.handleCalculateEvent();
+  //     expect(component.createChart).toHaveBeenCalled();
+  //   });
+  // });
 
   describe('handleShowOriginalInputEvent', () => {
     it('should make showInput = false, showResult = true', () => {
